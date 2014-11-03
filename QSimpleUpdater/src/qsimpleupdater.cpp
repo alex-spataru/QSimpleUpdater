@@ -197,7 +197,7 @@ void QSimpleUpdater::checkDownloadedVersion(QNetworkReply *reply) {
             // Also, we will only reach this code when we finish comparing
             // the "3" in both the downloaded and the installed version.
             else {
-                if (_installed.count() > _download.count()) {
+                if (_installed.count() < _download.count()) {
                     _new_update = true;
                     break;
                 }
