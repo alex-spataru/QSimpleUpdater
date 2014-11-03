@@ -155,6 +155,8 @@ void QSimpleUpdater::checkDownloadedVersion(QNetworkReply *reply) {
     // Read the reply from the server and transform it
     // to a QString
     QString _reply = QString::fromUtf8 (reply->readAll());
+    _reply.replace(" ", "");
+    _reply.replace("\n", "");
 
     // If the reply from the server is not empty, compare
     // the downloaded version with the installed version
