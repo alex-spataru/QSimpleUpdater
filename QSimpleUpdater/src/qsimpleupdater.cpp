@@ -182,7 +182,7 @@ void QSimpleUpdater::checkDownloadedVersion(QNetworkReply *reply) {
             // Make sure that the number that we are goind to compare
             // exists in both strings, for example, we will not compare
             // 1.2.3 and 1.2.3.1 because we would crash the program
-            if (_download.count() >= i && _installed.count() >= i) {
+            if (_download.count() - 1 >= i && _installed.count() - 1 >= i) {
 
                 // The downloaded number is greater than the installed number
                 // in question. So there's a newer version of the application
