@@ -158,7 +158,7 @@ void QSimpleUpdater::checkDownloadedVersion(QNetworkReply *reply) {
 
     // If the reply from the server is not empty, compare
     // the downloaded version with the installed version
-    if (!_reply.isEmpty()) {
+    if (!_reply.isEmpty() && _reply.contains(".")) {
 
         // Replace the latest version string with the downloaded string
         m_latest_version = _reply;
