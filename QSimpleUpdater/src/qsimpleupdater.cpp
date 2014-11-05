@@ -8,7 +8,11 @@
 
 #include "qsimpleupdater.h"
 
-QSimpleUpdater::QSimpleUpdater(QObject *parent) : QObject(parent) {}
+QSimpleUpdater::QSimpleUpdater(QObject *parent) : QObject(parent) 
+{
+    m_latest_version = false;
+}
+
 
 QString QSimpleUpdater::changeLog() {
     // Return the contents of the downloaded changelog
