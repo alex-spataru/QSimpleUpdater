@@ -8,9 +8,12 @@
 
 #include "qsimpleupdater.h"
 
-QSimpleUpdater::QSimpleUpdater(QObject *parent) : QObject(parent) 
+QSimpleUpdater::QSimpleUpdater(QObject *parent)
+    : QObject(parent)
+    , m_changelog_downloaded(false)
+    , m_version_check_finished(false)
+    , m_new_version_available(false)
 {
-    m_new_version_available = false;
 }
 
 
