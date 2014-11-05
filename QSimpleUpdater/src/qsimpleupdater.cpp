@@ -90,54 +90,49 @@ bool QSimpleUpdater::newerVersionAvailable() const {
     return m_new_version_available;
 }
 
+// Change the download URL if the issued URL is valid
 void QSimpleUpdater::setDownloadUrl(const QString &url) {
-    // Change the download URL if the issued URL is valid
+    Q_ASSERT(!url.isEmpty());
+
     if (!url.isEmpty()) {
         m_download_url.setUrl(url);
-    }
-
-    // The issued URL is ilegal, so we warn the user
-    else {
+    } else {
         qWarning() << "QSimpleUpdater: input URL cannot be empty!";
     }
 }
 
+// Change the reference URL if the issued URL is valid
 void QSimpleUpdater::setReferenceUrl(const QString &url) {
-    // Change the reference URL if the issued URL is valid
+    Q_ASSERT(!url.isEmpty());
+
     if (!url.isEmpty()) {
         m_reference_url.setUrl(url);
-    }
-
-    // The issued URL is ilegal, so we warn the user
-    else {
+    } else {
         qWarning() << "QSimpleUpdater: input URL cannot be empty!";
     }
 }
 
+// Change the changelog URL if the issued URL is valid
 void QSimpleUpdater::setChangelogUrl(const QString &url) {
-    // Change the changelog URL if the issued URL is valid
+    Q_ASSERT(!url.isEmpty());
+
     if (!url.isEmpty()) {
         m_changelog_url.setUrl(url);
-    }
-
-    // The issued URL is ilegal, so we warn the user
-    else {
+    } else {
         qWarning() << "QSimpleUpdater: input URL cannot be empty!";
     }
 }
 
+// Change the installed application version if the issued string is valid
 void QSimpleUpdater::setApplicationVersion(const QString &version) {
-    // Change the installed application version if the issued string is valid
+    Q_ASSERT(!version.isEmpty());
+
     if (!version.isEmpty()) {
         m_installed_version = version;
-    }
-
-    // The application version cannot be empty, so we warn the user
-    else {
+    } else {
         qWarning() << "QSimpleUpdater: input string cannot be empty!";
     }
 }
-
 
 void QSimpleUpdater::checkDownloadedVersion(QNetworkReply *reply) {
     bool _new_update = false;
