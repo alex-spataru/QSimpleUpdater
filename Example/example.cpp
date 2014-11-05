@@ -87,8 +87,8 @@ void Example::onCheckingFinished() {
     // so we inform the user and clear the text of the change log text edit
     else {
         ui->changelogTextEdit->setPlainText("");
-        ui->changelogTextEdit->setPlaceholderText("The change log was not downloaded because you "
-                                                  "are running the latest version of the application...");
+        //ui->changelogTextEdit->setPlaceholderText("The change log was not downloaded because you "
+        //                                          "are running the latest version of the application...");
 
         QMessageBox::information(this, tr("No updates available"),
                                  tr("Congratulations! You are running the latest version of the application!"));

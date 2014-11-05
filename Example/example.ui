@@ -26,9 +26,6 @@
      <property name="placeholderText">
       <string>0.1 (default)</string>
      </property>
-     <property name="clearButtonEnabled">
-      <bool>true</bool>
-     </property>
     </widget>
    </item>
    <item>
@@ -57,9 +54,6 @@
      </property>
      <property name="backgroundVisible">
       <bool>false</bool>
-     </property>
-     <property name="placeholderText">
-      <string>Click on the &quot;Check for Updates&quot; button to download the changelog of the latest version</string>
      </property>
     </widget>
    </item>
