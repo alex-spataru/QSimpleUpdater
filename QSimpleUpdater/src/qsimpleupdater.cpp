@@ -17,7 +17,7 @@ QSimpleUpdater::QSimpleUpdater(QObject *parent)
 }
 
 
-QString QSimpleUpdater::changeLog() {
+QString QSimpleUpdater::changeLog() const {
     // Return the contents of the downloaded changelog
     if (!m_changelog.isEmpty()) {
         return m_changelog;
@@ -59,7 +59,7 @@ void QSimpleUpdater::checkForUpdates() {
     }
 }
 
-QString QSimpleUpdater::latestVersion() {
+QString QSimpleUpdater::latestVersion() const {
     // Return the application version referenced by the string
     // that we downloaded
     if (!m_latest_version.isEmpty()) {
@@ -75,7 +75,7 @@ QString QSimpleUpdater::latestVersion() {
     }
 }
 
-QString QSimpleUpdater::installedVersion() {
+QString QSimpleUpdater::installedVersion() const {
     // Return the string issued by the user in the setApplicationVersion() function
     if (!m_installed_version.isEmpty()) {
         return m_installed_version;
@@ -103,7 +103,7 @@ void QSimpleUpdater::downloadLatestVersion() {
     }
 }
 
-bool QSimpleUpdater::newerVersionAvailable() {
+bool QSimpleUpdater::newerVersionAvailable() const {
     return m_new_version_available;
 }
 

@@ -19,12 +19,12 @@ class QSimpleUpdater : public QObject {
 public:
     QSimpleUpdater(QObject *parent = 0);
 
-    QString changeLog();
+    QString changeLog() const;
     void checkForUpdates();
-    QString latestVersion();
-    QString installedVersion();
+    QString latestVersion() const;
+    QString installedVersion() const;
     void downloadLatestVersion();
-    bool newerVersionAvailable();
+    bool newerVersionAvailable() const;
 
 public slots:
     void setDownloadUrl(const QString &url);
