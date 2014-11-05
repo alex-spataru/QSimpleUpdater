@@ -17,19 +17,13 @@ QSimpleUpdater::QSimpleUpdater(QObject *parent)
 }
 
 
+// Return the contents of the downloaded changelog
 QString QSimpleUpdater::changeLog() const {
-    // Return the contents of the downloaded changelog
-    if (!m_changelog.isEmpty()) {
-        return m_changelog;
-    }
-
-    // If the changelog is empty, we issue a warning message in
-    // the console and return an empty string
-    else {
+    if (m_changelog.isEmpty()) {
         qWarning() << "QSimpleUpdater: change log is empty,"
                    << "did you call setChangelogUrl() and checkForUpdates()?";
-        return NULL;
     }
+    return m_changelog;
 }
 
 void QSimpleUpdater::checkForUpdates() {
@@ -59,35 +53,24 @@ void QSimpleUpdater::checkForUpdates() {
     }
 }
 
+// Return the application version referenced by the string
+// that we downloaded
 QString QSimpleUpdater::latestVersion() const {
-    // Return the application version referenced by the string
-    // that we downloaded
-    if (!m_latest_version.isEmpty()) {
-        return m_latest_version;
-    }
-
-    // Issue a warning message in the case that the downloaded
-    // application version string is empty
-    else {
+    if (m_latest_version.isEmpty()) {
         qWarning() << "QSimpleUpdater: latest version is empty,"
                    << "did you call checkForUpdates() and setReferenceUrl()?";
-        return NULL;
     }
+    return m_latest_version;
 }
 
+// Return the string issued by the user in the setApplicationVersion() function
 QString QSimpleUpdater::installedVersion() const {
-    // Return the string issued by the user in the setApplicationVersion() function
-    if (!m_installed_version.isEmpty()) {
-        return m_installed_version;
-    }
-
-    // Issue a warning message in the case that the installed application
-    // version is empty
-    else {
+    if (m_installed_version.isEmpty()) {
         qWarning() << "QSimpleUpdater: installed version is empty,"
                    << "did you call setApplicationVersion()?";
-        return NULL;
     }
+
+    return m_installed_version;
 }
 
 void QSimpleUpdater::downloadLatestVersion() {
