@@ -107,7 +107,7 @@ bool QSimpleUpdater::newerVersionAvailable() {
     return m_new_version_available;
 }
 
-void QSimpleUpdater::setDownloadUrl(const QString url) {
+void QSimpleUpdater::setDownloadUrl(const QString &url) {
     // Change the download URL if the issued URL is valid
     if (!url.isEmpty()) {
         m_download_url.setUrl(url);
@@ -119,7 +119,7 @@ void QSimpleUpdater::setDownloadUrl(const QString url) {
     }
 }
 
-void QSimpleUpdater::setReferenceUrl(const QString url) {
+void QSimpleUpdater::setReferenceUrl(const QString &url) {
     // Change the reference URL if the issued URL is valid
     if (!url.isEmpty()) {
         m_reference_url.setUrl(url);
@@ -131,7 +131,7 @@ void QSimpleUpdater::setReferenceUrl(const QString url) {
     }
 }
 
-void QSimpleUpdater::setChangelogUrl(const QString url) {
+void QSimpleUpdater::setChangelogUrl(const QString &url) {
     // Change the changelog URL if the issued URL is valid
     if (!url.isEmpty()) {
         m_changelog_url.setUrl(url);
@@ -143,7 +143,7 @@ void QSimpleUpdater::setChangelogUrl(const QString url) {
     }
 }
 
-void QSimpleUpdater::setApplicationVersion(const QString version) {
+void QSimpleUpdater::setApplicationVersion(const QString &version) {
     // Change the installed application version if the issued string is valid
     if (!version.isEmpty()) {
         m_installed_version = version;
@@ -264,6 +264,6 @@ void QSimpleUpdater::processDownloadedChangelog(QNetworkReply *reply) {
     emit checkingFinished();
 }
 
-void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, QList<QSslError> error) {
+void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
     reply->ignoreSslErrors (error);
 }

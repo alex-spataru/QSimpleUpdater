@@ -27,15 +27,15 @@ public:
     bool newerVersionAvailable();
 
 public slots:
-    void setDownloadUrl(const QString url);
-    void setReferenceUrl(const QString url);
-    void setChangelogUrl(const QString url);
-    void setApplicationVersion(const QString version);
+    void setDownloadUrl(const QString &url);
+    void setReferenceUrl(const QString &url);
+    void setChangelogUrl(const QString &url);
+    void setApplicationVersion(const QString &version);
 
 private slots:
     void checkDownloadedVersion(QNetworkReply *reply);
     void processDownloadedChangelog(QNetworkReply *reply);
-    void ignoreSslErrors(QNetworkReply *reply, QList<QSslError> error);
+    void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &error);
 
 signals:
     void checkingFinished();
