@@ -10,7 +10,7 @@
 
 QSimpleUpdater::QSimpleUpdater(QObject *parent) : QObject(parent) 
 {
-    m_latest_version = false;
+    m_new_version_available = false;
 }
 
 
