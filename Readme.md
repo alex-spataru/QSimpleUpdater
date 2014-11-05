@@ -24,8 +24,7 @@ Donate [Bitcoins](http://bitcoin.org) to the project to keep it going!
 
 ## Useful Links
 
-+ [Project website](http://qsimpleupdater.sf.net)
-+ [SourceForge Project](http://sf.net/p/qsimpleupdater)
++ [Project website](http://alex-97.github.io/QSimpleUpdater)
 + [OpenHub Project](http://openhub.net/p/qsimpleupdater)
 + [Contact developer](mailto:alex.racotta@gmail.com)
 
