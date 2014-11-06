@@ -19,23 +19,23 @@ class QSimpleUpdater : public QObject {
 public:
     QSimpleUpdater(QObject *parent = 0);
 
-    QString changeLog();
+    QString changeLog() const;
     void checkForUpdates();
-    QString latestVersion();
-    QString installedVersion();
+    QString latestVersion() const;
+    QString installedVersion() const;
     void downloadLatestVersion();
-    bool newerVersionAvailable();
+    bool newerVersionAvailable() const;
 
 public slots:
-    void setDownloadUrl(const QString url);
-    void setReferenceUrl(const QString url);
-    void setChangelogUrl(const QString url);
-    void setApplicationVersion(const QString version);
+    void setDownloadUrl(const QString &url);
+    void setReferenceUrl(const QString &url);
+    void setChangelogUrl(const QString &url);
+    void setApplicationVersion(const QString &version);
 
 private slots:
     void checkDownloadedVersion(QNetworkReply *reply);
     void processDownloadedChangelog(QNetworkReply *reply);
-    void ignoreSslErrors(QNetworkReply *reply, QList<QSslError> error);
+    void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &error);
 
 signals:
     void checkingFinished();
