@@ -36,6 +36,8 @@ DownloadDialog::~DownloadDialog()
 
 void DownloadDialog::beginDownload(const QUrl &url)
 {
+    Q_ASSERT(!url.isEmpty());
+
     // Reset the UI
     ui->progressBar->setValue(0);
     ui->installButton->setEnabled(false);
