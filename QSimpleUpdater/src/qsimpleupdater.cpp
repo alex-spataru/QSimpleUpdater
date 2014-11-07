@@ -14,7 +14,10 @@ QSimpleUpdater::QSimpleUpdater(QObject *parent)
     , m_version_check_finished(false)
     , m_new_version_available(false)
 {
+<<<<<<< HEAD
     m_downloadDialog = new DownloadDialog();
+=======
+>>>>>>> FETCH_HEAD
 }
 
 
@@ -54,6 +57,7 @@ void QSimpleUpdater::checkForUpdates() {
     }
 }
 
+<<<<<<< HEAD
 void QSimpleUpdater::openDownloadLink() {
     // Open the download URL in a web browser
     if (!m_download_url.isEmpty()) {
@@ -64,9 +68,19 @@ void QSimpleUpdater::openDownloadLink() {
     else {
         qWarning() << "QSimpleUpdater: cannot download latest version,"
                    << "did you call setDownloadUrl() and checkForUpdates()?";
+=======
+// Return the application version referenced by the string
+// that we downloaded
+QString QSimpleUpdater::latestVersion() const {
+    if (m_latest_version.isEmpty()) {
+        qWarning() << "QSimpleUpdater: latest version is empty,"
+                   << "did you call checkForUpdates() and setReferenceUrl()?";
+>>>>>>> FETCH_HEAD
     }
+    return m_latest_version;
 }
 
+<<<<<<< HEAD
 // Return the application version referenced by the string
 // that we downloaded
 QString QSimpleUpdater::latestVersion() const {
@@ -77,6 +91,8 @@ QString QSimpleUpdater::latestVersion() const {
     return m_latest_version;
 }
 
+=======
+>>>>>>> FETCH_HEAD
 // Return the string issued by the user in the setApplicationVersion() function
 QString QSimpleUpdater::installedVersion() const {
     if (m_installed_version.isEmpty()) {
