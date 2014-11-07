@@ -13,29 +13,32 @@
 #include <QSslConfiguration>
 #include <QNetworkAccessManager>
 
+#include "dialogs/download_dialog.h"
+
 class QSimpleUpdater : public QObject {
     Q_OBJECT
 
 public:
     QSimpleUpdater(QObject *parent = 0);
 
-    QString changeLog();
+    QString changeLog() const;
     void checkForUpdates();
-    QString latestVersion();
-    QString installedVersion();
+    void openDownloadLink();
+    QString latestVersion() const;
+    QString installedVersion() const;
     void downloadLatestVersion();
-    bool newerVersionAvailable();
+    bool newerVersionAvailable() const;
 
 public slots:
-    void setDownloadUrl(const QString url);
-    void setReferenceUrl(const QString url);
-    void setChangelogUrl(const QString url);
-    void setApplicationVersion(const QString version);
+    void setDownloadUrl(const QString &url);
+    void setReferenceUrl(const QString &url);
+    void setChangelogUrl(const QString &url);
+    void setApplicationVersion(const QString &version);
 
 private slots:
     void checkDownloadedVersion(QNetworkReply *reply);
     void processDownloadedChangelog(QNetworkReply *reply);
-    void ignoreSslErrors(QNetworkReply *reply, QList<QSslError> error);
+    void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &error);
 
 signals:
     void checkingFinished();
@@ -55,6 +58,8 @@ private:
     bool m_version_check_finished;
 
     bool m_new_version_available;
+
+    DownloadDialog *m_downloadDialog;
 };
 
 #endif

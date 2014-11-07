@@ -63,6 +63,9 @@ void Example::checkForUpdates() {
     updater->setReferenceUrl("https://raw.githubusercontent.com/alex-97/"
                              "QSimpleUpdater/Files-for-example-project/current_version.txt");
 
+    // Tell the updater where to download the update, its recommended to use direct links
+    updater->setDownloadUrl("https://github.com/alex-97/QSimpleUpdater/archive/master.zip");
+
     // Finally, check for updates...
     updater->checkForUpdates();
 }
@@ -81,6 +84,7 @@ void Example::onCheckingFinished() {
         QMessageBox::information(this, tr("Update available"),
                                  tr("There's a newer version available! The latest version is ") +
                                  updater->latestVersion());
+        updater->downloadLatestVersion();
     }
 
     // The installed version is equal or greater to the "official" latest version,

@@ -8,8 +8,10 @@
 
 QT += network
 
-HEADERS += $$PWD/src/qsimpleupdater.h
-SOURCES += $$PWD/src/qsimpleupdater.cpp
+HEADERS += $$PWD/src/qsimpleupdater.h \
+    $$PWD/src/dialogs/download_dialog.h
+SOURCES += $$PWD/src/qsimpleupdater.cpp \
+    $$PWD/src/dialogs/download_dialog.cpp
 OTHER_FILES += $$PWD/src/QSimpleUpdater
 
 INCLUDEPATH += $$PWD/src
@@ -22,3 +24,9 @@ win32* {
     CONFIG += openssl-linked
     LIBS += -L$$PWD/dependencies/win32/ -llibeay32
 }
+
+RESOURCES += \
+    $$PWD/res/res.qrc
+
+FORMS += \
+    $$PWD/src/dialogs/download_dialog.ui
