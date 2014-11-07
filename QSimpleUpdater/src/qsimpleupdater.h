@@ -23,10 +23,7 @@ public:
 
     QString changeLog() const;
     void checkForUpdates();
-<<<<<<< HEAD
     void openDownloadLink();
-=======
->>>>>>> FETCH_HEAD
     QString latestVersion() const;
     QString installedVersion() const;
     void downloadLatestVersion();

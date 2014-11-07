@@ -14,10 +14,7 @@ QSimpleUpdater::QSimpleUpdater(QObject *parent)
     , m_version_check_finished(false)
     , m_new_version_available(false)
 {
-<<<<<<< HEAD
     m_downloadDialog = new DownloadDialog();
-=======
->>>>>>> FETCH_HEAD
 }
 
 
