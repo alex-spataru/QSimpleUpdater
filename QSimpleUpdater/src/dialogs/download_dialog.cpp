@@ -38,8 +38,8 @@ void DownloadDialog::beginDownload(const QUrl &url)
 {
     // Reset the UI
     ui->progressBar->setValue(0);
-    ui->cancelButton->setText("Cancel");
     ui->installButton->setEnabled(false);
+    ui->cancelButton->setText(tr("Cancel"));
     ui->downloadLabel->setText(tr("Downloading update..."));
 
     // Begin the download
@@ -88,8 +88,9 @@ void DownloadDialog::cancelDownload()
 void DownloadDialog::downloadFinished()
 {
     // Setup the UI
-    ui->cancelButton->setText("Close");
+    ui->cancelButton->setText(tr("Close"));
     ui->installButton->setEnabled(true);
+    ui->downloadLabel->setText(tr("Download complete!"));
 
     // Write the file
     QByteArray data = m_reply->readAll();
