@@ -6,6 +6,8 @@
 #  Please check the license.txt file for more information.
 #
 
+QT += gui
+QT += widgets
 QT += network
 
 HEADERS += $$PWD/src/qsimpleupdater.h \
