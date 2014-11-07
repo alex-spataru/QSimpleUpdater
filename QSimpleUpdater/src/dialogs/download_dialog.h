@@ -2,6 +2,7 @@
 #define DOWNLOAD_DIALOG_H
 
 #include <QDir>
+#include <QDebug>
 #include <QWidget>
 #include <QNetworkReply>
 #include <QDesktopServices>

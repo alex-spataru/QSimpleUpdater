@@ -15,6 +15,9 @@ int main (int argc, char *argv[]) {
 Example::Example (QWidget *parent) : QDialog(parent), ui(new Ui::Example) {
     // Create and configure the user interface
     ui->setupUi(this);
+    ui->versionLineEdit->setText("0.1");
+    ui->versionLineEdit->setPlaceholderText("0.1");
+    ui->changelogTextEdit->setPlainText("Click the \"Check for updates\" button to download the change log");
 
     // Close the dialog when the close button is clicked
     connect (ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -81,18 +84,28 @@ void Example::onCheckingFinished() {
     // of the changelog text edit with the downloaded change log
     if (updater->newerVersionAvailable()) {
         ui->changelogTextEdit->setPlainText(updater->changeLog());
-        QMessageBox::information(this, tr("Update available"),
-                                 tr("There's a newer version available! The latest version is ") +
-                                 updater->latestVersion());
-        updater->downloadLatestVersion();
+
+        // Create and configure a message box
+        QMessageBox _messagebox;
+        _messagebox.setIcon(QMessageBox::Information);
+        _messagebox.setWindowTitle(tr("Update available"));
+        _messagebox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        _messagebox.setText(tr("There's an update available!"));
+        _messagebox.setInformativeText(tr("The latest version of the application is") + " " +
+                                       updater->latestVersion() + ", " +
+                                       tr("do you want to download it?"));
+
+        // If the user clicks "yes" open the download dialog
+        if (_messagebox.exec() == QMessageBox::Yes)
+            updater->downloadLatestVersion();
     }
 
     // The installed version is equal or greater to the "official" latest version,
     // so we inform the user and clear the text of the change log text edit
     else {
         ui->changelogTextEdit->setPlainText("");
-        //ui->changelogTextEdit->setPlaceholderText("The change log was not downloaded because you "
-        //                                          "are running the latest version of the application...");
+        ui->changelogTextEdit->setPlainText("The change log was not downloaded because you "
+                                            "are running the latest version of the application...");
 
         QMessageBox::information(this, tr("No updates available"),
                                  tr("Congratulations! You are running the latest version of the application!"));

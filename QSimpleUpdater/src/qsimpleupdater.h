@@ -3,6 +3,7 @@
 
 #include <QSsl>
 #include <QUrl>
+#include <QDebug>
 #include <QString>
 #include <QSslError>
 #include <QByteArray>

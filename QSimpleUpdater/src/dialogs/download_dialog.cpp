@@ -38,6 +38,7 @@ void DownloadDialog::beginDownload(const QUrl &url)
 {
     // Reset the UI
     ui->progressBar->setValue(0);
+    ui->cancelButton->setText("Cancel");
     ui->installButton->setEnabled(false);
     ui->downloadLabel->setText(tr("Downloading update..."));
 
@@ -87,6 +88,7 @@ void DownloadDialog::cancelDownload()
 void DownloadDialog::downloadFinished()
 {
     // Setup the UI
+    ui->cancelButton->setText("Close");
     ui->installButton->setEnabled(true);
 
     // Write the file
