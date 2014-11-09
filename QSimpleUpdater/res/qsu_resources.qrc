@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>internet_icon.png</file>
+        <file alias="update.png">update.png</file>
     </qresource>
 </RCC>

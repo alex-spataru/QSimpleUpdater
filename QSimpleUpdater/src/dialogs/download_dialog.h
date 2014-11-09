@@ -2,8 +2,11 @@
 #define DOWNLOAD_DIALOG_H
 
 #include <QDir>
+#include <QIcon>
 #include <QDebug>
 #include <QWidget>
+#include <QDateTime>
+#include <QMessageBox>
 #include <QNetworkReply>
 #include <QDesktopServices>
 #include <QNetworkAccessManager>
@@ -38,6 +41,8 @@ private:
 
     QNetworkReply *m_reply;
     QNetworkAccessManager *m_manager;
+
+    uint m_start_time;
 
     float roundNumber(const float &input);
 };

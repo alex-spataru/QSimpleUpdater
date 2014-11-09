@@ -27,8 +27,7 @@ win32* {
     LIBS += -L$$PWD/dependencies/win32/ -llibeay32
 }
 
-RESOURCES += \
-    $$PWD/res/res.qrc
+RESOURCES += $$PWD/res/qsu_resources.qrc
 
 FORMS += \
     $$PWD/src/dialogs/download_dialog.ui
