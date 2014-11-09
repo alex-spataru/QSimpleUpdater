@@ -160,16 +160,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="cancelButton">
+       <widget class="QPushButton" name="stopButton">
         <property name="text">
-         <string>Cancel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="installButton">
-        <property name="text">
-         <string>Install</string>
+         <string>Stop</string>
         </property>
        </widget>
       </item>

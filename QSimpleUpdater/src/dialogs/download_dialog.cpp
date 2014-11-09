@@ -15,11 +15,9 @@ DownloadDialog::DownloadDialog(QWidget *parent) :
 {
     // Setup the UI
     ui->setupUi(this);
-    ui->installButton->setEnabled(false);
 
     // Connect SIGNALS/SLOTS
-    connect(ui->installButton, SIGNAL(clicked()), this, SLOT(openDownload()));
-    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
+    connect(ui->stopButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 
     // Initialize the network access manager
     m_manager = new QNetworkAccessManager(this);
@@ -40,8 +38,7 @@ void DownloadDialog::beginDownload(const QUrl &url)
 
     // Reset the UI
     ui->progressBar->setValue(0);
-    ui->installButton->setEnabled(false);
-    ui->cancelButton->setText(tr("Cancel"));
+    ui->stopButton->setText(tr("Stop"));
     ui->downloadLabel->setText(tr("Downloading updates"));
     ui->timeLabel->setText(tr("Time remaining") + ": " + tr("unknown"));
 
@@ -65,13 +62,11 @@ void DownloadDialog::openDownload()
     if (!m_path.isEmpty()) {
         QString url = m_path;
 
-        // Build a correct URL to open local files
         if (url.startsWith("/"))
             url = "file://" + url;
         else
             url = "file:///" + url;
 
-        // Let the system open the downloaded file
         QDesktopServices::openUrl(url);
     }
 
@@ -82,29 +77,31 @@ void DownloadDialog::openDownload()
 
 void DownloadDialog::cancelDownload()
 {
-    QMessageBox _message;
-    _message.setWindowTitle(tr("Updater"));
-    _message.setIcon(QMessageBox::Question);
-    _message.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    _message.setText(tr("Are you sure you want to cancel the download?"));
+    if (!m_reply->isFinished()) {
+        QMessageBox _message;
+        _message.setWindowTitle(tr("Updater"));
+        _message.setIcon(QMessageBox::Question);
+        _message.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        _message.setText(tr("Are you sure you want to cancel the download?"));
 
-    if (_message.exec() == QMessageBox::Yes) {
+        if (_message.exec() == QMessageBox::Yes) {
+            hide();
+            m_reply->abort();
+        }
+    } else {
         hide();
-        m_reply->abort();
     }
 }
 
 void DownloadDialog::downloadFinished()
 {
-    ui->timeLabel->setText(NULL);
-    ui->installButton->setEnabled(true);
-    ui->cancelButton->setText(tr("Close"));
+    ui->stopButton->setText(tr("Close"));
     ui->downloadLabel->setText(tr("Download complete!"));
+    ui->timeLabel->setText(tr("The installer will open in a separate window..."));
 
     QByteArray data = m_reply->readAll();
 
     if (!data.isEmpty()) {
-        // Create a QFile with the name of the downloaded file
         QStringList list = m_reply->url().toString().split("/");
         QFile file(QDir::tempPath() + "/" + list.at(list.count() - 1));
 
@@ -118,6 +115,7 @@ void DownloadDialog::downloadFinished()
         }
 
         file.close();
+        openDownload();
     }
 
     else {
