@@ -13,38 +13,39 @@
 
 #include <math.h>
 
-namespace Ui {
+namespace Ui
+{
 class DownloadDialog;
 }
 
 class DownloadDialog : public QWidget
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    explicit DownloadDialog(QWidget *parent = 0);
-    ~DownloadDialog();
+    public:
+        explicit DownloadDialog (QWidget *parent = 0);
+        ~DownloadDialog();
 
-    void beginDownload(const QUrl &url);
+        void beginDownload (const QUrl &url);
 
-private slots:
-    void openDownload();
-    void cancelDownload();
-    void downloadFinished();
-    void updateProgress(qint64 received, qint64 total);
-    void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &error);
+    private slots:
+        void openDownload();
+        void cancelDownload();
+        void downloadFinished();
+        void updateProgress (qint64 received, qint64 total);
+        void ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error);
 
-private:
-    Ui::DownloadDialog *ui;
+    private:
+        Ui::DownloadDialog *ui;
 
-    QString m_path;
+        QString m_path;
 
-    QNetworkReply *m_reply;
-    QNetworkAccessManager *m_manager;
+        QNetworkReply *m_reply;
+        QNetworkAccessManager *m_manager;
 
-    uint m_start_time;
+        uint m_start_time;
 
-    float roundNumber(const float &input);
+        float roundNumber (const float &input);
 };
 
 #endif

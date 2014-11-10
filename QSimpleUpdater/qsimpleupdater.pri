@@ -23,8 +23,7 @@ macx || linux{
 }
 
 win32* {
-    CONFIG += openssl-linked
-    LIBS += -L$$PWD/dependencies/win32/ -llibeay32
+    LIBS += -L$$PWD/dependencies/OpenSSL-Win32/lib -llibeay32
 }
 
 RESOURCES += $$PWD/res/qsu_resources.qrc
