@@ -39,6 +39,7 @@ class DownloadDialog : public QWidget
         Ui::DownloadDialog *ui;
 
         QString m_path;
+        bool m_download_paused;
 
         QNetworkReply *m_reply;
         QNetworkAccessManager *m_manager;

@@ -12,15 +12,12 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
     : QObject (parent)
     , m_changelog_downloaded (false)
     , m_version_check_finished (false)
-    , m_new_version_available (false)
-{
+    , m_new_version_available (false) {
     m_downloadDialog = new DownloadDialog();
 }
 
-QString QSimpleUpdater::changeLog() const
-{
-    if (m_changelog.isEmpty())
-    {
+QString QSimpleUpdater::changeLog() const {
+    if (m_changelog.isEmpty()) {
         qDebug() << "QSimpleUpdater: change log is empty,"
                  << "did you call setChangelogUrl() and checkForUpdates()?";
     }
@@ -28,10 +25,8 @@ QString QSimpleUpdater::changeLog() const
     return m_changelog;
 }
 
-void QSimpleUpdater::checkForUpdates()
-{
-    if (!m_reference_url.isEmpty())
-    {
+void QSimpleUpdater::checkForUpdates() {
+    if (!m_reference_url.isEmpty()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
         connect (_manager, SIGNAL (finished (QNetworkReply *)),
@@ -47,22 +42,18 @@ void QSimpleUpdater::checkForUpdates()
         qDebug() << "QSimpleUpdater: Invalid reference URL";
 }
 
-void QSimpleUpdater::openDownloadLink()
-{
+void QSimpleUpdater::openDownloadLink() {
     if (!m_download_url.isEmpty())
         QDesktopServices::openUrl (m_download_url);
 
-    else
-    {
+    else {
         qDebug() << "QSimpleUpdater: cannot download latest version,"
                  << "did you call setDownloadUrl() and checkForUpdates()?";
     }
 }
 
-QString QSimpleUpdater::latestVersion() const
-{
-    if (m_latest_version.isEmpty())
-    {
+QString QSimpleUpdater::latestVersion() const {
+    if (m_latest_version.isEmpty()) {
         qDebug() << "QSimpleUpdater: latest version is empty,"
                  << "did you call checkForUpdates() and setReferenceUrl()?";
     }
@@ -70,10 +61,8 @@ QString QSimpleUpdater::latestVersion() const
     return m_latest_version;
 }
 
-QString QSimpleUpdater::installedVersion() const
-{
-    if (m_installed_version.isEmpty())
-    {
+QString QSimpleUpdater::installedVersion() const {
+    if (m_installed_version.isEmpty()) {
         qDebug() << "QSimpleUpdater: installed version is empty,"
                  << "did you call setApplicationVersion()?";
     }
@@ -81,25 +70,21 @@ QString QSimpleUpdater::installedVersion() const
     return m_installed_version;
 }
 
-void QSimpleUpdater::downloadLatestVersion()
-{
+void QSimpleUpdater::downloadLatestVersion() {
     if (!m_download_url.isEmpty())
         m_downloadDialog->beginDownload (m_download_url);
 
-    else
-    {
+    else {
         qDebug() << "QSimpleUpdater: cannot download latest version,"
                  << "did you call setDownloadUrl() and checkForUpdates()?";
     }
 }
 
-bool QSimpleUpdater::newerVersionAvailable() const
-{
+bool QSimpleUpdater::newerVersionAvailable() const {
     return m_new_version_available;
 }
 
-void QSimpleUpdater::setDownloadUrl (const QString &url)
-{
+void QSimpleUpdater::setDownloadUrl (const QString &url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -109,8 +94,7 @@ void QSimpleUpdater::setDownloadUrl (const QString &url)
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setReferenceUrl (const QString &url)
-{
+void QSimpleUpdater::setReferenceUrl (const QString &url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -120,8 +104,7 @@ void QSimpleUpdater::setReferenceUrl (const QString &url)
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setChangelogUrl (const QString &url)
-{
+void QSimpleUpdater::setChangelogUrl (const QString &url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -131,8 +114,7 @@ void QSimpleUpdater::setChangelogUrl (const QString &url)
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setApplicationVersion (const QString &version)
-{
+void QSimpleUpdater::setApplicationVersion (const QString &version) {
     Q_ASSERT (!version.isEmpty());
 
     if (!version.isEmpty())
@@ -142,41 +124,33 @@ void QSimpleUpdater::setApplicationVersion (const QString &version)
         qDebug() << "QSimpleUpdater: input string cannot be empty!";
 }
 
-void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply)
-{
+void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
     bool _new_update = false;
 
     QString _reply = QString::fromUtf8 (reply->readAll());
     _reply.replace (" ", "");
     _reply.replace ("\n", "");
 
-    if (!_reply.isEmpty() && _reply.contains ("."))
-    {
+    if (!_reply.isEmpty() && _reply.contains (".")) {
         m_latest_version = _reply;
-		
+
         QStringList _download = m_latest_version.split (".");
         QStringList _installed = m_installed_version.split (".");
-		
-        for (int i = 0; i <= _download.count() - 1; ++i)
-        {
-            if (_download.count() - 1 >= i && _installed.count() - 1 >= i)
-            {
-                if (_download.at (i) > _installed.at (i))
-                {
+
+        for (int i = 0; i <= _download.count() - 1; ++i) {
+            if (_download.count() - 1 >= i && _installed.count() - 1 >= i) {
+                if (_download.at (i) > _installed.at (i)) {
                     _new_update = true;
                     break;
                 }
             }
-			
-            else
-            {
-                if (_installed.count() < _download.count())
-                {
+
+            else {
+                if (_installed.count() < _download.count()) {
                     if (_installed.at (i - 1) == _download.at (i - 1))
                         break;
 
-                    else
-                    {
+                    else {
                         _new_update = true;
                         break;
                     }
@@ -188,8 +162,7 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply)
     m_new_version_available = _new_update;
     emit versionCheckFinished();
 
-    if (!m_changelog_url.isEmpty() && newerVersionAvailable())
-    {
+    if (!m_changelog_url.isEmpty() && newerVersionAvailable()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
         connect (_manager, SIGNAL (finished (QNetworkReply *)),
@@ -205,23 +178,20 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply)
         emit checkingFinished();
 }
 
-void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply)
-{
+void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply) {
     QString _reply = QString::fromUtf8 (reply->readAll());
 
-    if (!_reply.isEmpty())
-    {
+    if (!_reply.isEmpty()) {
         m_changelog = _reply;
         emit changelogDownloadFinished();
     }
 
     else
         qDebug() << "QSimpleUpdater: downloaded change log is empty!";
-		
+
     emit checkingFinished();
 }
 
-void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error)
-{
+void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
     reply->ignoreSslErrors (error);
 }

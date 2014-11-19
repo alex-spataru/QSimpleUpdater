@@ -18,7 +18,7 @@ OTHER_FILES += $$PWD/src/QSimpleUpdater
 
 INCLUDEPATH += $$PWD/src
 
-macx || linux{
+macx || linux:!android {
     LIBS += -lcrypto -lssl
 }
 
