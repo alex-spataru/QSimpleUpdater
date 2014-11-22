@@ -193,5 +193,10 @@ void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply) {
 }
 
 void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
+#ifndef Q_OS_IOS
     reply->ignoreSslErrors (error);
+#else
+    Q_UNUSED (reply);
+    Q_UNUSED (error);
+#endif
 }

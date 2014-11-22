@@ -195,7 +195,12 @@ void DownloadDialog::updateProgress (qint64 received, qint64 total) {
 }
 
 void DownloadDialog::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
+#ifndef Q_OS_IOS
     reply->ignoreSslErrors (error);
+#else
+    Q_UNUSED (reply);
+    Q_UNUSED (error);
+#endif
 }
 
 float DownloadDialog::roundNumber (const float &input) {
