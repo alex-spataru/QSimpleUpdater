@@ -9,9 +9,9 @@
 #include "download_dialog.h"
 #include "ui_download_dialog.h"
 
-DownloadDialog::DownloadDialog (QWidget *parent) :
-    QWidget (parent),
-    ui (new Ui::DownloadDialog) {
+DownloadDialog::DownloadDialog (QWidget *parent)
+    : QWidget (parent)
+    , ui (new Ui::DownloadDialog) {
     // Setup the UI
     ui->setupUi (this);
 
@@ -22,15 +22,15 @@ DownloadDialog::DownloadDialog (QWidget *parent) :
     m_manager = new QNetworkAccessManager (this);
 
     // Avoid SSL issues
-    connect (m_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
-             this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
+    connect (m_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)), this,
+             SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
 }
 
 DownloadDialog::~DownloadDialog() {
     delete ui;
 }
 
-void DownloadDialog::beginDownload (const QUrl &url) {
+void DownloadDialog::beginDownload (const QUrl& url) {
     Q_ASSERT (!url.isEmpty());
 
     // Reset the UI
@@ -44,8 +44,8 @@ void DownloadDialog::beginDownload (const QUrl &url) {
     m_start_time = QDateTime::currentDateTime().toTime_t();
 
     // Update the progress bar value automatically
-    connect (m_reply, SIGNAL (downloadProgress (qint64, qint64)),
-             this, SLOT (updateProgress (qint64, qint64)));
+    connect (m_reply, SIGNAL (downloadProgress (qint64, qint64)), this,
+             SLOT (updateProgress (qint64, qint64)));
 
     // Write the file to the hard disk once the download is finished
     connect (m_reply, SIGNAL (finished()), this, SLOT (downloadFinished()));
@@ -157,9 +157,7 @@ void DownloadDialog::updateProgress (qint64 received, qint64 total) {
             _received_string = tr ("%1 MB").arg (_received);
         }
 
-        ui->downloadLabel->setText (tr ("Downloading updates") + " (" +
-                                    _received_string + " " + tr ("of") + " " +
-                                    _total_string + ")");
+        ui->downloadLabel->setText (tr ("Downloading updates") + " (" + _received_string + " " + tr ("of") + " " + _total_string + ")");
 
         uint _diff = QDateTime::currentDateTime().toTime_t() - m_start_time;
 
@@ -184,7 +182,8 @@ void DownloadDialog::updateProgress (qint64 received, qint64 total) {
         }
     }
 
-    // We do not know the size of the download, so we improvise...
+    // We do not know the size of the download, so we avoid scaring the shit out
+    // of the user
     else {
         ui->progressBar->setValue (-1);
         ui->progressBar->setMinimum (0);
@@ -194,7 +193,8 @@ void DownloadDialog::updateProgress (qint64 received, qint64 total) {
     }
 }
 
-void DownloadDialog::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
+void DownloadDialog::ignoreSslErrors (QNetworkReply *reply,
+                                      const QList<QSslError>& error) {
 #ifndef Q_OS_IOS
     reply->ignoreSslErrors (error);
 #else
@@ -203,6 +203,6 @@ void DownloadDialog::ignoreSslErrors (QNetworkReply *reply, const QList<QSslErro
 #endif
 }
 
-float DownloadDialog::roundNumber (const float &input) {
+float DownloadDialog::roundNumber (const float& input) {
     return roundf (input * 100) / 100;
 }

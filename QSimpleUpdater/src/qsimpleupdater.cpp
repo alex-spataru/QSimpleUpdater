@@ -29,8 +29,8 @@ void QSimpleUpdater::checkForUpdates() {
     if (!m_reference_url.isEmpty()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
-        connect (_manager, SIGNAL (finished (QNetworkReply *)),
-                 this, SLOT (checkDownloadedVersion (QNetworkReply *)));
+        connect (_manager, SIGNAL (finished (QNetworkReply *)), this,
+                 SLOT (checkDownloadedVersion (QNetworkReply *)));
 
         connect (_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
                  this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
@@ -84,7 +84,7 @@ bool QSimpleUpdater::newerVersionAvailable() const {
     return m_new_version_available;
 }
 
-void QSimpleUpdater::setDownloadUrl (const QString &url) {
+void QSimpleUpdater::setDownloadUrl (const QString& url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -94,7 +94,7 @@ void QSimpleUpdater::setDownloadUrl (const QString &url) {
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setReferenceUrl (const QString &url) {
+void QSimpleUpdater::setReferenceUrl (const QString& url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -104,7 +104,7 @@ void QSimpleUpdater::setReferenceUrl (const QString &url) {
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setChangelogUrl (const QString &url) {
+void QSimpleUpdater::setChangelogUrl (const QString& url) {
     Q_ASSERT (!url.isEmpty());
 
     if (!url.isEmpty())
@@ -114,7 +114,7 @@ void QSimpleUpdater::setChangelogUrl (const QString &url) {
         qDebug() << "QSimpleUpdater: input URL cannot be empty!";
 }
 
-void QSimpleUpdater::setApplicationVersion (const QString &version) {
+void QSimpleUpdater::setApplicationVersion (const QString& version) {
     Q_ASSERT (!version.isEmpty());
 
     if (!version.isEmpty())
@@ -165,8 +165,8 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
     if (!m_changelog_url.isEmpty() && newerVersionAvailable()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
-        connect (_manager, SIGNAL (finished (QNetworkReply *)),
-                 this, SLOT (processDownloadedChangelog (QNetworkReply *)));
+        connect (_manager, SIGNAL (finished (QNetworkReply *)), this,
+                 SLOT (processDownloadedChangelog (QNetworkReply *)));
 
         connect (_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
                  this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
@@ -192,7 +192,8 @@ void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply) {
     emit checkingFinished();
 }
 
-void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply, const QList<QSslError> &error) {
+void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply,
+                                      const QList<QSslError>& error) {
 #ifndef Q_OS_IOS
     reply->ignoreSslErrors (error);
 #else
