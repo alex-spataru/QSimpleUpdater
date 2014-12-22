@@ -16,7 +16,7 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
     m_downloadDialog = new DownloadDialog();
 }
 
-QString QSimpleUpdater::changeLog() const {
+QString QSimpleUpdater::changeLog(void) const {
     if (m_changelog.isEmpty()) {
         qDebug() << "QSimpleUpdater: change log is empty,"
                  << "did you call setChangelogUrl() and checkForUpdates()?";
@@ -25,7 +25,7 @@ QString QSimpleUpdater::changeLog() const {
     return m_changelog;
 }
 
-void QSimpleUpdater::checkForUpdates() {
+void QSimpleUpdater::checkForUpdates(void) {
     if (!m_reference_url.isEmpty()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
@@ -42,7 +42,7 @@ void QSimpleUpdater::checkForUpdates() {
         qDebug() << "QSimpleUpdater: Invalid reference URL";
 }
 
-void QSimpleUpdater::openDownloadLink() {
+void QSimpleUpdater::openDownloadLink(void) {
     if (!m_download_url.isEmpty())
         QDesktopServices::openUrl (m_download_url);
 
@@ -52,7 +52,7 @@ void QSimpleUpdater::openDownloadLink() {
     }
 }
 
-QString QSimpleUpdater::latestVersion() const {
+QString QSimpleUpdater::latestVersion(void) const {
     if (m_latest_version.isEmpty()) {
         qDebug() << "QSimpleUpdater: latest version is empty,"
                  << "did you call checkForUpdates() and setReferenceUrl()?";
@@ -61,7 +61,7 @@ QString QSimpleUpdater::latestVersion() const {
     return m_latest_version;
 }
 
-QString QSimpleUpdater::installedVersion() const {
+QString QSimpleUpdater::installedVersion(void) const {
     if (m_installed_version.isEmpty()) {
         qDebug() << "QSimpleUpdater: installed version is empty,"
                  << "did you call setApplicationVersion()?";
@@ -70,7 +70,7 @@ QString QSimpleUpdater::installedVersion() const {
     return m_installed_version;
 }
 
-void QSimpleUpdater::downloadLatestVersion() {
+void QSimpleUpdater::downloadLatestVersion(void) {
     if (!m_download_url.isEmpty())
         m_downloadDialog->beginDownload (m_download_url);
 
@@ -80,7 +80,7 @@ void QSimpleUpdater::downloadLatestVersion() {
     }
 }
 
-bool QSimpleUpdater::newerVersionAvailable() const {
+bool QSimpleUpdater::newerVersionAvailable(void) const {
     return m_new_version_available;
 }
 

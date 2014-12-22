@@ -26,7 +26,7 @@ DownloadDialog::DownloadDialog (QWidget *parent)
              SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
 }
 
-DownloadDialog::~DownloadDialog() {
+DownloadDialog::~DownloadDialog(void) {
     delete ui;
 }
 
@@ -54,7 +54,7 @@ void DownloadDialog::beginDownload (const QUrl& url) {
     showNormal();
 }
 
-void DownloadDialog::openDownload() {
+void DownloadDialog::openDownload(void) {
     if (!m_path.isEmpty()) {
         QString url = m_path;
 
@@ -71,7 +71,7 @@ void DownloadDialog::openDownload() {
         qWarning() << "QSimpleUpdater: cannot open downloaded file!";
 }
 
-void DownloadDialog::cancelDownload() {
+void DownloadDialog::cancelDownload(void) {
     if (!m_reply->isFinished()) {
         QMessageBox _message;
         _message.setWindowTitle (tr ("Updater"));
@@ -89,7 +89,7 @@ void DownloadDialog::cancelDownload() {
         hide();
 }
 
-void DownloadDialog::downloadFinished() {
+void DownloadDialog::downloadFinished(void) {
     ui->stopButton->setText (tr ("Close"));
     ui->downloadLabel->setText (tr ("Download complete!"));
     ui->timeLabel->setText (tr ("The installer will open in a separate window..."));

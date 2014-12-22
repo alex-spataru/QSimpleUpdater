@@ -23,29 +23,29 @@ public:
     QSimpleUpdater (QObject *parent = 0);
 
     /// Returns the downloaded change log
-    QString changeLog() const;
+    QString changeLog(void) const;
 
     /// Returns the downloaded version string
-    QString latestVersion() const;
+    QString latestVersion(void) const;
 
     /// Returns the local version, referenced by
     /// the setApplicationVersion() function
-    QString installedVersion() const;
+    QString installedVersion(void) const;
 
     /// Returns \c true if there's a newer version available
-    bool newerVersionAvailable() const;
+    bool newerVersionAvailable(void) const;
 
     /// Checks for updates and calls the appropriate
     /// signals when finished
-    void checkForUpdates();
+    void checkForUpdates(void);
 
     /// Opens the download URL in a a web browser.
     /// The URL is referenced by the \c setDownloadUrl() function
-    void openDownloadLink();
+    void openDownloadLink(void);
 
     /// Shows a dialog that downloads the file in the
     /// URL referenced by the \c setDownloadUrl() function
-    void downloadLatestVersion();
+    void downloadLatestVersion(void);
 
 public slots:
 
@@ -79,9 +79,9 @@ private slots:
     void ignoreSslErrors (QNetworkReply *reply, const QList<QSslError>& error);
 
 signals:
-    void checkingFinished();
-    void versionCheckFinished();
-    void changelogDownloadFinished();
+    void checkingFinished(void);
+    void versionCheckFinished(void);
+    void changelogDownloadFinished(void);
 
 private:
     QString m_changelog;
