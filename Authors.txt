@@ -1,4 +1,0 @@
-QSIMPLEUPDATER AUTHORS
-----------------------
-
-Alex Spataru <alex_spataru@outlook.com>
