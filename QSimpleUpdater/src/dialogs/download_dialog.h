@@ -41,6 +41,7 @@ public:
 
 private slots:
     void openDownload(void);
+    void installUpdate(void);
     void cancelDownload(void);
     void downloadFinished(void);
     void updateProgress (qint64 received, qint64 total);

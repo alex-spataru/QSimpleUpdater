@@ -24,6 +24,11 @@ DownloadDialog::DownloadDialog (QWidget *parent)
 
     // Connect SIGNALS/SLOTS
     connect (ui->stopButton, SIGNAL (clicked()), this, SLOT (cancelDownload()));
+    connect (ui->openButton, SIGNAL (clicked()), this, SLOT (installUpdate()));
+
+    // Configure open button
+    ui->openButton->setEnabled(false);
+    ui->openButton->setVisible(false);
 
     // Initialize the network access manager
     m_manager = new QNetworkAccessManager (this);
@@ -59,6 +64,28 @@ void DownloadDialog::beginDownload (const QUrl& url) {
 
     // Show the dialog
     showNormal();
+}
+
+void DownloadDialog::installUpdate(void) {
+    QMessageBox msg;
+    msg.setIcon(QMessageBox::Question);
+    msg.setText("<b>" +
+                tr("To apply the update(s), you must first quit %1")
+                .arg(qApp->applicationName()) +
+                "</b>");
+    msg.setInformativeText(tr("Do you want to quit %1 now?").arg(qApp->applicationName()));
+    msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+
+    if (msg.exec() == QMessageBox::Yes) {
+        openDownload();
+        qApp->closeAllWindows();
+    }
+
+    else {
+        ui->openButton->setEnabled(true);
+        ui->openButton->setVisible(true);
+        ui->timeLabel->setText (tr ("Click the \"Open\" button to apply the update"));
+    }
 }
 
 void DownloadDialog::openDownload(void) {
@@ -110,7 +137,7 @@ void DownloadDialog::downloadFinished(void) {
         }
 
         file.close();
-        openDownload();
+        installUpdate();
     }
 }
 
