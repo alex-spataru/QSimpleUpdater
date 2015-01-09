@@ -27,8 +27,8 @@ DownloadDialog::DownloadDialog (QWidget *parent)
     connect (ui->openButton, SIGNAL (clicked()), this, SLOT (installUpdate()));
 
     // Configure open button
-    ui->openButton->setEnabled(false);
-    ui->openButton->setVisible(false);
+    ui->openButton->setEnabled (false);
+    ui->openButton->setVisible (false);
 
     // Initialize the network access manager
     m_manager = new QNetworkAccessManager (this);
@@ -38,7 +38,7 @@ DownloadDialog::DownloadDialog (QWidget *parent)
              SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
 }
 
-DownloadDialog::~DownloadDialog(void) {
+DownloadDialog::~DownloadDialog (void) {
     delete ui;
 }
 
@@ -66,15 +66,15 @@ void DownloadDialog::beginDownload (const QUrl& url) {
     showNormal();
 }
 
-void DownloadDialog::installUpdate(void) {
+void DownloadDialog::installUpdate (void) {
     QMessageBox msg;
-    msg.setIcon(QMessageBox::Question);
-    msg.setText("<b>" +
-                tr("To apply the update(s), you must first quit %1")
-                .arg(qApp->applicationName()) +
-                "</b>");
-    msg.setInformativeText(tr("Do you want to quit %1 now?").arg(qApp->applicationName()));
-    msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msg.setIcon (QMessageBox::Question);
+    msg.setText ("<b>" +
+                 tr ("To apply the update(s), you must first quit %1")
+                 .arg (qApp->applicationName()) +
+                 "</b>");
+    msg.setInformativeText (tr ("Do you want to quit %1 now?").arg (qApp->applicationName()));
+    msg.setStandardButtons (QMessageBox::Yes | QMessageBox::No);
 
     if (msg.exec() == QMessageBox::Yes) {
         openDownload();
@@ -82,13 +82,13 @@ void DownloadDialog::installUpdate(void) {
     }
 
     else {
-        ui->openButton->setEnabled(true);
-        ui->openButton->setVisible(true);
+        ui->openButton->setEnabled (true);
+        ui->openButton->setVisible (true);
         ui->timeLabel->setText (tr ("Click the \"Open\" button to apply the update"));
     }
 }
 
-void DownloadDialog::openDownload(void) {
+void DownloadDialog::openDownload (void) {
     if (!m_path.isEmpty()) {
         QString url = m_path;
 
@@ -102,7 +102,7 @@ void DownloadDialog::openDownload(void) {
     }
 }
 
-void DownloadDialog::cancelDownload(void) {
+void DownloadDialog::cancelDownload (void) {
     if (!m_reply->isFinished()) {
         QMessageBox _message;
         _message.setWindowTitle (tr ("Updater"));
@@ -120,7 +120,7 @@ void DownloadDialog::cancelDownload(void) {
         hide();
 }
 
-void DownloadDialog::downloadFinished(void) {
+void DownloadDialog::downloadFinished (void) {
     ui->stopButton->setText (tr ("Close"));
     ui->downloadLabel->setText (tr ("Download complete!"));
     ui->timeLabel->setText (tr ("The installer will open in a separate window..."));

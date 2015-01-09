@@ -20,30 +20,27 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
     , m_version_check_finished (false)
     , m_new_version_available (false) {
     m_downloadDialog = new DownloadDialog();
+
+    m_manager = new QNetworkAccessManager (this);
+    connect (m_manager, SIGNAL (finished (QNetworkReply *)), this,
+             SLOT (checkDownloadedVersion (QNetworkReply *)));
+    connect (m_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
+             this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
 }
 
-QString QSimpleUpdater::changeLog() const {    
+QString QSimpleUpdater::changeLog() const {
     return m_changelog;
 }
 
-void QSimpleUpdater::checkForUpdates(void) {
-    if (!m_reference_url.isEmpty()) {
-        QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
-
-        connect (_manager, SIGNAL (finished (QNetworkReply *)), this,
-                 SLOT (checkDownloadedVersion (QNetworkReply *)));
-
-        connect (_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
-                 this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
-
-        _manager->get (QNetworkRequest (m_reference_url));
-    }
+void QSimpleUpdater::checkForUpdates (void) {
+    if (!m_reference_url.isEmpty())
+        m_manager->get (QNetworkRequest (m_reference_url));
 
     else
         qDebug() << "QSimpleUpdater: Invalid reference URL";
 }
 
-void QSimpleUpdater::openDownloadLink(void) {
+void QSimpleUpdater::openDownloadLink (void) {
     if (!m_download_url.isEmpty())
         QDesktopServices::openUrl (m_download_url);
 }
@@ -56,7 +53,7 @@ QString QSimpleUpdater::installedVersion() const {
     return m_installed_version;
 }
 
-void QSimpleUpdater::downloadLatestVersion(void) {
+void QSimpleUpdater::downloadLatestVersion (void) {
     if (!m_download_url.isEmpty())
         m_downloadDialog->beginDownload (m_download_url);
 }
