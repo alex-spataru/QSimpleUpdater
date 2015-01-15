@@ -67,7 +67,7 @@ void Example::checkForUpdates() {
                              "QSimpleUpdater/Files-for-example-project/current_version.txt");
 
     // Tell the updater where to download the update, its recommended to use direct links
-    updater->setDownloadUrl("https://github.com/alex-97/QSimpleUpdater/archive/master.zip");
+    updater->setDownloadUrl("https://codeload.github.com/alex-97/QSimpleUpdater/zip/master");
 
     // Finally, check for updates...
     updater->checkForUpdates();

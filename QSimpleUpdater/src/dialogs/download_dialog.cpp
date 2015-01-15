@@ -19,8 +19,15 @@
 DownloadDialog::DownloadDialog (QWidget *parent)
     : QWidget (parent)
     , ui (new Ui::DownloadDialog) {
+
     // Setup the UI
     ui->setupUi (this);
+
+    // Make the window look like a dialog
+    QIcon _blank;
+    setWindowIcon (_blank);
+    setWindowModality (Qt::WindowModal);
+    setWindowFlags (Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
     // Connect SIGNALS/SLOTS
     connect (ui->stopButton, SIGNAL (clicked()), this, SLOT (cancelDownload()));

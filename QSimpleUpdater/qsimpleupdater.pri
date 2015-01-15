@@ -25,7 +25,7 @@ unix:!android {
 }
 
 win32* {
-    LIBS += -L$$PWD/dependencies/OpenSSL-Win32/lib -llibeay32
+    LIBS += -LC:/OpenSSL-Win32/lib -llibeay32
 }
 
 RESOURCES += $$PWD/res/qsu_resources.qrc
