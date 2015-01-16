@@ -45,7 +45,7 @@ QSimpleUpdater makes use of the OpenSSL-Win32 project, make sure that have it in
 
 Donate [Bitcoins](http://bitcoin.org) to the project to keep it going!
 
-> 1BdxESMayJAengjAkjipMwfWkiqZUztyhU
+> 1FFz9TZCPGgiCD97yEqnFaauYYvZUE7f51 
 
 ## Useful Links
 
