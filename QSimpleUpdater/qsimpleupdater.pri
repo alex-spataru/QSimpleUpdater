@@ -11,10 +11,12 @@ QT += widgets
 QT += network
 
 HEADERS += $$PWD/src/qsimpleupdater.h \
-           $$PWD/src/dialogs/download_dialog.h
+           $$PWD/src/dialogs/download_dialog.h \
+    $$PWD/src/dialogs/progress_dialog.h
 
 SOURCES += $$PWD/src/qsimpleupdater.cpp \
-           $$PWD/src/dialogs/download_dialog.cpp
+           $$PWD/src/dialogs/download_dialog.cpp \
+    $$PWD/src/dialogs/progress_dialog.cpp
 
 OTHER_FILES += $$PWD/src/QSimpleUpdater
 
@@ -30,4 +32,5 @@ win32* {
 
 RESOURCES += $$PWD/res/qsu_resources.qrc
 
-FORMS += $$PWD/src/dialogs/download_dialog.ui
+FORMS += $$PWD/src/dialogs/download_dialog.ui \
+    $$PWD/src/dialogs/progress_dialog.ui

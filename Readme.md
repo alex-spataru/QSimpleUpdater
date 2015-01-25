@@ -19,7 +19,7 @@ QSimpleUpdater is **free and open source [LGPL software](https://www.gnu.org/lic
 
 ## Warnings 
 
-Many websites today use the HTTPS protocol, which means that you will need SSL in order to communicate with them. If your project needs to access such a webiste (for example GitHub), you will need to carefully read the following information in order to ensure that QSimpleUpdater works with those websites (both in your machine and in the final users' machine).
+Many websites today use the [HTTP Secure](http://en.wikipedia.org/wiki/HTTP_Secure) protocol, which means that you will need [SSL](https://www.globalsign.com/en/ssl-information-center/what-ssl/) in order to communicate with them. If your project needs to access such a webiste (for example GitHub), you will need to carefully read the following information in order to ensure that QSimpleUpdater works with those websites (both in your machine and in the final users' machine).
 
 This section is extremely important for any developer wishing to deploy his or her applications under the Windows platform, because the application will depend on the libraries provided by QSimpleUpdater.
 

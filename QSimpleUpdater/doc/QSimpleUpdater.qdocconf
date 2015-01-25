@@ -1,0 +1,14 @@
+# Project info
+project = QSimpleUpdater
+url = http://qsimpleupdater.sf.net/doc
+description = A simple auto-updating system for Qt projects
+
+# Import sources and headers
+headerdirs = ../src
+sourcedirs = ../src
+sources.fileextensions = "*.cpp *.qdoc *.mm *.qml"
+headers.fileextensions = "*.h *.ch *.h++ *.hh *.hpp *.hxx"
+
+# Output as HTML
+outputdir = doc-html
+outputformats = HTML

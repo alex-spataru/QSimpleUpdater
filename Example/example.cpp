@@ -3,6 +3,7 @@
 
 int main (int argc, char *argv[]) {
     QApplication app(argc, argv);
+    app.setApplicationName("QSimpleUpdater Example");
 
     // Create the dialog and show it
     Example example;
@@ -69,6 +70,10 @@ void Example::checkForUpdates() {
     // Tell the updater where to download the update, its recommended to use direct links
     updater->setDownloadUrl("https://codeload.github.com/alex-97/QSimpleUpdater/zip/master");
 
+    // Show the progress dialog and show messages when checking is finished
+    updater->setSilent(false);
+    updater->setShowNewestVersionMessage(true);
+
     // Finally, check for updates...
     updater->checkForUpdates();
 }
@@ -78,36 +83,4 @@ void Example::onCheckingFinished() {
     // that he/she can check for updates again
     ui->updatesButton->setEnabled(true);
     ui->updatesButton->setText("Check for updates");
-
-    // There's a newer version of the application available, so we inform
-    // the user that there's a newer version available and we replace the text
-    // of the changelog text edit with the downloaded change log
-    if (updater->newerVersionAvailable()) {
-        ui->changelogTextEdit->setPlainText(updater->changeLog());
-
-        // Create and configure a message box
-        QMessageBox _messagebox;
-        _messagebox.setIcon(QMessageBox::Information);
-        _messagebox.setWindowTitle(tr("Update available"));
-        _messagebox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        _messagebox.setText(tr("There's an update available!"));
-        _messagebox.setInformativeText(tr("The latest version of the application is") + " " +
-                                       updater->latestVersion() + ", " +
-                                       tr("do you want to download it?"));
-
-        // If the user clicks "yes" open the download dialog
-        if (_messagebox.exec() == QMessageBox::Yes)
-            updater->downloadLatestVersion();
-    }
-
-    // The installed version is equal or greater to the "official" latest version,
-    // so we inform the user and clear the text of the change log text edit
-    else {
-        ui->changelogTextEdit->setPlainText("");
-        ui->changelogTextEdit->setPlainText("The change log was not downloaded because you "
-                                            "are running the latest version of the application...");
-
-        QMessageBox::information(this, tr("No updates available"),
-                                 tr("Congratulations! You are running the latest version of the application!"));
-    }
 }
