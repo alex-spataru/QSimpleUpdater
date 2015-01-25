@@ -37,7 +37,8 @@
 #include "dialogs/download_dialog.h"
 #include "dialogs/progress_dialog.h"
 
-class QSimpleUpdater : public QObject {
+class QSimpleUpdater : public QObject
+{
         Q_OBJECT
 
     public:
@@ -59,8 +60,8 @@ class QSimpleUpdater : public QObject {
         void setDownloadUrl (const QString& url);
         void setReferenceUrl (const QString& url);
         void setChangelogUrl (const QString& url);
-        void setShowNewestVersionMessage(bool show);
-        void setShowUpdateAvailableMessage(bool show);
+        void setShowNewestVersionMessage (bool show);
+        void setShowUpdateAvailableMessage (bool show);
         void setApplicationVersion (const QString& version);
 
     signals:

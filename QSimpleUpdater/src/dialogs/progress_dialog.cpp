@@ -15,10 +15,10 @@
 #include "progress_dialog.h"
 #include "ui_progress_dialog.h"
 
-ProgressDialog::ProgressDialog(QWidget *parent) : QDialog(parent), ui(new Ui::ProgressDialog)
+ProgressDialog::ProgressDialog (QWidget *parent) : QDialog (parent), ui (new Ui::ProgressDialog)
 {
     // Create and configure UI
-    ui->setupUi(this);
+    ui->setupUi (this);
 
     // Make the window look like a dialog
     QIcon _blank;
@@ -27,7 +27,7 @@ ProgressDialog::ProgressDialog(QWidget *parent) : QDialog(parent), ui(new Ui::Pr
     setWindowFlags (Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
     // Close dialog when cancel button is clicked
-    connect(ui->ui_cancel_button, SIGNAL(clicked()), this, SLOT(cancel()));
+    connect (ui->ui_cancel_button, SIGNAL (clicked()), this, SLOT (cancel()));
 }
 
 ProgressDialog::~ProgressDialog()
@@ -35,7 +35,8 @@ ProgressDialog::~ProgressDialog()
     delete ui;
 }
 
-void ProgressDialog::cancel(void) {
+void ProgressDialog::cancel (void)
+{
     hide();
     emit cancelClicked();
 }

@@ -26,11 +26,13 @@
 
 #include <math.h>
 
-namespace Ui {
+namespace Ui
+{
 class DownloadDialog;
 }
 
-class DownloadDialog : public QWidget {
+class DownloadDialog : public QWidget
+{
         Q_OBJECT
 
     public:

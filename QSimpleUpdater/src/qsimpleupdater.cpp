@@ -14,9 +14,9 @@
 
 /*! \class QSimpleUpdater
  * \brief A simple auto-updater system for Qt
- * 
- * QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. 
- * Aside from notifying you if there's a newer version, it allows you to download the change log in any 
+ *
+ * QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects.
+ * Aside from notifying you if there's a newer version, it allows you to download the change log in any
  * format (such as HTML or RTF) and download the updates directly from your application using a dialog.
  * QSimpleUpdater is free and open source LGPL software,
  * which means that you can use it for both open source and proprietary applications.
@@ -88,7 +88,8 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
     , m_silent (false)
     , m_show_newest_version (true)
     , m_show_update_available (true)
-    , m_new_version_available (false) {
+    , m_new_version_available (false)
+{
 
     m_progressDialog = new ProgressDialog();
     m_downloadDialog = new DownloadDialog();
@@ -99,17 +100,18 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
     connect (m_manager, SIGNAL (sslErrors (QNetworkReply *, QList<QSslError>)),
              this, SLOT (ignoreSslErrors (QNetworkReply *, QList<QSslError>)));
 
-    connect (m_progressDialog, SIGNAL(cancelClicked()), this, SLOT(cancel()));
+    connect (m_progressDialog, SIGNAL (cancelClicked()), this, SLOT (cancel()));
     connect (this, SIGNAL (checkingFinished()), this, SLOT (onCheckingFinished()));
 }
 
 /*!
  * Returns the downloaded change log as a \c QString.
- * 
+ *
  * \sa setChangelogUrl()
  */
 
-QString QSimpleUpdater::changeLog() const {
+QString QSimpleUpdater::changeLog() const
+{
     return m_changelog;
 }
 
@@ -120,8 +122,10 @@ QString QSimpleUpdater::changeLog() const {
  * \sa setDownloadUrl(), setReferenceUrl()
  */
 
-void QSimpleUpdater::checkForUpdates (void) {
-    if (!m_reference_url.isEmpty()) {
+void QSimpleUpdater::checkForUpdates (void)
+{
+    if (!m_reference_url.isEmpty())
+    {
         m_manager->get (QNetworkRequest (m_reference_url));
 
         if (!silent())
@@ -138,7 +142,8 @@ void QSimpleUpdater::checkForUpdates (void) {
  * \sa setDownloadUrl()
  */
 
-void QSimpleUpdater::openDownloadLink (void) {
+void QSimpleUpdater::openDownloadLink (void)
+{
     if (!m_download_url.isEmpty())
         QDesktopServices::openUrl (m_download_url);
 }
@@ -149,7 +154,8 @@ void QSimpleUpdater::openDownloadLink (void) {
  * \sa setReferenceUrl(), checkForUpdates()
  */
 
-QString QSimpleUpdater::latestVersion() const {
+QString QSimpleUpdater::latestVersion() const
+{
     return m_latest_version;
 }
 
@@ -159,7 +165,8 @@ QString QSimpleUpdater::latestVersion() const {
  * \sa setApplicationVersion()
  */
 
-QString QSimpleUpdater::installedVersion() const {
+QString QSimpleUpdater::installedVersion() const
+{
     return m_installed_version;
 }
 
@@ -170,7 +177,8 @@ QString QSimpleUpdater::installedVersion() const {
  * \sa setDownloadUrl(), checkForUpdates()
  */
 
-void QSimpleUpdater::downloadLatestVersion (void) {
+void QSimpleUpdater::downloadLatestVersion (void)
+{
     if (!m_download_url.isEmpty())
         m_downloadDialog->beginDownload (m_download_url);
 }
@@ -182,7 +190,8 @@ void QSimpleUpdater::downloadLatestVersion (void) {
  * \sa setReferenceUrl(), checkForUpdates()
  */
 
-bool QSimpleUpdater::newerVersionAvailable() const {
+bool QSimpleUpdater::newerVersionAvailable() const
+{
     return m_new_version_available;
 }
 
@@ -193,7 +202,8 @@ bool QSimpleUpdater::newerVersionAvailable() const {
  * \sa setSilent()
  */
 
-bool QSimpleUpdater::silent() const {
+bool QSimpleUpdater::silent() const
+{
     return m_silent;
 }
 
@@ -208,13 +218,14 @@ bool QSimpleUpdater::silent() const {
  * \sa downloadLatestVersion(), openDownloadLink()
  */
 
-void QSimpleUpdater::setDownloadUrl (const QString& url) {
+void QSimpleUpdater::setDownloadUrl (const QString& url)
+{
     Q_ASSERT (!url.isEmpty());
     m_download_url.setUrl (url);
 }
 
 /*!
- * Tells the updater system from where to download the file 
+ * Tells the updater system from where to download the file
  * that indicates the latest version using the \a url parameter.
  *
  * The reference file should contain \bold {ONLY} the latest version
@@ -231,15 +242,16 @@ void QSimpleUpdater::setDownloadUrl (const QString& url) {
  * \sa latestVersion()
  */
 
-void QSimpleUpdater::setReferenceUrl (const QString& url) {
+void QSimpleUpdater::setReferenceUrl (const QString& url)
+{
     Q_ASSERT (!url.isEmpty());
     m_reference_url.setUrl (url);
 }
 
 /*!
- * Tells the updater system from where to download the 
+ * Tells the updater system from where to download the
  * change log using the \a url parameter.
- * The change log can be any file you like, however, 
+ * The change log can be any file you like, however,
  * its recommended to write it in plain text,
  * such as TXT, HTML and RTF files.
  *
@@ -247,7 +259,8 @@ void QSimpleUpdater::setReferenceUrl (const QString& url) {
  */
 
 
-void QSimpleUpdater::setChangelogUrl (const QString& url) {
+void QSimpleUpdater::setChangelogUrl (const QString& url)
+{
     Q_ASSERT (!url.isEmpty());
     m_changelog_url.setUrl (url);
 }
@@ -263,13 +276,14 @@ void QSimpleUpdater::setChangelogUrl (const QString& url) {
  */
 
 
-void QSimpleUpdater::setApplicationVersion (const QString& version) {
+void QSimpleUpdater::setApplicationVersion (const QString& version)
+{
     Q_ASSERT (!version.isEmpty());
     m_installed_version = version;
 }
 
 /*!
- * 
+ *
  * \list
  * \o If \a silent is set to \c true, no dialogs will be shown while checking
  * for updates or when a newer version of the application is found.
@@ -280,11 +294,12 @@ void QSimpleUpdater::setApplicationVersion (const QString& version) {
  * \sa silent()
  */
 
-void QSimpleUpdater::setSilent (bool silent) {
+void QSimpleUpdater::setSilent (bool silent)
+{
     m_silent = silent;
 
     if (m_silent)
-        setShowNewestVersionMessage(false);
+        setShowNewestVersionMessage (false);
 }
 
 /*!
@@ -294,7 +309,8 @@ void QSimpleUpdater::setSilent (bool silent) {
  * \sa checkForUpdates()
  */
 
-void QSimpleUpdater::setShowUpdateAvailableMessage(bool show) {
+void QSimpleUpdater::setShowUpdateAvailableMessage (bool show)
+{
     m_show_update_available = show;
 }
 
@@ -308,7 +324,8 @@ void QSimpleUpdater::setShowUpdateAvailableMessage(bool show) {
  * \sa checkForUpdates()
  */
 
-void QSimpleUpdater::setShowNewestVersionMessage(bool show) {
+void QSimpleUpdater::setShowNewestVersionMessage (bool show)
+{
     m_show_newest_version = show;
 }
 
@@ -317,7 +334,8 @@ void QSimpleUpdater::setShowNewestVersionMessage(bool show) {
  * clicks on the "cancel" button in the progress dialog.
  */
 
-void QSimpleUpdater::cancel(void) {
+void QSimpleUpdater::cancel (void)
+{
     m_manager->disconnect();
 }
 
@@ -328,10 +346,14 @@ void QSimpleUpdater::cancel(void) {
  * \sa checkDownloadedVersion()
  */
 
-void QSimpleUpdater::showErrorMessage (void) {
+void QSimpleUpdater::showErrorMessage (void)
+{
     if (!silent())
-        QMessageBox::warning(NULL, tr("Software Updater"),
-                             tr("An unknown error occured while checking for updates"));
+    {
+        m_progressDialog->hide();
+        QMessageBox::warning (NULL, tr ("Software Updater"),
+                              tr ("An unknown error occured while checking for updates"));
+    }
 }
 
 /*! \internal
@@ -341,41 +363,47 @@ void QSimpleUpdater::showErrorMessage (void) {
  * \sa checkDownloadedVersion()
  */
 
-void QSimpleUpdater::onCheckingFinished (void) {
+void QSimpleUpdater::onCheckingFinished (void)
+{
+    // Hide the progress dialog
+    m_progressDialog->hide();
+
     // Get the application icon as a pixmap
-    QPixmap _icon = qApp->windowIcon().pixmap(
-                qApp->windowIcon().actualSize(QSize(96, 96)));
+    QPixmap _icon = qApp->windowIcon().pixmap (
+                        qApp->windowIcon().actualSize (QSize (96, 96)));
 
     // If the icon is invalid, use default icon
     if (_icon.isNull())
-        _icon = QPixmap(":/icons/update.png");
+        _icon = QPixmap (":/icons/update.png");
 
     QMessageBox _message;
     _message.setIconPixmap (_icon);
 
     // Ask user if he/she wants to download newer version
-    if (newerVersionAvailable() && m_show_update_available) {
+    if (newerVersionAvailable() && m_show_update_available)
+    {
         _message.setDetailedText (changeLog());
         _message.setStandardButtons (QMessageBox::Yes | QMessageBox::No);
-        _message.setText ("<b>" + tr ("A new version of %1 is available!").arg(qApp->applicationName()) + "</b>");
-        _message.setInformativeText (tr("%1 %2 is available - you have %3. Would you like to download it now?")
-                                     .arg(qApp->applicationName())
-                                     .arg(latestVersion())
-                                     .arg(installedVersion()));
+        _message.setText ("<b>" + tr ("A new version of %1 is available!").arg (qApp->applicationName()) + "</b>");
+        _message.setInformativeText (tr ("%1 %2 is available - you have %3. Would you like to download it now?")
+                                     .arg (qApp->applicationName())
+                                     .arg (latestVersion())
+                                     .arg (installedVersion()));
 
         if (_message.exec() == QMessageBox::Yes)
             downloadLatestVersion();
     }
 
     // Tell user that he/she is up to date (only if necessary)
-    else if (!silent() && m_show_newest_version && !m_latest_version.isEmpty()) {
+    else if (!silent() && m_show_newest_version && !m_latest_version.isEmpty())
+    {
         _message.setStandardButtons (QMessageBox::Ok);
         _message.setText ("<b>" + tr ("You're up-to-date!") +
                           "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>");
         _message.setInformativeText (
-                    tr ("%1 %2 is currently the newest version available")
-                    .arg (qApp->applicationName())
-                    .arg (installedVersion()));
+            tr ("%1 %2 is currently the newest version available")
+            .arg (qApp->applicationName())
+            .arg (installedVersion()));
 
         _message.exec();
     }
@@ -391,34 +419,41 @@ void QSimpleUpdater::onCheckingFinished (void) {
  * \sa checkForUpdates()
  */
 
-void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
+void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply)
+{
     bool _new_update = false;
-    m_progressDialog->hide();
 
     QString _reply = QString::fromUtf8 (reply->readAll());
     _reply.replace (" ", "");
     _reply.replace ("\n", "");
 
-    if (!_reply.isEmpty()) {
+    if (!_reply.isEmpty())
+    {
         m_latest_version = _reply;
 
         QStringList _download = m_latest_version.split (".");
         QStringList _installed = m_installed_version.split (".");
 
-        for (int i = 0; i <= _download.count() - 1; ++i) {
-            if (_download.count() - 1 >= i && _installed.count() - 1 >= i) {
-                if (_download.at (i) > _installed.at (i)) {
+        for (int i = 0; i <= _download.count() - 1; ++i)
+        {
+            if (_download.count() - 1 >= i && _installed.count() - 1 >= i)
+            {
+                if (_download.at (i) > _installed.at (i))
+                {
                     _new_update = true;
                     break;
                 }
             }
 
-            else {
-                if (_installed.count() < _download.count()) {
+            else
+            {
+                if (_installed.count() < _download.count())
+                {
                     if (_installed.at (i - 1) == _download.at (i - 1))
                         break;
 
-                    else {
+                    else
+                    {
                         _new_update = true;
                         break;
                     }
@@ -426,13 +461,14 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
             }
         }
     }
-    
+
     else
         showErrorMessage();
 
     m_new_version_available = _new_update;
 
-    if (!m_changelog_url.isEmpty() && newerVersionAvailable()) {
+    if (!m_changelog_url.isEmpty() && newerVersionAvailable())
+    {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
 
         connect (_manager, SIGNAL (finished (QNetworkReply *)), this,
@@ -454,7 +490,8 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
  * \sa setChangelogUrl(), changeLog()
  */
 
-void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply) {
+void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply)
+{
     QString _reply = QString::fromUtf8 (reply->readAll());
 
     if (!_reply.isEmpty())
@@ -470,7 +507,8 @@ void QSimpleUpdater::processDownloadedChangelog (QNetworkReply *reply) {
  */
 
 void QSimpleUpdater::ignoreSslErrors (QNetworkReply *reply,
-                                      const QList<QSslError>& error) {
+                                      const QList<QSslError>& error)
+{
 #if SUPPORTS_SSL
     reply->ignoreSslErrors (error);
 #else

@@ -6,6 +6,10 @@ QSimpleUpdater is an implementation of an auto-updating system to be used with Q
 
 QSimpleUpdater is **free and open source [LGPL software](https://www.gnu.org/licenses/lgpl.html)**, which means that you can use it for both open source and proprietary applications.
 
+## Developer Documentation
+
+You can find the developer documentation for QSimpleUpdater [here](http://qsimpleupdater.sourceforge.net/doc/).
+
 ## Using QSimpleUpdater
 
 1. Copy the *QSimpleUpdater* folder in your "3rd-party" folder.
