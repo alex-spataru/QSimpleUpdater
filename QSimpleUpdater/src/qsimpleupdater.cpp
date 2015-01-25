@@ -426,11 +426,11 @@ void QSimpleUpdater::checkDownloadedVersion (QNetworkReply *reply) {
             }
         }
     }
-
-    m_new_version_available = _new_update;
     
     else
         showErrorMessage();
+
+    m_new_version_available = _new_update;
 
     if (!m_changelog_url.isEmpty() && newerVersionAvailable()) {
         QNetworkAccessManager *_manager = new QNetworkAccessManager (this);
