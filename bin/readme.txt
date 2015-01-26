@@ -1,1 +1,0 @@
-The scripts contained in this folder will require you to install the [astyle](http://astyle.sf.net) source code styler.

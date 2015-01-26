@@ -16,6 +16,8 @@
 #include "download_dialog.h"
 #include "ui_download_dialog.h"
 
+#include <QMutex>
+
 DownloadDialog::DownloadDialog (QWidget *parent)
     : QWidget (parent)
     , ui (new Ui::DownloadDialog)
@@ -150,14 +152,17 @@ void DownloadDialog::downloadFinished (void)
     {
         QStringList list = m_reply->url().toString().split ("/");
         QFile file (QDir::tempPath() + "/" + list.at (list.count() - 1));
+        QMutex _mutex;
 
         if (file.open (QIODevice::WriteOnly))
         {
+            _mutex.lock();
             file.write (data);
             m_path = file.fileName();
+            file.close();
+            _mutex.unlock();
         }
 
-        file.close();
         installUpdate();
     }
 }

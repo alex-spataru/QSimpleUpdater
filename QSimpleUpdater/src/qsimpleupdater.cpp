@@ -102,7 +102,7 @@ QSimpleUpdater::QSimpleUpdater (QObject *parent)
 
     connect (m_progressDialog, SIGNAL (cancelClicked()), this, SLOT (cancel()));
     connect (this, SIGNAL (checkingFinished()), this, SLOT (onCheckingFinished()));
-    
+
     setApplicationVersion (qApp->applicationVersion());
 }
 
