@@ -2,8 +2,6 @@
 
 [![OpenHub](https://www.openhub.net/p/qsimpleupdater/widgets/project_thin_badge.gif)](http://openhub.net/p/qsimpleupdater)
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/alex-spataru/qsimpleupdater/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. 
 
 QSimpleUpdater is **free and open source [LGPL software](https://www.gnu.org/licenses/lgpl.html)**, which means that you can use it for both open source and proprietary applications.
