@@ -1,10 +1,16 @@
-# Include the QSimpleUpdater files
-include($$PWD/../QSimpleUpdater/QSimpleUpdater.pri)
+#
+# Copyright (c) 2014-2016 Alex Spataru <alex_spataru@outlook.com>
+#
+# This work is free. You can redistribute it and/or modify it under the
+# terms of the Do What The Fuck You Want To Public License, Version 2,
+# as published by Sam Hocevar. See the COPYING file for more details.
+#
 
-# Include the QtWidgets module
-QT += widgets
+TEMPLATE = app
 
-# Define the source code
-FORMS += example.ui
-HEADERS += example.h
-SOURCES += example.cpp
+FORMS   += $$PWD/src/Window.ui
+HEADERS += $$PWD/src/Window.h
+SOURCES += $$PWD/src/Window.cpp \
+           $$PWD/src/main.cpp
+
+include ($$PWD/../QSimpleUpdater.pri)
