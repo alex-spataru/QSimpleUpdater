@@ -8,6 +8,8 @@
 
 TEMPLATE = app
 
+TARGET = "QSU Tutorial"
+
 FORMS   += $$PWD/src/Window.ui
 HEADERS += $$PWD/src/Window.h
 SOURCES += $$PWD/src/Window.cpp \

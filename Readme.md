@@ -1,5 +1,8 @@
 # QSimpleUpdater
+
 QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects.
+
+[![Downloading](etc/screenshots/downloading.png)](etc/screenshots/)
 
 ## Integrating QSimpleUpdater with your projects
 1. Copy the QSimpleUpdater folder in your "3rd-party" folder.
