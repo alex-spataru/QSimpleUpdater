@@ -15,7 +15,9 @@
 // Define the URL of the Update Definitions file
 //==============================================================================
 
-static const QString DEFS_URL = "http://pastebin.com/raw/FGs1sTs0";
+static const QString DEFS_URL = "https://raw.githubusercontent.com/"
+                                "alex-spataru/QSimpleUpdater/master/tutorial/"
+                                "definitions/updates.json";
 
 //==============================================================================
 // Window::Window
@@ -91,5 +93,6 @@ void Window::checkForUpdates() {
 //==============================================================================
 
 void Window::updateChangelog (QString url) {
-    m_ui->changelogText->setText (m_updater->getChangelog (url));
+    if (url == DEFS_URL)
+        m_ui->changelogText->setText (m_updater->getChangelog (url));
 }
