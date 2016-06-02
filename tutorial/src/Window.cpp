@@ -27,6 +27,9 @@ Window::Window (QWidget* parent) : QMainWindow (parent) {
     m_ui = new Ui::Window;
     m_ui->setupUi (this);
 
+    setWindowTitle (qApp->applicationName());
+
+    /* QSimpleUpdater is single-instance */
     m_updater = QSimpleUpdater::getInstance();
 
     /* Check for updates when the "Check For Updates" button is clicked */

@@ -11,7 +11,7 @@
 int main (int argc, char** argv) {
     QApplication app (argc, argv);
     app.setApplicationVersion ("1.0");
-    app.setApplicationName ("Application");
+    app.setApplicationName ("Bob's Badass App");
 
     Window window;
     window.show();

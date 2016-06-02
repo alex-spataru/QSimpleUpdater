@@ -112,17 +112,8 @@ void Downloader::startDownload (const QUrl& url) {
 //==============================================================================
 
 void Downloader::openDownload() {
-    if (!m_filePath.isEmpty()) {
-        QString url = m_filePath;
-
-        if (url.startsWith ("/"))
-            url = "file://" + url;
-        else
-            url = "file:///" + url;
-
-        hide();
-        QDesktopServices::openUrl (url);
-    }
+    if (!m_filePath.isEmpty())
+        QDesktopServices::openUrl (QUrl::fromLocalFile (m_filePath));
 
     else {
         QMessageBox::critical (this,
