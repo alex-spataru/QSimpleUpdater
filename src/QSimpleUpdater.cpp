@@ -204,7 +204,7 @@ void QSimpleUpdater::setNotifyOnFinish (const QString& url,
 //==============================================================================
 
 void QSimpleUpdater::setDownloaderEnabled (const QString& url,
-        const bool& enabled) {
+                                           const bool& enabled) {
     getUpdater (url)->setDownloaderEnabled (enabled);
 }
 
