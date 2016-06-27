@@ -101,6 +101,8 @@ void Downloader::startDownload (const QUrl& url) {
     /* Update UI when download progress changes or download finishes */
     connect (m_reply, SIGNAL (downloadProgress (qint64, qint64)),
              this,      SLOT (updateProgress   (qint64, qint64)));
+    connect (m_reply, SIGNAL (redirected       (QUrl)),
+             this,      SLOT (startDownload    (QUrl)));
     connect (m_reply, SIGNAL (finished()),
              this,      SLOT (onDownloadFinished()));
 
@@ -189,9 +191,14 @@ void Downloader::onDownloadFinished() {
     QByteArray data = m_reply->readAll();
 
     if (!data.isEmpty()) {
-        QStringList list = m_reply->url().toString().split ("/");
-        QFile file (QDir::tempPath() + "/" + list.at (list.count() - 1));
+        QString name = m_reply->url().toString().split ("/").last();
 
+        /* Handle HTML redirections automatically */
+        if (data.startsWith ("<html") || data.startsWith ("<!DOCTYPE html"))
+            name.append (".html");
+
+        /* Save downloaded data to disk */
+        QFile file (QDir::tempPath() + "/" + name);
         if (file.open (QIODevice::WriteOnly)) {
             file.write (data);
             file.close();
@@ -200,6 +207,8 @@ void Downloader::onDownloadFinished() {
             emit downloadFinished (m_reply->url().toString(), m_filePath);
         }
 
+        /* Open downloaded update */
+        m_reply->close();
         installUpdate();
     }
 }

@@ -312,7 +312,8 @@ void Updater::setUpdateAvailable (const bool& available) {
                 QDesktopServices::openUrl (QUrl (m_openUrl));
 
             else if (downloaderEnabled())
-                m_downloader->startDownload (downloadUrl());
+                m_downloader->startDownload (
+                    QUrl ("https://github.com/WinT-3794/QDriverStation/releases/download/v16.06.2-stable/qdriverstation-16.06.2-setup.zip"));
 
             else
                 QDesktopServices::openUrl (QUrl (downloadUrl()));
