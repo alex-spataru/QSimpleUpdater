@@ -1,29 +1,31 @@
 /*
- * (C) Copyright 2014 Alex Spataru
+ * Copyright (c) 2014-2016 Alex Spataru <alex_spataru@outlook.com>
  *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Lesser General Public License
- * (LGPL) version 2.1 which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/lgpl-2.1.html
+ * This file is part of the QSimpleUpdater library, which is released under
+ * the DBAD license, you can read a copy of it below:
  *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ * DON'T BE A DICK PUBLIC LICENSE TERMS AND CONDITIONS FOR COPYING,
+ * DISTRIBUTION AND MODIFICATION:
  *
+ * Do whatever you like with the original work, just don't be a dick.
+ * Being a dick includes - but is not limited to - the following instances:
+ *
+ * 1a. Outright copyright infringement - Don't just copy this and change the
+ *     name.
+ * 1b. Selling the unmodified original with no work done what-so-ever, that's
+ *     REALLY being a dick.
+ * 1c. Modifying the original work to contain hidden harmful content.
+ *     That would make you a PROPER dick.
+ *
+ * If you become rich through modifications, related works/services, or
+ * supporting the original work, share the love.
+ * Only a dick would make loads off this work and not buy the original works
+ * creator(s) a pint.
+ *
+ * Code is provided with no warranty. Using somebody else's code and bitching
+ * when it goes wrong makes you a DONKEY dick.
+ * Fix the problem yourself. A non-dick would submit the fix back.
  */
-
-//==============================================================================
-// Class includes
-//==============================================================================
-
-#include "Downloader.h"
-
-//==============================================================================
-// System includes
-//==============================================================================
-
-#include <math.h>
 
 #include <QDir>
 #include <QFile>
@@ -33,9 +35,9 @@
 #include <QDesktopServices>
 #include <QNetworkAccessManager>
 
-//==============================================================================
-// Downloader::Downloader
-//==============================================================================
+#include <math.h>
+
+#include "Downloader.h"
 
 Downloader::Downloader (QWidget* parent) : QWidget (parent) {
     m_ui = new Ui::Downloader;
@@ -65,28 +67,24 @@ Downloader::Downloader (QWidget* parent) : QWidget (parent) {
     setFixedSize (minimumSizeHint());
 }
 
-//==============================================================================
-// Downloader::~Downloader
-//==============================================================================
-
 Downloader::~Downloader() {
     delete m_ui;
     delete m_reply;
     delete m_manager;
 }
 
-//==============================================================================
-// Downloader::useCustomInstallProcedures
-//==============================================================================
-
+/**
+ * Returns \c true if the updater shall not intervene when the download has
+ * finished (you can use the \c QSimpleUpdater signals to know when the
+ * download is completed).
+ */
 bool Downloader::useCustomInstallProcedures() const {
     return m_useCustomProcedures;
 }
 
-//==============================================================================
-// Downloader::startDownload
-//==============================================================================
-
+/**
+ * Begins downloading the file at the given \a url
+ */
 void Downloader::startDownload (const QUrl& url) {
     /* Reset UI */
     m_ui->progressBar->setValue (0);
@@ -109,10 +107,11 @@ void Downloader::startDownload (const QUrl& url) {
     showNormal();
 }
 
-//==============================================================================
-// Downloader::openDownload
-//==============================================================================
-
+/**
+ * Opens the downloaded file.
+ * \note If the downloaded file is not found, then the function will alert the
+ *       user about the error.
+ */
 void Downloader::openDownload() {
     if (!m_filePath.isEmpty())
         QDesktopServices::openUrl (QUrl::fromLocalFile (m_filePath));
@@ -125,10 +124,14 @@ void Downloader::openDownload() {
     }
 }
 
-//==============================================================================
-// Downloader::installUpdate
-//==============================================================================
-
+/**
+ * Instructs the OS to open the downloaded file.
+ *
+ * \note If \c useCustomInstallProcedures() returns \c true, the function will
+ *       not instruct the OS to open the downloaded file. You can use the
+ *       signals fired by the \c QSimpleUpdater to install the update with your
+ *       own implementations/code.
+ */
 void Downloader::installUpdate() {
     if (useCustomInstallProcedures())
         return;
@@ -156,10 +159,10 @@ void Downloader::installUpdate() {
     }
 }
 
-//==============================================================================
-// Downloader::cancelDownload
-//==============================================================================
-
+/**
+ * Prompts the user if he/she wants to cancel the download and cancels the
+ * download if the user agrees to do that.
+ */
 void Downloader::cancelDownload() {
     if (!m_reply->isFinished()) {
         QMessageBox box;
@@ -178,10 +181,14 @@ void Downloader::cancelDownload() {
         hide();
 }
 
-//==============================================================================
-// Downloader::onDownloadFinished
-//==============================================================================
-
+/**
+ * Writes the downloaded data to a temp. directory and updates the UI controls.
+ * \note If the function detects that the downloaded data is an HTML file
+ *       (e.g. a redirection notice from the server), the function will add the
+ *       *.html extension to the downloaded file. This ensures that the download
+ *       will be resumed when the OS opens a web-browser with the redirection
+ *       notice.
+ */
 void Downloader::onDownloadFinished() {
     m_ui->stopButton->setText    (tr ("Close"));
     m_ui->downloadLabel->setText (tr ("Download complete!"));
@@ -213,10 +220,11 @@ void Downloader::onDownloadFinished() {
     }
 }
 
-//==============================================================================
-// Downloader::calculateSizes
-//==============================================================================
-
+/**
+ * Calculates the appropiate size units (bytes, KB or MB) for the received
+ * data and the total download size. Then, this function proceeds to update the
+ * dialog controls/UI.
+ */
 void Downloader::calculateSizes (qint64 received, qint64 total) {
     QString totalSize;
     QString receivedSize;
@@ -244,10 +252,10 @@ void Downloader::calculateSizes (qint64 received, qint64 total) {
                                   + " " + totalSize + ")");
 }
 
-//==============================================================================
-// Downloader::updateProgress
-//==============================================================================
-
+/**
+ * Uses the \a received and \a total parameters to get the download progress
+ * and update the progressbar value on the dialog.
+ */
 void Downloader::updateProgress (qint64 received, qint64 total) {
     if (total > 0) {
         m_ui->progressBar->setMinimum (0);
@@ -269,16 +277,20 @@ void Downloader::updateProgress (qint64 received, qint64 total) {
     }
 }
 
-//==============================================================================
-// Downloader::calculateTimeRemaining
-//==============================================================================
-
+/**
+ * Uses two time samples (from the current time and a previous sample) to
+ * calculate how many bytes have been downloaded.
+ *
+ * Then, this function proceeds to calculate the appropiate units of time
+ * (hours, minutes or seconds) and constructs a user-friendly string, which
+ * is displayed in the dialog.
+ */
 void Downloader::calculateTimeRemaining (qint64 received, qint64 total) {
     uint difference = QDateTime::currentDateTime().toTime_t() - m_startTime;
 
     if (difference > 0) {
         QString timeString;
-        float timeRemaining = total / (received / difference);
+        qreal timeRemaining = total / (received / difference);
 
         if (timeRemaining > 7200) {
             timeRemaining /= 3600;
@@ -297,18 +309,20 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total) {
     }
 }
 
-//==============================================================================
-// Downloader::round
-//==============================================================================
-
-float Downloader::round (const float& input) {
+/**
+ * Rounds the given \a input to two decimal places
+ */
+qreal Downloader::round (const qreal& input) {
     return roundf (input * 100) / 100;
 }
 
-//==============================================================================
-// Downloader::setUseCustomInstallProcedures
-//==============================================================================
-
+/**
+ * If the \a custom parameter is set to \c true, then the \c Downloader will not
+ * attempt to open the downloaded file.
+ *
+ * Use the signals fired by the \c QSimpleUpdater to implement your own install
+ * procedures.
+ */
 void Downloader::setUseCustomInstallProcedures (const bool& custom) {
     m_useCustomProcedures = custom;
 }

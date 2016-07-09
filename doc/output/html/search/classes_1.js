@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['updater',['Updater',['../d3/d1d/class_updater.html',1,'']]]
+  ['qsimpleupdater',['QSimpleUpdater',['../d0/d80/class_q_simple_updater.html',1,'']]]
 ];

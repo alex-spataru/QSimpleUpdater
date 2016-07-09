@@ -93,6 +93,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="title">Downloader Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implements an integrated file downloader with a nice UI.  
+ <a href="../../de/dc0/class_downloader.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d1/d88/_downloader_8h_source.html">Downloader.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Downloader:</div>
 <div class="dyncontent">
@@ -111,7 +116,8 @@ Public Slots</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:a7374214627efe871ac19af293f702f9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dc0/class_downloader.html#a7374214627efe871ac19af293f702f9a">downloadFinished</a> (const QString &amp;url, const QString &amp;filepath)</td></tr>
+<tr class="memitem:a7374214627efe871ac19af293f702f9a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7374214627efe871ac19af293f702f9a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>downloadFinished</b> (const QString &amp;url, const QString &amp;filepath)</td></tr>
 <tr class="separator:a7374214627efe871ac19af293f702f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -122,44 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e7a91a3cdfa68e3bc59db0af1377f9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dc0/class_downloader.html#a3e7a91a3cdfa68e3bc59db0af1377f9c">useCustomInstallProcedures</a> () const </td></tr>
 <tr class="separator:a3e7a91a3cdfa68e3bc59db0af1377f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7374214627efe871ac19af293f702f9a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Downloader::downloadFinished </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>url</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Emitted when the download has finished. You can use this to implement your own procedures to install the downloaded updates. </p>
-
-<p>Referenced by <a class="el" href="../../de/dc0/class_downloader.html#a7f81027436d44ca52168b30a6eb0d379">startDownload()</a>.</p>
-
-</div>
-</div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements an integrated file downloader with a nice UI. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a26a4f889029c63c11f679284397a3285"></a>
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +152,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If <code>custom</code> is set to true, then the <a class="el" href="../../de/dc0/class_downloader.html">Downloader</a> will not attempt to open or install the downloaded updates. This can be useful if you want to implement your own install procedures using the <code><a class="el" href="../../de/dc0/class_downloader.html#a7374214627efe871ac19af293f702f9a">downloadFinished()</a></code> signal. </p>
+<p>If the <em>custom</em> parameter is set to <code>true</code>, then the <code><a class="el" href="../../de/dc0/class_downloader.html" title="Implements an integrated file downloader with a nice UI. ">Downloader</a></code> will not attempt to open the downloaded file.</p>
+<p>Use the signals fired by the <code><a class="el" href="../../d0/d80/class_q_simple_updater.html" title="Manages the updater instances. ">QSimpleUpdater</a></code> to implement your own install procedures. </p>
 
 <p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">Updater::setUseCustomInstallProcedures()</a>.</p>
 
@@ -208,11 +180,11 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Begins downloading the update </p>
+<p>Begins downloading the file at the given <em>url</em> </p>
 
-<p>References <a class="el" href="../../de/dc0/class_downloader.html#a7374214627efe871ac19af293f702f9a">downloadFinished()</a>, and <a class="el" href="../../de/dc0/class_downloader.html#a3e7a91a3cdfa68e3bc59db0af1377f9c">useCustomInstallProcedures()</a>.</p>
+<p>References <a class="el" href="../../de/dc0/class_downloader.html#a3e7a91a3cdfa68e3bc59db0af1377f9c">useCustomInstallProcedures()</a>.</p>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">Updater::setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">Updater::setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -228,8 +200,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>true</code> if the downloader will not attempt to install the downloaded file.</p>
-<p>This can be useful if you want to use the <code><a class="el" href="../../de/dc0/class_downloader.html#a7374214627efe871ac19af293f702f9a">downloadFinished()</a></code> signal to implement your own install procedures. </p>
+<p>Returns <code>true</code> if the updater shall not intervene when the download has finished (you can use the <code><a class="el" href="../../d0/d80/class_q_simple_updater.html" title="Manages the updater instances. ">QSimpleUpdater</a></code> signals to know when the download is completed). </p>
 
 <p>Referenced by <a class="el" href="../../de/dc0/class_downloader.html#a7f81027436d44ca52168b30a6eb0d379">startDownload()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#a7860e1643f426dc4d62cec2cdf207cd5">Updater::useCustomInstallProcedures()</a>.</p>
 

@@ -94,6 +94,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Downloads and interprests the update definition file.  
+ <a href="../../d3/d1d/class_updater.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../dd/d30/_updater_8h_source.html">Updater.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Updater:</div>
@@ -110,12 +113,12 @@ Public Slots</h2></td></tr>
 <tr class="separator:a4af41658f974f72c71a9463be7bba1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1219e9bb1c1fb0a68d757fbc0d9b76aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a1219e9bb1c1fb0a68d757fbc0d9b76aa">setUrl</a> (const QString &amp;<a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a>)</td></tr>
 <tr class="separator:a1219e9bb1c1fb0a68d757fbc0d9b76aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac7e1a2bd65353a5fdec22689f1adf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a5ac7e1a2bd65353a5fdec22689f1adf3">setModuleName</a> (const QString &amp;name)</td></tr>
+<tr class="separator:a5ac7e1a2bd65353a5fdec22689f1adf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88b597bf4ae11a65a9c87171239ed00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#ad88b597bf4ae11a65a9c87171239ed00">setNotifyOnUpdate</a> (const bool &amp;notify)</td></tr>
 <tr class="separator:ad88b597bf4ae11a65a9c87171239ed00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a949e507fd72ec4b2565bb49ebe98a2dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a949e507fd72ec4b2565bb49ebe98a2dc">setNotifyOnFinish</a> (const bool &amp;notify)</td></tr>
 <tr class="separator:a949e507fd72ec4b2565bb49ebe98a2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ac7e1a2bd65353a5fdec22689f1adf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a5ac7e1a2bd65353a5fdec22689f1adf3">setModuleName</a> (const QString &amp;name)</td></tr>
-<tr class="separator:a5ac7e1a2bd65353a5fdec22689f1adf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8da70f39cc193b94c64769fc6f40dc2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion</a> (const QString &amp;version)</td></tr>
 <tr class="separator:a8da70f39cc193b94c64769fc6f40dc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d6db0d853ed8400a1725df436812ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a46d6db0d853ed8400a1725df436812ee">setDownloaderEnabled</a> (const bool &amp;enabled)</td></tr>
@@ -127,17 +130,29 @@ Public Slots</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:a82debd6b1ad627d6d40c0f2a9996e0c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a82debd6b1ad627d6d40c0f2a9996e0c1">checkingFinished</a> (const QString &amp;<a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a>)</td></tr>
+<tr class="memitem:a82debd6b1ad627d6d40c0f2a9996e0c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82debd6b1ad627d6d40c0f2a9996e0c1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>checkingFinished</b> (const QString &amp;<a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a>)</td></tr>
 <tr class="separator:a82debd6b1ad627d6d40c0f2a9996e0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a274a08240ad2bbea8cda6c52787510d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a274a08240ad2bbea8cda6c52787510d3">downloadFinished</a> (const QString &amp;<a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a>, const QString &amp;filepath)</td></tr>
+<tr class="memitem:a274a08240ad2bbea8cda6c52787510d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a274a08240ad2bbea8cda6c52787510d3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>downloadFinished</b> (const QString &amp;<a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a>, const QString &amp;filepath)</td></tr>
 <tr class="separator:a274a08240ad2bbea8cda6c52787510d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7ebf698a86619ebaadd2eb6e772f2a3d"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url</a> () const </td></tr>
 <tr class="separator:a7ebf698a86619ebaadd2eb6e772f2a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6a266ddbf0b855bcee1e9f77dfe9efb"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#af6a266ddbf0b855bcee1e9f77dfe9efb">changelog</a> () const </td></tr>
+<tr class="separator:af6a266ddbf0b855bcee1e9f77dfe9efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8369115126e41cdefd30004cefc46d"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a7d8369115126e41cdefd30004cefc46d">moduleName</a> () const </td></tr>
+<tr class="separator:a7d8369115126e41cdefd30004cefc46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5690e5ab3dde19098caf77c22f8bf075"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">downloadUrl</a> () const </td></tr>
+<tr class="separator:a5690e5ab3dde19098caf77c22f8bf075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6d8a5d7b8fd9bdfde738d72c50f8bee"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">platformKey</a> () const </td></tr>
 <tr class="separator:ad6d8a5d7b8fd9bdfde738d72c50f8bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af32daac9bff9cb3e79798fc9a825648e"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#af32daac9bff9cb3e79798fc9a825648e">moduleVersion</a> () const </td></tr>
+<tr class="separator:af32daac9bff9cb3e79798fc9a825648e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25e7f289753c6d7b4439ee3728866a48"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a25e7f289753c6d7b4439ee3728866a48">latestVersion</a> () const </td></tr>
+<tr class="separator:a25e7f289753c6d7b4439ee3728866a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abefc7aae1333458ab03d50aec9b58581"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#abefc7aae1333458ab03d50aec9b58581">notifyOnUpdate</a> () const </td></tr>
 <tr class="separator:abefc7aae1333458ab03d50aec9b58581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd2c8c3782c04289a76b1bf0b23ca0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#ad9fd2c8c3782c04289a76b1bf0b23ca0">notifyOnFinish</a> () const </td></tr>
@@ -146,21 +161,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aec889d582692cb41875ea803db3feb35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f526325b92c344244303b877d990cd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a4f526325b92c344244303b877d990cd3">downloaderEnabled</a> () const </td></tr>
 <tr class="separator:a4f526325b92c344244303b877d990cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6a266ddbf0b855bcee1e9f77dfe9efb"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#af6a266ddbf0b855bcee1e9f77dfe9efb">changelog</a> () const </td></tr>
-<tr class="separator:af6a266ddbf0b855bcee1e9f77dfe9efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5690e5ab3dde19098caf77c22f8bf075"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">downloadUrl</a> () const </td></tr>
-<tr class="separator:a5690e5ab3dde19098caf77c22f8bf075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e7f289753c6d7b4439ee3728866a48"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a25e7f289753c6d7b4439ee3728866a48">latestVersion</a> () const </td></tr>
-<tr class="separator:a25e7f289753c6d7b4439ee3728866a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d8369115126e41cdefd30004cefc46d"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a7d8369115126e41cdefd30004cefc46d">moduleName</a> () const </td></tr>
-<tr class="separator:a7d8369115126e41cdefd30004cefc46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af32daac9bff9cb3e79798fc9a825648e"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#af32daac9bff9cb3e79798fc9a825648e">moduleVersion</a> () const </td></tr>
-<tr class="separator:af32daac9bff9cb3e79798fc9a825648e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7860e1643f426dc4d62cec2cdf207cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1d/class_updater.html#a7860e1643f426dc4d62cec2cdf207cd5">useCustomInstallProcedures</a> () const </td></tr>
 <tr class="separator:a7860e1643f426dc4d62cec2cdf207cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="../../d3/d1d/class_updater.html">Updater</a> class is in charge of downloading and analyzing the appcast and "reacting" based on the options given by the user/developer/application. </p>
+<div class="textblock"><p>Downloads and interprests the update definition file. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="af6a266ddbf0b855bcee1e9f77dfe9efb"></a>
 <div class="memitem">
@@ -174,7 +179,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the latest changelog </p>
+<p>Returns the changelog defined by the update definitions file. </p><dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a></code> before using this function </dd></dl>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a1bbffc681514ca5393450b8664c137bb">QSimpleUpdater::getChangelog()</a>.</p>
 
 </div>
 </div>
@@ -198,36 +205,11 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Downloads the update definitions file and analyzes it to determine the latest version and the download links </p>
+<p>Downloads and interpets the update definitions file referenced by the <code><a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url()</a></code> function. </p>
 
 <p>References <a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url()</a>.</p>
 
-</div>
-</div>
-<a class="anchor" id="a82debd6b1ad627d6d40c0f2a9996e0c1"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Updater::checkingFinished </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>url</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Emitted when the download definitions have been downloaded and analyzed. </p>
-
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">QSimpleUpdater::checkForUpdates()</a>.</p>
 
 </div>
 </div>
@@ -243,44 +225,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>if</code> the updater allows the integrated downloader to download and install the update (if aplicable). </p>
+<p>Returns <code>true</code> if the integrated downloader is enabled. </p><dl class="section note"><dt>Note</dt><dd>If set to <code>true</code>, the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will open the downloader dialog if the user agrees to download the update. </dd></dl>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a274a08240ad2bbea8cda6c52787510d3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Updater::downloadFinished </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>url</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Emitted when the download has finished. You can use this to implement your own procedures to install the downloaded updates. </p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a10f421d41b30134583ee1f5e8cfbc59d">QSimpleUpdater::getDownloaderEnabled()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -296,9 +243,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the URL from where we can download the update </p>
+<p>Returns the download URL defined by the update definitions file. </p><dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a></code> before using this function </dd></dl>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a2c660cca487b092fd8e1b366a964a10b">QSimpleUpdater::getDownloadUrl()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -314,9 +261,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the latest version online </p>
+<p>Returns the latest version defined by the update definitions file. </p><dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a></code> before using this function </dd></dl>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#aefb5ac20bec6e8509e2b55ed14926a70">QSimpleUpdater::getLatestVersion()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -332,9 +279,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the application name, which can be set manually or automatically using the <code>qApp-&gt;applicationName()</code> function. </p>
+<p>Returns the name of the module (if defined) </p>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a30c3bccb5c6f06c1a243fa2629f441a3">QSimpleUpdater::getModuleName()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -350,9 +297,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the application version, which can be set manually or automatically using the <code>qApp-&gt;applicationVersion()</code> function. </p>
+<p>Returns the "local" version of the installed module </p>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#ad7391bb43acbcbf1627cc51262c2ec60">QSimpleUpdater::getModuleVersion()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -368,9 +315,10 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>true</code> if the class is set to notify the user when it finishes checking for updates (even if there are no updates available). By default this value is set to <code>false</code>. </p>
+<p>Returns <code>true</code> if the updater should notify the user when it finishes checking for updates.</p>
+<dl class="section note"><dt>Note</dt><dd>If set to <code>true</code>, the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will notify the user even when there are no updates available (by congratulating him/her about being smart) </dd></dl>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#acc540358f0d887e4945ac061667a596d">QSimpleUpdater::getNotifyOnFinish()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -386,9 +334,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>true</code> if the class is set to notify the user when an update is found online. By default this value is set to <code>true</code>. </p>
+<p>Returns <code>true</code> if the updater should notify the user when an update is available. </p>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#acdc00558a979df664910b07cb82f9b36">QSimpleUpdater::getNotifyOnUpdate()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -404,10 +352,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the current platform key, which is used to differentiate the different download links (and download versions) based on the current operating system.</p>
-<p>You can modify this value with the <code><a class="el" href="../../d3/d1d/class_updater.html#a840a6b061590901eae3255ba74ff7ad8">setPlatformKey()</a></code> function </p>
+<p>Returns the platform key (be it system-set or user-set). If you do not define a platform key, the system will assign the following platform key:</p><ul>
+<li>On iOS: <code>ios</code> </li>
+<li>On Mac OSX: <code>osx</code> </li>
+<li>On Android: <code>android</code> </li>
+<li>On GNU/Linux: <code>linux</code> </li>
+<li>On Microsoft Windows: <code>windows</code> </li>
+</ul>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#a840a6b061590901eae3255ba74ff7ad8">setPlatformKey()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a0f061c6945b58664c2c9f9ec26f0d87c">QSimpleUpdater::getPlatformKey()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a840a6b061590901eae3255ba74ff7ad8">setPlatformKey()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -432,7 +385,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If <em>enabled</em> is set to true, then the user will be able to download and install updates directly from the application, without the need of opening the download URL from a browser and manually installing the update. </p>
+<p>If the <em>enabled</em> parameter is set to <code>true</code>, the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will open the integrated downloader if the user agrees to install the update (if any) </p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a0ff15deef5af536150911353df0c44b2">QSimpleUpdater::setDownloaderEnabled()</a>.</p>
 
 </div>
 </div>
@@ -457,7 +412,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes the name of the module, this can be useful in large applications that only need to update certain components of them (e.g. plugins). </p>
+<p>Changes the module <em>name</em>. </p><dl class="section note"><dt>Note</dt><dd>The module name is used on the user prompts. If the module name is empty, then the prompts will show the name of the application. </dd></dl>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a4b5e2bb2b88ab10a3c6c3a83661a2ebe">QSimpleUpdater::setModuleName()</a>.</p>
 
 </div>
 </div>
@@ -482,9 +439,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes the version of the module, this can be useful in large applications that only need to update certain components of them (e.g. plugins). </p>
+<p>Changes the module <em>version</em> </p><dl class="section note"><dt>Note</dt><dd>The module version is used to compare the local and remote versions. If the <em>version</em> parameter is empty, then the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will use the application version (referenced by <code>qApp</code>) </dd></dl>
 
-<p>References <a class="el" href="../../d3/d1d/class_updater.html#a82debd6b1ad627d6d40c0f2a9996e0c1">checkingFinished()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a4f526325b92c344244303b877d990cd3">downloaderEnabled()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">downloadUrl()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a25e7f289753c6d7b4439ee3728866a48">latestVersion()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a7d8369115126e41cdefd30004cefc46d">moduleName()</a>, <a class="el" href="../../d3/d1d/class_updater.html#af32daac9bff9cb3e79798fc9a825648e">moduleVersion()</a>, <a class="el" href="../../d3/d1d/class_updater.html#ad9fd2c8c3782c04289a76b1bf0b23ca0">notifyOnFinish()</a>, <a class="el" href="../../d3/d1d/class_updater.html#abefc7aae1333458ab03d50aec9b58581">notifyOnUpdate()</a>, <a class="el" href="../../d3/d1d/class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">platformKey()</a>, <a class="el" href="../../de/dc0/class_downloader.html#a7f81027436d44ca52168b30a6eb0d379">Downloader::startDownload()</a>, <a class="el" href="../../d3/d1d/class_updater.html#aec889d582692cb41875ea803db3feb35">updateAvailable()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a1a2a03f01c7ba081637268910fc50919">QSimpleUpdater::setModuleVersion()</a>.</p>
 
 </div>
 </div>
@@ -509,8 +466,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If set to <code>true</code>, the updater will notify the user when it finishes checking for updates (even where there are no updates available).</p>
-<p>If set to <code>false</code> (default), the updater will only notify the user when there is an update available (if <a class="el" href="../../d3/d1d/class_updater.html#ad88b597bf4ae11a65a9c87171239ed00">setNotifyOnUpdate()</a> is <code>true</code>). </p>
+<p>If <em>notify</em> is set to <code>true</code>, then the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will notify the user when it has finished interpreting the update definitions file. </p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#ad9e53f893874d54bff8c787c2f560bd2">QSimpleUpdater::setNotifyOnFinish()</a>.</p>
 
 </div>
 </div>
@@ -535,8 +493,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If <code>notify</code> is set to true, the <code>QSimpleUpdater</code> will notify the user when an update is available.</p>
-<p>If <code>notify</code> is set to false, the <code>QSimpleUpdater</code> will not notify the user when an update is available. </p>
+<p>If <em>notify</em> is set to <code>true</code>, then the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will notify the user when an update is available. </p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a4789b616743189642a023fa7704e9c00">QSimpleUpdater::setNotifyOnUpdate()</a>.</p>
 
 </div>
 </div>
@@ -561,9 +520,17 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes the platform key/id. This can be useful if the update depends on more than the underlying operating system on which the application runs. </p>
+<p>Changes the platform key. If the platform key is empty, then the system will use the following keys:</p><ul>
+<li>On iOS: <code>ios</code> </li>
+<li>On Mac OSX: <code>osx</code> </li>
+<li>On Android: <code>android</code> </li>
+<li>On GNU/Linux: <code>linux</code> </li>
+<li>On Microsoft Windows: <code>windows</code> </li>
+</ul>
 
 <p>References <a class="el" href="../../d3/d1d/class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">platformKey()</a>.</p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#af6b2713b7468a69ce3ff46074e642df8">QSimpleUpdater::setPlatformKey()</a>.</p>
 
 </div>
 </div>
@@ -588,9 +555,11 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Changes the <em>url</em> from where we download the update definitions </p>
+<p>Changes the <code>url</code> in which the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> can find the update definitions file. </p>
 
 <p>References <a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url()</a>.</p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a6c30dd784023264dd6ec885ec755f515">QSimpleUpdater::setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -615,9 +584,11 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If <code>custom</code> is set to true, then the <a class="el" href="../../de/dc0/class_downloader.html">Downloader</a> will not attempt to open or install the downloaded updates. This can be useful if you want to implement your own install procedures using the <code><a class="el" href="../../d3/d1d/class_updater.html#a274a08240ad2bbea8cda6c52787510d3">downloadFinished()</a></code> signal. </p>
+<p>If the <em>custom</em> parameter is set to <code>true</code>, the <code><a class="el" href="../../d3/d1d/class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> will not try to open the downloaded file. Use the signals fired by the <code><a class="el" href="../../d0/d80/class_q_simple_updater.html" title="Manages the updater instances. ">QSimpleUpdater</a></code> to install the update from the downloaded file by yourself. </p>
 
-<p>References <a class="el" href="../../de/dc0/class_downloader.html#a26a4f889029c63c11f679284397a3285">Downloader::setUseCustomInstallProcedures()</a>.</p>
+<p>References <a class="el" href="../../d3/d1d/class_updater.html#a4f526325b92c344244303b877d990cd3">downloaderEnabled()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">downloadUrl()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a25e7f289753c6d7b4439ee3728866a48">latestVersion()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a7d8369115126e41cdefd30004cefc46d">moduleName()</a>, <a class="el" href="../../d3/d1d/class_updater.html#af32daac9bff9cb3e79798fc9a825648e">moduleVersion()</a>, <a class="el" href="../../d3/d1d/class_updater.html#ad9fd2c8c3782c04289a76b1bf0b23ca0">notifyOnFinish()</a>, <a class="el" href="../../d3/d1d/class_updater.html#abefc7aae1333458ab03d50aec9b58581">notifyOnUpdate()</a>, <a class="el" href="../../d3/d1d/class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">platformKey()</a>, <a class="el" href="../../de/dc0/class_downloader.html#a26a4f889029c63c11f679284397a3285">Downloader::setUseCustomInstallProcedures()</a>, <a class="el" href="../../de/dc0/class_downloader.html#a7f81027436d44ca52168b30a6eb0d379">Downloader::startDownload()</a>, <a class="el" href="../../d3/d1d/class_updater.html#aec889d582692cb41875ea803db3feb35">updateAvailable()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#a7ebf698a86619ebaadd2eb6e772f2a3d">url()</a>.</p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a6c30dd784023264dd6ec885ec755f515">QSimpleUpdater::setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -633,9 +604,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>true</code> if the updater found an updated version of the application/module online. </p>
+<p>Returns <code>true</code> if there is an update available. </p><dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a></code> before using this function </dd></dl>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>.</p>
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#a6557bff5a8a255291f12d2613879981b">QSimpleUpdater::getUpdateAvailable()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -651,9 +622,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the AppCast URL (from which we extract the update definitions) </p>
+<p>Returns the URL of the update definitions file </p>
 
-<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">setModuleVersion()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#a1219e9bb1c1fb0a68d757fbc0d9b76aa">setUrl()</a>.</p>
+<p>Referenced by <a class="el" href="../../d3/d1d/class_updater.html#a4af41658f974f72c71a9463be7bba1b5">checkForUpdates()</a>, <a class="el" href="../../d3/d1d/class_updater.html#a1219e9bb1c1fb0a68d757fbc0d9b76aa">setUrl()</a>, and <a class="el" href="../../d3/d1d/class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -669,10 +640,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns <code>true</code> if the downloader will not attempt to install the downloaded file.</p>
-<p>This can be useful if you want to use the <code><a class="el" href="../../d3/d1d/class_updater.html#a274a08240ad2bbea8cda6c52787510d3">downloadFinished()</a></code> signal to implement your own install procedures. </p>
+<p>Returns <code>true</code> if the updater shall not intervene when the download has finished (you can use the <code><a class="el" href="../../d0/d80/class_q_simple_updater.html" title="Manages the updater instances. ">QSimpleUpdater</a></code> signals to know when the download is completed). </p>
 
 <p>References <a class="el" href="../../de/dc0/class_downloader.html#a3e7a91a3cdfa68e3bc59db0af1377f9c">Downloader::useCustomInstallProcedures()</a>.</p>
+
+<p>Referenced by <a class="el" href="../../d0/d80/class_q_simple_updater.html#af8f4cca002e820499d1fbca127095c87">QSimpleUpdater::usesCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
