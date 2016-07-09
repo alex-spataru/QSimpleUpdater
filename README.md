@@ -6,7 +6,7 @@
 
 QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. It allows you to easily check for updates, download them and install them. Additionally, the QSimpleUpdater allows you to check for updates for different "modules" of your application. Check the [WTFs Section](#wtfs-section) for more information.
 
-Online documentation can be found [here](http://qdriverstation.sourceforge.net/documentation/qsimpleupdater/).
+Online documentation can be found [here](http://frc-utilities.github.io/documentation/qsimpleupdater/).
 
 [![Downloading](etc/screenshots/downloading.png)](etc/screenshots/)
 
