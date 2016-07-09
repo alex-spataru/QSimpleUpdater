@@ -10,5 +10,6 @@ var searchData=
   ['getnotifyonfinish',['getNotifyOnFinish',['../class_q_simple_updater.html#acc540358f0d887e4945ac061667a596d',1,'QSimpleUpdater']]],
   ['getnotifyonupdate',['getNotifyOnUpdate',['../class_q_simple_updater.html#acdc00558a979df664910b07cb82f9b36',1,'QSimpleUpdater']]],
   ['getplatformkey',['getPlatformKey',['../class_q_simple_updater.html#a0f061c6945b58664c2c9f9ec26f0d87c',1,'QSimpleUpdater']]],
-  ['getupdateavailable',['getUpdateAvailable',['../class_q_simple_updater.html#a6557bff5a8a255291f12d2613879981b',1,'QSimpleUpdater']]]
+  ['getupdateavailable',['getUpdateAvailable',['../class_q_simple_updater.html#a6557bff5a8a255291f12d2613879981b',1,'QSimpleUpdater']]],
+  ['getupdater',['getUpdater',['../class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149',1,'QSimpleUpdater']]]
 ];

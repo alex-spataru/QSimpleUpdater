@@ -89,6 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="class_q_simple_updater-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QSimpleUpdater Class Reference</div>  </div>
@@ -165,6 +166,11 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adea7d414a9430fc2b653231a87eaacc6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_q_simple_updater.html">QSimpleUpdater</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_simple_updater.html#adea7d414a9430fc2b653231a87eaacc6">getInstance</a> ()</td></tr>
 <tr class="separator:adea7d414a9430fc2b653231a87eaacc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0305a6c8eb9d0bf213736d1c1beb4149"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_updater.html">Updater</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater</a> (const QString &amp;url) const </td></tr>
+<tr class="separator:a0305a6c8eb9d0bf213736d1c1beb4149"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages the updater instances. </p>
@@ -197,7 +203,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Instructs the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance with the registered <code>url</code> to download and interpret the update definitions file.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a4af41658f974f72c71a9463be7bba1b5">Updater::checkForUpdates()</a>.</p>
+<p>References <a class="el" href="class_updater.html#a4af41658f974f72c71a9463be7bba1b5">Updater::checkForUpdates()</a>, and <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>.</p>
 
 </div>
 </div>
@@ -218,7 +224,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">checkForUpdates()</a></code> before using this function </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#af6a266ddbf0b855bcee1e9f77dfe9efb">Updater::changelog()</a>.</p>
+<p>References <a class="el" href="class_updater.html#af6a266ddbf0b855bcee1e9f77dfe9efb">Updater::changelog()</a>, and <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>.</p>
 
 </div>
 </div>
@@ -238,7 +244,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns <code>true</code> if the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> has the integrated downloader enabled.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a4f526325b92c344244303b877d990cd3">Updater::downloaderEnabled()</a>.</p>
+<p>References <a class="el" href="class_updater.html#a4f526325b92c344244303b877d990cd3">Updater::downloaderEnabled()</a>, and <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>.</p>
 
 </div>
 </div>
@@ -259,7 +265,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">checkForUpdates()</a></code> before using this function </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">Updater::downloadUrl()</a>.</p>
+<p>References <a class="el" href="class_updater.html#a5690e5ab3dde19098caf77c22f8bf075">Updater::downloadUrl()</a>, and <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>.</p>
 
 </div>
 </div>
@@ -304,7 +310,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">checkForUpdates()</a></code> before using this function </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a25e7f289753c6d7b4439ee3728866a48">Updater::latestVersion()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a25e7f289753c6d7b4439ee3728866a48">Updater::latestVersion()</a>.</p>
 
 </div>
 </div>
@@ -326,7 +332,7 @@ Static Public Member Functions</h2></td></tr>
 <dd>
 If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a7d8369115126e41cdefd30004cefc46d">Updater::moduleName()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a7d8369115126e41cdefd30004cefc46d">Updater::moduleName()</a>.</p>
 
 </div>
 </div>
@@ -348,7 +354,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <dd>
 If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#af32daac9bff9cb3e79798fc9a825648e">Updater::moduleVersion()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#af32daac9bff9cb3e79798fc9a825648e">Updater::moduleVersion()</a>.</p>
 
 </div>
 </div>
@@ -368,7 +374,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <p>Returns <code>true</code> if the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> shall notify the user when it finishes checking for updates.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#ad9fd2c8c3782c04289a76b1bf0b23ca0">Updater::notifyOnFinish()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#ad9fd2c8c3782c04289a76b1bf0b23ca0">Updater::notifyOnFinish()</a>.</p>
 
 </div>
 </div>
@@ -388,7 +394,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <p>Returns <code>true</code> if the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> shall notify the user when an update is available.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#abefc7aae1333458ab03d50aec9b58581">Updater::notifyOnUpdate()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#abefc7aae1333458ab03d50aec9b58581">Updater::notifyOnUpdate()</a>.</p>
 
 </div>
 </div>
@@ -414,7 +420,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 </ul>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">Updater::platformKey()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#ad6d8a5d7b8fd9bdfde738d72c50f8bee">Updater::platformKey()</a>.</p>
 
 </div>
 </div>
@@ -435,7 +441,37 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <dl class="section warning"><dt>Warning</dt><dd>You should call <code><a class="el" href="class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">checkForUpdates()</a></code> before using this function </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#aec889d582692cb41875ea803db3feb35">Updater::updateAvailable()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#aec889d582692cb41875ea803db3feb35">Updater::updateAvailable()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0305a6c8eb9d0bf213736d1c1beb4149"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_updater.html">Updater</a> * QSimpleUpdater::getUpdater </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em>.</p>
+<p>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with teh given <em>url</em> does not exist, this function will create it and configure it automatically. </p>
+
+<p>References <a class="el" href="class_updater.html#a1219e9bb1c1fb0a68d757fbc0d9b76aa">Updater::setUrl()</a>.</p>
+
+<p>Referenced by <a class="el" href="class_q_simple_updater.html#a791c89568adb171a62ccd0704570b68d">checkForUpdates()</a>, <a class="el" href="class_q_simple_updater.html#a1bbffc681514ca5393450b8664c137bb">getChangelog()</a>, <a class="el" href="class_q_simple_updater.html#a10f421d41b30134583ee1f5e8cfbc59d">getDownloaderEnabled()</a>, <a class="el" href="class_q_simple_updater.html#a2c660cca487b092fd8e1b366a964a10b">getDownloadUrl()</a>, <a class="el" href="class_q_simple_updater.html#aefb5ac20bec6e8509e2b55ed14926a70">getLatestVersion()</a>, <a class="el" href="class_q_simple_updater.html#a30c3bccb5c6f06c1a243fa2629f441a3">getModuleName()</a>, <a class="el" href="class_q_simple_updater.html#ad7391bb43acbcbf1627cc51262c2ec60">getModuleVersion()</a>, <a class="el" href="class_q_simple_updater.html#acc540358f0d887e4945ac061667a596d">getNotifyOnFinish()</a>, <a class="el" href="class_q_simple_updater.html#acdc00558a979df664910b07cb82f9b36">getNotifyOnUpdate()</a>, <a class="el" href="class_q_simple_updater.html#a0f061c6945b58664c2c9f9ec26f0d87c">getPlatformKey()</a>, <a class="el" href="class_q_simple_updater.html#a6557bff5a8a255291f12d2613879981b">getUpdateAvailable()</a>, <a class="el" href="class_q_simple_updater.html#a0ff15deef5af536150911353df0c44b2">setDownloaderEnabled()</a>, <a class="el" href="class_q_simple_updater.html#a4b5e2bb2b88ab10a3c6c3a83661a2ebe">setModuleName()</a>, <a class="el" href="class_q_simple_updater.html#a1a2a03f01c7ba081637268910fc50919">setModuleVersion()</a>, <a class="el" href="class_q_simple_updater.html#ad9e53f893874d54bff8c787c2f560bd2">setNotifyOnFinish()</a>, <a class="el" href="class_q_simple_updater.html#a4789b616743189642a023fa7704e9c00">setNotifyOnUpdate()</a>, <a class="el" href="class_q_simple_updater.html#af6b2713b7468a69ce3ff46074e642df8">setPlatformKey()</a>, <a class="el" href="class_q_simple_updater.html#a6c30dd784023264dd6ec885ec755f515">setUseCustomInstallProcedures()</a>, and <a class="el" href="class_q_simple_updater.html#af8f4cca002e820499d1fbca127095c87">usesCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -473,7 +509,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <p>If the <em>enabled</em> parameter is set to <code>true</code>, the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> will open the integrated downloader if the user agrees to install the update (if any).</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a46d6db0d853ed8400a1725df436812ee">Updater::setDownloaderEnabled()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a46d6db0d853ed8400a1725df436812ee">Updater::setDownloaderEnabled()</a>.</p>
 
 </div>
 </div>
@@ -513,7 +549,7 @@ If an <code><a class="el" href="class_updater.html" title="Downloads and interpr
 <dd>
 The module name is used on the user prompts. If the module name is empty, then the prompts will show the name of the application. </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a5ac7e1a2bd65353a5fdec22689f1adf3">Updater::setModuleName()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a5ac7e1a2bd65353a5fdec22689f1adf3">Updater::setModuleName()</a>.</p>
 
 </div>
 </div>
@@ -551,7 +587,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 <p>Changes the module </p><dl class="section version"><dt>Version</dt><dd>of the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered at the given <em>url</em>.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The module version is used to compare it with the remove version. If the module name is empty, then the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will use the application version. </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">Updater::setModuleVersion()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a8da70f39cc193b94c64769fc6f40dc2c">Updater::setModuleVersion()</a>.</p>
 
 </div>
 </div>
@@ -589,7 +625,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 <p>If <em>notify</em> is set to <code>true</code>, then the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> will notify the user when it has finished interpreting the update definitions file.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a949e507fd72ec4b2565bb49ebe98a2dc">Updater::setNotifyOnFinish()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a949e507fd72ec4b2565bb49ebe98a2dc">Updater::setNotifyOnFinish()</a>.</p>
 
 </div>
 </div>
@@ -627,7 +663,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 <p>If <em>notify</em> is set to <code>true</code>, then the <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> will notify the user when an update is available.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#ad88b597bf4ae11a65a9c87171239ed00">Updater::setNotifyOnUpdate()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#ad88b597bf4ae11a65a9c87171239ed00">Updater::setNotifyOnUpdate()</a>.</p>
 
 </div>
 </div>
@@ -672,7 +708,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 </ul>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a840a6b061590901eae3255ba74ff7ad8">Updater::setPlatformKey()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a840a6b061590901eae3255ba74ff7ad8">Updater::setPlatformKey()</a>.</p>
 
 </div>
 </div>
@@ -711,7 +747,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 <p>If you want to implement your own way to handle the downloaded file, just bind to the <code>downloadFinished()</code> signal and disable the integrated downloader with the <code><a class="el" href="class_q_simple_updater.html#a6c30dd784023264dd6ec885ec755f515">setUseCustomInstallProcedures()</a></code> function.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a1219e9bb1c1fb0a68d757fbc0d9b76aa">Updater::setUrl()</a>, and <a class="el" href="class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">Updater::setUseCustomInstallProcedures()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#ac3f35326fb62b9cf8a2421d91651ad60">Updater::setUseCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
@@ -732,7 +768,7 @@ The module name is used on the user prompts. If the module name is empty, then t
 <p>If you want to implement your own way to handle the downloaded file, just bind to the <code>downloadFinished()</code> signal and disable the integrated downloader with the <code><a class="el" href="class_q_simple_updater.html#a6c30dd784023264dd6ec885ec755f515">setUseCustomInstallProcedures()</a></code> function.</p>
 <dl class="section note"><dt>Note</dt><dd>If an <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance registered with the given <em>url</em> is not found, that <code><a class="el" href="class_updater.html" title="Downloads and interprests the update definition file. ">Updater</a></code> instance will be initialized automatically </dd></dl>
 
-<p>References <a class="el" href="class_updater.html#a7860e1643f426dc4d62cec2cdf207cd5">Updater::useCustomInstallProcedures()</a>.</p>
+<p>References <a class="el" href="class_q_simple_updater.html#a0305a6c8eb9d0bf213736d1c1beb4149">getUpdater()</a>, and <a class="el" href="class_updater.html#a7860e1643f426dc4d62cec2cdf207cd5">Updater::useCustomInstallProcedures()</a>.</p>
 
 </div>
 </div>
