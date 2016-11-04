@@ -57,7 +57,7 @@ class Downloader : public QWidget {
 
   public slots:
     void startDownload (const QUrl& url);
-    void setUseCustomInstallProcedures (const bool& custom);
+    void setUseCustomInstallProcedures (const bool custom);
 
   private slots:
     void openDownload();

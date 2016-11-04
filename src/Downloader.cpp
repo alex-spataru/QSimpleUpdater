@@ -201,7 +201,8 @@ void Downloader::onDownloadFinished() {
         QString name = m_reply->url().toString().split ("/").last();
 
         /* Check if we need to redirect */
-        QUrl url = m_reply->attribute (QNetworkRequest::RedirectionTargetAttribute).toUrl();
+        QUrl url = m_reply->attribute (
+                       QNetworkRequest::RedirectionTargetAttribute).toUrl();
         if (!url.isEmpty()) {
             startDownload (url);
             return;
@@ -326,6 +327,6 @@ qreal Downloader::round (const qreal& input) {
  * Use the signals fired by the \c QSimpleUpdater to implement your own install
  * procedures.
  */
-void Downloader::setUseCustomInstallProcedures (const bool& custom) {
+void Downloader::setUseCustomInstallProcedures (const bool custom) {
     m_useCustomProcedures = custom;
 }
