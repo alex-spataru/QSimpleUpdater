@@ -308,6 +308,15 @@ void QSimpleUpdater::setDownloaderEnabled (const QString& url,
     getUpdater (url)->setDownloaderEnabled (enabled);
 }
 
+/**
+ * If the \a customAppcast parameter is set to \c true, then the \c Updater
+ * will not try to read the network reply from the server, instead, it will
+ * emit the \c appcastDownloaded() signal, which allows the application to
+ * read and interpret the appcast file by itself.
+ * 
+ * \note If an \c Updater instance registered with the given \a url is not
+ *       found, that \c Updater instance will be initialized automatically
+ */
 void QSimpleUpdater::setUseCustomAppcast (const QString& url,
         const bool customAppcast) {
     getUpdater (url)->setUseCustomAppcast (customAppcast);
