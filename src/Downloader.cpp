@@ -332,16 +332,32 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total) {
 
         if (timeRemaining > 7200) {
             timeRemaining /= 3600;
-            timeString = tr ("About %1 hours").arg (int (timeRemaining + 0.5));
+            int hours = int (timeRemaining + 0.5);
+
+            if (hours > 1)
+                timeString = tr ("about %1 hours").arg (hours);
+            else
+                timeString = tr ("about one hour");
         }
 
         else if (timeRemaining > 60) {
             timeRemaining /= 60;
-            timeString = tr ("About %1 minutes").arg (int (timeRemaining + 0.5));
+            int minutes = int (timeRemaining + 0.5);
+
+            if (minutes > 1)
+                timeString = tr ("%1 minutes").arg (minutes);
+            else
+                timeString = tr ("1 minute");
         }
 
-        else if (timeRemaining <= 60)
-            timeString = tr ("%1 seconds").arg (int (timeRemaining + 0.5));
+        else if (timeRemaining <= 60) {
+            int seconds = int (timeRemaining + 0.5);
+
+            if (seconds > 1)
+                timeString = tr ("%1 seconds").arg (seconds);
+            else
+                timeString = tr ("1 second");
+        }
 
         m_ui->timeLabel->setText (tr ("Time remaining") + ": " + timeString);
     }
