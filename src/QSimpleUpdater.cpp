@@ -313,7 +313,7 @@ void QSimpleUpdater::setDownloaderEnabled (const QString& url,
  * will not try to read the network reply from the server, instead, it will
  * emit the \c appcastDownloaded() signal, which allows the application to
  * read and interpret the appcast file by itself.
- * 
+ *
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */

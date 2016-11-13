@@ -362,8 +362,11 @@ void Updater::setUpdateAvailable (const bool available) {
             if (!openUrl().isEmpty())
                 QDesktopServices::openUrl (QUrl (openUrl()));
 
-            else if (downloaderEnabled())
+            else if (downloaderEnabled()) {
+                m_downloader->setUrlId (url());
+                m_downloader->setFileName (downloadUrl().split ("/").last());
                 m_downloader->startDownload (QUrl (downloadUrl()));
+            }
 
             else
                 QDesktopServices::openUrl (QUrl (downloadUrl()));
