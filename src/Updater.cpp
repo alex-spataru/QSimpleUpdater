@@ -37,7 +37,8 @@
 #include "Updater.h"
 #include "Downloader.h"
 
-Updater::Updater() {
+Updater::Updater()
+{
     m_url = "";
     m_openUrl = "";
     m_changelog = "";
@@ -72,14 +73,16 @@ Updater::Updater() {
              this,           SLOT (onReply  (QNetworkReply*)));
 }
 
-Updater::~Updater() {
+Updater::~Updater()
+{
     delete m_downloader;
 }
 
 /**
  * Returns the URL of the update definitions file
  */
-QString Updater::url() const {
+QString Updater::url() const
+{
     return m_url;
 }
 
@@ -89,7 +92,8 @@ QString Updater::url() const {
  *
  * \warning You should call \c checkForUpdates() before using this functio
  */
-QString Updater::openUrl() const {
+QString Updater::openUrl() const
+{
     return m_openUrl;
 }
 
@@ -97,14 +101,16 @@ QString Updater::openUrl() const {
  * Returns the changelog defined by the update definitions file.
  * \warning You should call \c checkForUpdates() before using this function
  */
-QString Updater::changelog() const {
+QString Updater::changelog() const
+{
     return m_changelog;
 }
 
 /**
  * Returns the name of the module (if defined)
  */
-QString Updater::moduleName() const {
+QString Updater::moduleName() const
+{
     return m_moduleName;
 }
 
@@ -118,7 +124,8 @@ QString Updater::moduleName() const {
  *    - On GNU/Linux: \c linux
  *    - On Microsoft Windows: \c windows
  */
-QString Updater::platformKey() const {
+QString Updater::platformKey() const
+{
     return m_platform;
 }
 
@@ -126,7 +133,8 @@ QString Updater::platformKey() const {
  * Returns the download URL defined by the update definitions file.
  * \warning You should call \c checkForUpdates() before using this function
  */
-QString Updater::downloadUrl() const {
+QString Updater::downloadUrl() const
+{
     return m_downloadUrl;
 }
 
@@ -134,14 +142,16 @@ QString Updater::downloadUrl() const {
  * Returns the latest version defined by the update definitions file.
  * \warning You should call \c checkForUpdates() before using this function
  */
-QString Updater::latestVersion() const {
+QString Updater::latestVersion() const
+{
     return m_latestVersion;
 }
 
 /**
  * Returns the "local" version of the installed module
  */
-QString Updater::moduleVersion() const {
+QString Updater::moduleVersion() const
+{
     return m_moduleVersion;
 }
 
@@ -150,7 +160,8 @@ QString Updater::moduleVersion() const {
  * This is useful if you need to store more variables (or information) in the
  * JSON file or use another appcast format (e.g. XML)
  */
-bool Updater::customAppcast() const {
+bool Updater::customAppcast() const
+{
     return m_customAppcast;
 }
 
@@ -158,7 +169,8 @@ bool Updater::customAppcast() const {
  * Returns \c true if the updater should notify the user when an update is
  * available.
  */
-bool Updater::notifyOnUpdate() const {
+bool Updater::notifyOnUpdate() const
+{
     return m_notifyOnUpdate;
 }
 
@@ -169,7 +181,8 @@ bool Updater::notifyOnUpdate() const {
  * \note If set to \c true, the \c Updater will notify the user even when there
  *       are no updates available (by congratulating him/her about being smart)
  */
-bool Updater::notifyOnFinish() const {
+bool Updater::notifyOnFinish() const
+{
     return m_notifyOnFinish;
 }
 
@@ -177,7 +190,8 @@ bool Updater::notifyOnFinish() const {
  * Returns \c true if there is an update available.
  * \warning You should call \c checkForUpdates() before using this function
  */
-bool Updater::updateAvailable() const {
+bool Updater::updateAvailable() const
+{
     return m_updateAvailable;
 }
 
@@ -186,7 +200,8 @@ bool Updater::updateAvailable() const {
  * \note If set to \c true, the \c Updater will open the downloader dialog if
  *       the user agrees to download the update.
  */
-bool Updater::downloaderEnabled() const {
+bool Updater::downloaderEnabled() const
+{
     return m_downloaderEnabled;
 }
 
@@ -195,7 +210,8 @@ bool Updater::downloaderEnabled() const {
  * finished (you can use the \c QSimpleUpdater signals to know when the
  * download is completed).
  */
-bool Updater::useCustomInstallProcedures() const {
+bool Updater::useCustomInstallProcedures() const
+{
     return m_downloader->useCustomInstallProcedures();
 }
 
@@ -203,7 +219,8 @@ bool Updater::useCustomInstallProcedures() const {
  * Downloads and interpets the update definitions file referenced by the
  * \c url() function.
  */
-void Updater::checkForUpdates() {
+void Updater::checkForUpdates()
+{
     m_manager->get (QNetworkRequest (url()));
 }
 
@@ -211,7 +228,8 @@ void Updater::checkForUpdates() {
  * Changes the \c url in which the \c Updater can find the update definitions
  * file.
  */
-void Updater::setUrl (const QString& url) {
+void Updater::setUrl (const QString& url)
+{
     m_url = url;
 }
 
@@ -220,7 +238,8 @@ void Updater::setUrl (const QString& url) {
  * \note The module name is used on the user prompts. If the module name is
  *       empty, then the prompts will show the name of the application.
  */
-void Updater::setModuleName (const QString& name) {
+void Updater::setModuleName (const QString& name)
+{
     m_moduleName = name;
 }
 
@@ -228,7 +247,8 @@ void Updater::setModuleName (const QString& name) {
  * If \a notify is set to \c true, then the \c Updater will notify the user
  * when an update is available.
  */
-void Updater::setNotifyOnUpdate (const bool notify) {
+void Updater::setNotifyOnUpdate (const bool notify)
+{
     m_notifyOnUpdate = notify;
 }
 
@@ -236,7 +256,8 @@ void Updater::setNotifyOnUpdate (const bool notify) {
  * If \a notify is set to \c true, then the \c Updater will notify the user
  * when it has finished interpreting the update definitions file.
  */
-void Updater::setNotifyOnFinish (const bool notify) {
+void Updater::setNotifyOnFinish (const bool notify)
+{
     m_notifyOnFinish = notify;
 }
 
@@ -246,7 +267,8 @@ void Updater::setNotifyOnFinish (const bool notify) {
  *       If the \a version parameter is empty, then the \c Updater will use the
  *       application version (referenced by \c qApp)
  */
-void Updater::setModuleVersion (const QString& version) {
+void Updater::setModuleVersion (const QString& version)
+{
     m_moduleVersion = version;
 }
 
@@ -254,7 +276,8 @@ void Updater::setModuleVersion (const QString& version) {
  * If the \a enabled parameter is set to \c true, the \c Updater will open the
  * integrated downloader if the user agrees to install the update (if any)
  */
-void Updater::setDownloaderEnabled (const bool enabled) {
+void Updater::setDownloaderEnabled (const bool enabled)
+{
     m_downloaderEnabled = enabled;
 }
 
@@ -267,7 +290,8 @@ void Updater::setDownloaderEnabled (const bool enabled) {
  *    - On GNU/Linux: \c linux
  *    - On Microsoft Windows: \c windows
  */
-void Updater::setPlatformKey (const QString& platformKey) {
+void Updater::setPlatformKey (const QString& platformKey)
+{
     m_platform = platformKey;
 }
 
@@ -277,7 +301,8 @@ void Updater::setPlatformKey (const QString& platformKey) {
  * emit the \c appcastDownloaded() signal, which allows the application to
  * read and interpret the appcast file by itself
  */
-void Updater::setUseCustomAppcast (const bool customAppcast) {
+void Updater::setUseCustomAppcast (const bool customAppcast)
+{
     m_customAppcast = customAppcast;
 }
 
@@ -286,14 +311,16 @@ void Updater::setUseCustomAppcast (const bool customAppcast) {
  * to open the downloaded file. Use the signals fired by the \c QSimpleUpdater
  * to install the update from the downloaded file by yourself.
  */
-void Updater::setUseCustomInstallProcedures (const bool custom) {
+void Updater::setUseCustomInstallProcedures (const bool custom)
+{
     m_downloader->setUseCustomInstallProcedures (custom);
 }
 
 /**
  * Called when the download of the update definitions file is finished.
  */
-void Updater::onReply (QNetworkReply* reply) {
+void Updater::onReply (QNetworkReply* reply)
+{
     /* Check if we need to redirect */
     QUrl redirect = reply->attribute (
                         QNetworkRequest::RedirectionTargetAttribute).toUrl();
@@ -339,7 +366,8 @@ void Updater::onReply (QNetworkReply* reply) {
  * Prompts the user based on the value of the \a available parameter and the
  * settings of this instance of the \c Updater class.
  */
-void Updater::setUpdateAvailable (const bool available) {
+void Updater::setUpdateAvailable (const bool available)
+{
     m_updateAvailable = available;
 
     QMessageBox box;
@@ -391,7 +419,8 @@ void Updater::setUpdateAvailable (const bool available) {
  *     - If \a y is greater than \x, this function returns \c false.
  *     - If both versions are the same, this function returns \c false.
  */
-bool Updater::compare (const QString& x, const QString& y) {
+bool Updater::compare (const QString& x, const QString& y)
+{
     QStringList versionsX = x.split (".");
     QStringList versionsY = y.split (".");
 

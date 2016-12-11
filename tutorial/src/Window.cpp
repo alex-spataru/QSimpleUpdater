@@ -23,7 +23,8 @@ static const QString DEFS_URL = "https://raw.githubusercontent.com/"
 // Window::Window
 //==============================================================================
 
-Window::Window (QWidget* parent) : QMainWindow (parent) {
+Window::Window (QWidget* parent) : QMainWindow (parent)
+{
     m_ui = new Ui::Window;
     m_ui->setupUi (this);
 
@@ -58,7 +59,8 @@ Window::Window (QWidget* parent) : QMainWindow (parent) {
 // Window::~Window
 //==============================================================================
 
-Window::~Window() {
+Window::~Window()
+{
     delete m_ui;
 }
 
@@ -66,7 +68,8 @@ Window::~Window() {
 // Window::checkForUpdates
 //==============================================================================
 
-void Window::resetFields() {
+void Window::resetFields()
+{
     m_ui->installedVersion->setText ("0.1");
     m_ui->customAppcast->setChecked (false);
     m_ui->enableDownloader->setChecked (true);
@@ -78,7 +81,8 @@ void Window::resetFields() {
 // Window::checkForUpdates
 //==============================================================================
 
-void Window::checkForUpdates() {
+void Window::checkForUpdates()
+{
     /* Get settings from the UI */
     QString version = m_ui->installedVersion->text();
     bool customAppcast = m_ui->customAppcast->isChecked();
@@ -101,7 +105,8 @@ void Window::checkForUpdates() {
 // Window::updateChangelog
 //==============================================================================
 
-void Window::updateChangelog (const QString& url) {
+void Window::updateChangelog (const QString& url)
+{
     if (url == DEFS_URL)
         m_ui->changelogText->setText (m_updater->getChangelog (url));
 }
@@ -111,7 +116,8 @@ void Window::updateChangelog (const QString& url) {
 // Window::displayAppcast
 //==============================================================================
 
-void Window::displayAppcast (const QString& url, const QByteArray& reply) {
+void Window::displayAppcast (const QString& url, const QByteArray& reply)
+{
     if (url == DEFS_URL) {
         QString text = "This is the downloaded appcast: <p><pre>" +
                        QString::fromUtf8 (reply) +

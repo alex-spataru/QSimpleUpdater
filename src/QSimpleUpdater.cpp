@@ -33,7 +33,8 @@
 static QList<QString> URLS;
 static QList<Updater*> UPDATERS;
 
-QSimpleUpdater::~QSimpleUpdater() {
+QSimpleUpdater::~QSimpleUpdater()
+{
     URLS.clear();
 
     foreach (Updater* updater, UPDATERS)
@@ -45,7 +46,8 @@ QSimpleUpdater::~QSimpleUpdater() {
 /**
  * Returns the only instance of the class
  */
-QSimpleUpdater* QSimpleUpdater::getInstance() {
+QSimpleUpdater* QSimpleUpdater::getInstance()
+{
     static QSimpleUpdater updater;
     return &updater;
 }
@@ -58,7 +60,8 @@ QSimpleUpdater* QSimpleUpdater::getInstance() {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::usesCustomAppcast (const QString& url) const {
+bool QSimpleUpdater::usesCustomAppcast (const QString& url) const
+{
     return getUpdater (url)->customAppcast();
 }
 
@@ -69,7 +72,8 @@ bool QSimpleUpdater::usesCustomAppcast (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::getNotifyOnUpdate (const QString& url) const {
+bool QSimpleUpdater::getNotifyOnUpdate (const QString& url) const
+{
     return getUpdater (url)->notifyOnUpdate();
 }
 
@@ -80,7 +84,8 @@ bool QSimpleUpdater::getNotifyOnUpdate (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::getNotifyOnFinish (const QString& url) const {
+bool QSimpleUpdater::getNotifyOnFinish (const QString& url) const
+{
     return getUpdater (url)->notifyOnFinish();
 }
 
@@ -92,7 +97,8 @@ bool QSimpleUpdater::getNotifyOnFinish (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::getUpdateAvailable (const QString& url) const {
+bool QSimpleUpdater::getUpdateAvailable (const QString& url) const
+{
     return getUpdater (url)->updateAvailable();
 }
 
@@ -103,7 +109,8 @@ bool QSimpleUpdater::getUpdateAvailable (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::getDownloaderEnabled (const QString& url) const {
+bool QSimpleUpdater::getDownloaderEnabled (const QString& url) const
+{
     return getUpdater (url)->downloaderEnabled();
 }
 
@@ -118,7 +125,8 @@ bool QSimpleUpdater::getDownloaderEnabled (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-bool QSimpleUpdater::usesCustomInstallProcedures (const QString& url) const {
+bool QSimpleUpdater::usesCustomInstallProcedures (const QString& url) const
+{
     return getUpdater (url)->useCustomInstallProcedures();
 }
 
@@ -131,7 +139,8 @@ bool QSimpleUpdater::usesCustomInstallProcedures (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getOpenUrl (const QString& url) const {
+QString QSimpleUpdater::getOpenUrl (const QString& url) const
+{
     return getUpdater (url)->openUrl();
 }
 
@@ -143,7 +152,8 @@ QString QSimpleUpdater::getOpenUrl (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getChangelog (const QString& url) const {
+QString QSimpleUpdater::getChangelog (const QString& url) const
+{
     return getUpdater (url)->changelog();
 }
 
@@ -156,7 +166,8 @@ QString QSimpleUpdater::getChangelog (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getModuleName (const QString& url) const {
+QString QSimpleUpdater::getModuleName (const QString& url) const
+{
     return getUpdater (url)->moduleName();
 }
 
@@ -168,7 +179,8 @@ QString QSimpleUpdater::getModuleName (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getDownloadUrl (const QString& url) const {
+QString QSimpleUpdater::getDownloadUrl (const QString& url) const
+{
     return getUpdater (url)->downloadUrl();
 }
 
@@ -185,7 +197,8 @@ QString QSimpleUpdater::getDownloadUrl (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getPlatformKey (const QString& url) const {
+QString QSimpleUpdater::getPlatformKey (const QString& url) const
+{
     return getUpdater (url)->platformKey();
 }
 
@@ -197,7 +210,8 @@ QString QSimpleUpdater::getPlatformKey (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getLatestVersion (const QString& url) const {
+QString QSimpleUpdater::getLatestVersion (const QString& url) const
+{
     return getUpdater (url)->latestVersion();
 }
 
@@ -210,7 +224,8 @@ QString QSimpleUpdater::getLatestVersion (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-QString QSimpleUpdater::getModuleVersion (const QString& url) const {
+QString QSimpleUpdater::getModuleVersion (const QString& url) const
+{
     return getUpdater (url)->moduleVersion();
 }
 
@@ -221,7 +236,8 @@ QString QSimpleUpdater::getModuleVersion (const QString& url) const {
  * \note If an \c Updater instance registered with the given \a url is not
  *       found, that \c Updater instance will be initialized automatically
  */
-void QSimpleUpdater::checkForUpdates (const QString& url) {
+void QSimpleUpdater::checkForUpdates (const QString& url)
+{
     getUpdater (url)->checkForUpdates();
 }
 
@@ -234,7 +250,8 @@ void QSimpleUpdater::checkForUpdates (const QString& url) {
  * \note The module name is used on the user prompts. If the module name is
  *       empty, then the prompts will show the name of the application.
  */
-void QSimpleUpdater::setModuleName (const QString& url, const QString& name) {
+void QSimpleUpdater::setModuleName (const QString& url, const QString& name)
+{
     getUpdater (url)->setModuleName (name);
 }
 
@@ -246,7 +263,8 @@ void QSimpleUpdater::setModuleName (const QString& url, const QString& name) {
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setNotifyOnUpdate (const QString& url,
-                                        const bool notify) {
+                                        const bool notify)
+{
     getUpdater (url)->setNotifyOnUpdate (notify);
 }
 
@@ -259,7 +277,8 @@ void QSimpleUpdater::setNotifyOnUpdate (const QString& url,
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setNotifyOnFinish (const QString& url,
-                                        const bool notify) {
+                                        const bool notify)
+{
     getUpdater (url)->setNotifyOnFinish (notify);
 }
 
@@ -278,7 +297,8 @@ void QSimpleUpdater::setNotifyOnFinish (const QString& url,
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setPlatformKey (const QString& url,
-                                     const QString& platform) {
+                                     const QString& platform)
+{
     getUpdater (url)->setPlatformKey (platform);
 }
 
@@ -291,7 +311,8 @@ void QSimpleUpdater::setPlatformKey (const QString& url,
  *       application version.
  */
 void QSimpleUpdater::setModuleVersion (const QString& url,
-                                       const QString& version) {
+                                       const QString& version)
+{
     getUpdater (url)->setModuleVersion (version);
 }
 
@@ -304,7 +325,8 @@ void QSimpleUpdater::setModuleVersion (const QString& url,
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setDownloaderEnabled (const QString& url,
-        const bool enabled) {
+                                           const bool enabled)
+{
     getUpdater (url)->setDownloaderEnabled (enabled);
 }
 
@@ -318,7 +340,8 @@ void QSimpleUpdater::setDownloaderEnabled (const QString& url,
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setUseCustomAppcast (const QString& url,
-        const bool customAppcast) {
+                                          const bool customAppcast)
+{
     getUpdater (url)->setUseCustomAppcast (customAppcast);
 }
 
@@ -334,7 +357,8 @@ void QSimpleUpdater::setUseCustomAppcast (const QString& url,
  *       found, that \c Updater instance will be initialized automatically
  */
 void QSimpleUpdater::setUseCustomInstallProcedures (const QString& url,
-        const bool custom) {
+        const bool custom)
+{
     getUpdater (url)->setUseCustomInstallProcedures (custom);
 }
 
@@ -344,7 +368,8 @@ void QSimpleUpdater::setUseCustomInstallProcedures (const QString& url,
  * If an \c Updater instance registered with teh given \a url does not exist,
  * this function will create it and configure it automatically.
  */
-Updater* QSimpleUpdater::getUpdater (const QString& url) const {
+Updater* QSimpleUpdater::getUpdater (const QString& url) const
+{
     if (!URLS.contains (url)) {
         Updater* updater = new Updater;
         updater->setUrl (url);

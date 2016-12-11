@@ -1,2 +1,2 @@
 # Style and format recursively
-astyle --pad-oper --pad-first-paren-out --align-pointer=type --remove-brackets --convert-tabs --max-code-length=80 --style=google --lineend=windows --suffix=none --recursive ../../*.h ../../*.cpp ../../*.c
+astyle --style=linux --indent=spaces --align-pointer=type --indent-preproc-block --indent-preproc-define --indent-col1-comments --pad-first-paren-out --pad-oper --attach-namespaces --remove-brackets --convert-tabs --close-templates --max-code-length=100 --max-instatement-indent=50 --lineend=windows --suffix=none --recursive ../../*.h ../../*.c ../../*.cpp ../../*.cc

@@ -24,7 +24,8 @@
 #include "Test_Downloader.h"
 #include "Test_QSimpleUpdater.h"
 
-int main (int argc, char* argv[]) {
+int main (int argc, char* argv[])
+{
     QApplication app (argc, argv);
 
     app.setApplicationName ("QSimpleUpdater Tests");

@@ -26,7 +26,8 @@
 #include <QtTest>
 #include <QSimpleUpdater.h>
 
-class Test_QSimpleUpdater : public QObject {
+class Test_QSimpleUpdater : public QObject
+{
     Q_OBJECT
 };
 
