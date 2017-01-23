@@ -332,11 +332,16 @@ void Updater::onReply (QNetworkReply* reply)
 
     /* There was a network error */
     if (reply->error() != QNetworkReply::NoError)
+    {
+        setUpdateAvailable(false);
+        emit checkingFinished (url());
         return;
+    }
 
     /* The application wants to interpret the appcast by itself */
     if (customAppcast()) {
         emit appcastDownloaded (url(), reply->readAll());
+        emit checkingFinished (url());
         return;
     }
 
@@ -345,7 +350,11 @@ void Updater::onReply (QNetworkReply* reply)
 
     /* JSON is invalid */
     if (document.isNull())
+    {
+        setUpdateAvailable(false);
+        emit checkingFinished (url());
         return;
+    }
 
     /* Get the platform information */
     QJsonObject updates = document.object().value ("updates").toObject();
