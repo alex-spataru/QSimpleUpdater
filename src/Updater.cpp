@@ -67,6 +67,9 @@ Updater::Updater()
     m_platform = "ios";
 #endif
 
+    setUserAgentString (QString ("%1/%2 (Qt; QSimpleUpdater)").arg (qApp->applicationName(),
+                        qApp->applicationVersion()));
+
     connect (m_downloader, SIGNAL (downloadFinished (QString, QString)),
              this,         SIGNAL (downloadFinished (QString, QString)));
     connect (m_manager,    SIGNAL (finished (QNetworkReply*)),
@@ -148,6 +151,15 @@ QString Updater::latestVersion() const
 }
 
 /**
+ * Returns the user-agent header used by the client when communicating
+ * with the server through HTTP
+ */
+QString Updater::userAgentString() const
+{
+    return m_userAgentString;
+}
+
+/**
  * Returns the "local" version of the installed module
  */
 QString Updater::moduleVersion() const
@@ -221,7 +233,11 @@ bool Updater::useCustomInstallProcedures() const
  */
 void Updater::checkForUpdates()
 {
-    m_manager->get (QNetworkRequest (url()));
+    QNetworkRequest request (url());
+    if (!userAgentString().isEmpty())
+        request.setRawHeader ("User-Agent", userAgentString().toUtf8());
+
+    m_manager->get (request);
 }
 
 /**
@@ -259,6 +275,18 @@ void Updater::setNotifyOnUpdate (const bool notify)
 void Updater::setNotifyOnFinish (const bool notify)
 {
     m_notifyOnFinish = notify;
+}
+
+/**
+ * Changes the user agent string used to identify the client application
+ * from the server in a HTTP session.
+ *
+ * By default, the user agent will co
+ */
+void Updater::setUserAgentString (const QString& agent)
+{
+    m_userAgentString = agent;
+    m_downloader->setUserAgentString (agent);
 }
 
 /**
@@ -331,9 +359,8 @@ void Updater::onReply (QNetworkReply* reply)
     }
 
     /* There was a network error */
-    if (reply->error() != QNetworkReply::NoError)
-    {
-        setUpdateAvailable(false);
+    if (reply->error() != QNetworkReply::NoError) {
+        setUpdateAvailable (false);
         emit checkingFinished (url());
         return;
     }
@@ -349,9 +376,8 @@ void Updater::onReply (QNetworkReply* reply)
     QJsonDocument document = QJsonDocument::fromJson (reply->readAll());
 
     /* JSON is invalid */
-    if (document.isNull())
-    {
-        setUpdateAvailable(false);
+    if (document.isNull()) {
+        setUpdateAvailable (false);
         emit checkingFinished (url());
         return;
     }

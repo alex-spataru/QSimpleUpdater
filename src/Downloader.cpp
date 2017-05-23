@@ -112,9 +112,14 @@ void Downloader::startDownload (const QUrl& url)
     m_ui->downloadLabel->setText (tr ("Downloading updates"));
     m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
 
+    /* Configure the network request */
+    QNetworkRequest request (url);
+    if (!m_userAgentString.isEmpty())
+        request.setRawHeader ("User-Agent", m_userAgentString.toUtf8());
+
     /* Start download */
     m_startTime = QDateTime::currentDateTime().toTime_t();
-    m_reply = m_manager->get (QNetworkRequest (url));
+    m_reply = m_manager->get (request);
 
     /* Ensure that downloads directory exists */
     if (!DOWNLOAD_DIR.exists())
@@ -382,6 +387,14 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total)
 qreal Downloader::round (const qreal& input)
 {
     return roundf (input * 100) / 100;
+}
+
+/**
+ * Changes the user-agent string used to communicate with the remote HTTP server
+ */
+void Downloader::setUserAgentString (const QString& agent)
+{
+    m_userAgentString = agent;
 }
 
 /**

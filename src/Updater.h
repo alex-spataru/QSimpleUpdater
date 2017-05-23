@@ -63,6 +63,7 @@ public:
     QString platformKey() const;
     QString moduleVersion() const;
     QString latestVersion() const;
+    QString userAgentString() const;
 
     bool customAppcast() const;
     bool notifyOnUpdate() const;
@@ -77,6 +78,7 @@ public slots:
     void setModuleName (const QString& name);
     void setNotifyOnUpdate (const bool notify);
     void setNotifyOnFinish (const bool notify);
+    void setUserAgentString (const QString& agent);
     void setModuleVersion (const QString& version);
     void setDownloaderEnabled (const bool enabled);
     void setPlatformKey (const QString& platformKey);
@@ -92,6 +94,7 @@ private:
 
 private:
     QString m_url;
+    QString m_userAgentString;
 
     bool m_customAppcast;
     bool m_notifyOnUpdate;

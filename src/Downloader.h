@@ -60,6 +60,7 @@ public slots:
     void setUrlId (const QString& url);
     void startDownload (const QUrl& url);
     void setFileName (const QString& file);
+    void setUserAgentString (const QString& agent);
     void setUseCustomInstallProcedures (const bool custom);
 
 private slots:
@@ -80,6 +81,7 @@ private:
     QString m_fileName;
     Ui::Downloader* m_ui;
     QNetworkReply* m_reply;
+    QString m_userAgentString;
     bool m_useCustomProcedures;
     QNetworkAccessManager* m_manager;
 };

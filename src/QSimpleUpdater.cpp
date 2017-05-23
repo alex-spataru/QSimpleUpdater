@@ -230,6 +230,18 @@ QString QSimpleUpdater::getModuleVersion (const QString& url) const
 }
 
 /**
+ * Returns the user-agent string used by the updater to communicate with
+ * the remote HTTP(S) server.
+ *
+ * \note If an \c Updater instance registered with the given \a url is not
+ *       found, that \c Updater instance will be initialized automatically
+ */
+QString QSimpleUpdater::getUserAgentString (const QString& url) const
+{
+    return getUpdater (url)->userAgentString();
+}
+
+/**
  * Instructs the \c Updater instance with the registered \c url to download and
  * interpret the update definitions file.
  *
@@ -328,6 +340,19 @@ void QSimpleUpdater::setDownloaderEnabled (const QString& url,
                                            const bool enabled)
 {
     getUpdater (url)->setDownloaderEnabled (enabled);
+}
+
+/**
+ * Changes the user-agent string used by the updater to communicate
+ * with the remote server
+ *
+ * \note If an \c Updater instance registered with the given \a url is not
+ *       found, that \c Updater instance will be initialized automatically
+ */
+void QSimpleUpdater::setUserAgentString (const QString& url,
+                                         const QString& agent)
+{
+    getUpdater (url)->setUserAgentString (agent);
 }
 
 /**
