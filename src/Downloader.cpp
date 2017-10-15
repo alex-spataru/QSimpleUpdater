@@ -56,8 +56,11 @@ Downloader::Downloader (QWidget* parent) : QWidget (parent)
     m_startTime = 0;
     m_useCustomProcedures = false;
 
+    /* Set download directory */
+    m_downloadDir = QDir::homePath() + "/Downloads/";
+
     /* Make the window look like a modal dialog */
-    setWindowIcon (QIcon ());
+    setWindowIcon (QIcon());
     setWindowFlags (Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
     /* Configure the appearance and behavior of the buttons */
@@ -112,9 +115,14 @@ void Downloader::startDownload (const QUrl& url)
     m_ui->downloadLabel->setText (tr ("Downloading updates"));
     m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
 
+    /* Configure the network request */
+    QNetworkRequest request (url);
+    if (!m_userAgentString.isEmpty())
+        request.setRawHeader ("User-Agent", m_userAgentString.toUtf8());
+
     /* Start download */
+    m_reply = m_manager->get (request);
     m_startTime = QDateTime::currentDateTime().toTime_t();
-    m_reply = m_manager->get (QNetworkRequest (url));
 
     /* Ensure that downloads directory exists */
     if (!m_downloadDir.exists())
@@ -147,6 +155,29 @@ void Downloader::setFileName (const QString& file)
 }
 
 /**
+ * Changes the user-agent string used to communicate with the remote HTTP server
+ */
+void Downloader::setUserAgentString (const QString& agent)
+{
+    m_userAgentString = agent;
+}
+
+void Downloader::finished()
+{
+    /* Rename file */
+    QFile::rename (m_downloadDir.filePath (m_fileName + PARTIAL_DOWN),
+                   m_downloadDir.filePath (m_fileName));
+
+    /* Notify application */
+    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName));
+
+    /* Install the update */
+    m_reply->close();
+    installUpdate();
+    setVisible (false);
+}
+
+/**
  * Opens the downloaded file.
  * \note If the downloaded file is not found, then the function will alert the
  *       user about the error.
@@ -155,7 +186,7 @@ void Downloader::openDownload()
 {
     if (!m_fileName.isEmpty())
         QDesktopServices::openUrl (QUrl::fromLocalFile (m_downloadDir.filePath (
-                m_fileName)));
+                                                            m_fileName)));
 
     else {
         QMessageBox::critical (this,
@@ -243,7 +274,7 @@ void Downloader::saveFile (qint64 received, qint64 total)
 
     /* Check if we need to redirect */
     QUrl url = m_reply->attribute (
-                   QNetworkRequest::RedirectionTargetAttribute).toUrl();
+                QNetworkRequest::RedirectionTargetAttribute).toUrl();
     if (!url.isEmpty()) {
         startDownload (url);
         return;
@@ -316,21 +347,6 @@ void Downloader::updateProgress (qint64 received, qint64 total)
                                   .arg (tr ("Time Remaining"))
                                   .arg (tr ("Unknown")));
     }
-}
-
-void Downloader::finished()
-{
-    /* Rename file */
-    QFile::rename (m_downloadDir.filePath (m_fileName + PARTIAL_DOWN),
-                   m_downloadDir.filePath (m_fileName));
-
-    /* Notify application */
-    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName));
-
-    /* Install the update */
-    m_reply->close();
-    installUpdate();
-    setVisible(false);
 }
 
 /**
