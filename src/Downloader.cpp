@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2014-2016 Alex Spataru <alex_spataru@outlook.com>
+ * Copyright (c) 2017 Gilmanov Ildar <https://github.com/gilmanov-ildar>
  *
  * This file is part of the QSimpleUpdater library, which is released under
  * the DBAD license, you can read a copy of it below:
@@ -30,7 +31,6 @@
 #include <QDir>
 #include <QFile>
 #include <QProcess>
-#include <QDateTime>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QDesktopServices>
@@ -41,7 +41,6 @@
 #include "Downloader.h"
 
 static const QString PARTIAL_DOWN (".part");
-static const QDir DOWNLOAD_DIR (QDir::homePath() + "/Downloads/");
 
 Downloader::Downloader (QWidget* parent) : QWidget (parent)
 {
@@ -113,26 +112,23 @@ void Downloader::startDownload (const QUrl& url)
     m_ui->downloadLabel->setText (tr ("Downloading updates"));
     m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
 
-    /* Configure the network request */
-    QNetworkRequest request (url);
-    if (!m_userAgentString.isEmpty())
-        request.setRawHeader ("User-Agent", m_userAgentString.toUtf8());
-
     /* Start download */
     m_startTime = QDateTime::currentDateTime().toTime_t();
-    m_reply = m_manager->get (request);
+    m_reply = m_manager->get (QNetworkRequest (url));
 
     /* Ensure that downloads directory exists */
-    if (!DOWNLOAD_DIR.exists())
-        DOWNLOAD_DIR.mkpath (".");
+    if (!m_downloadDir.exists())
+        m_downloadDir.mkpath (".");
 
     /* Remove old downloads */
-    QFile::remove (DOWNLOAD_DIR.filePath (m_fileName));
-    QFile::remove (DOWNLOAD_DIR.filePath (m_fileName + PARTIAL_DOWN));
+    QFile::remove (m_downloadDir.filePath (m_fileName));
+    QFile::remove (m_downloadDir.filePath (m_fileName + PARTIAL_DOWN));
 
     /* Update UI when download progress changes or download finishes */
     connect (m_reply, SIGNAL (downloadProgress (qint64, qint64)),
              this,      SLOT (updateProgress   (qint64, qint64)));
+    connect (m_reply, SIGNAL (finished ()),
+             this,      SLOT (finished ()));
     connect (m_reply, SIGNAL (redirected       (QUrl)),
              this,      SLOT (startDownload    (QUrl)));
 
@@ -158,7 +154,7 @@ void Downloader::setFileName (const QString& file)
 void Downloader::openDownload()
 {
     if (!m_fileName.isEmpty())
-        QDesktopServices::openUrl (QUrl::fromLocalFile (DOWNLOAD_DIR.filePath (
+        QDesktopServices::openUrl (QUrl::fromLocalFile (m_downloadDir.filePath (
                 m_fileName)));
 
     else {
@@ -242,6 +238,9 @@ void Downloader::cancelDownload()
  */
 void Downloader::saveFile (qint64 received, qint64 total)
 {
+    Q_UNUSED(received);
+    Q_UNUSED(total);
+
     /* Check if we need to redirect */
     QUrl url = m_reply->attribute (
                    QNetworkRequest::RedirectionTargetAttribute).toUrl();
@@ -251,24 +250,10 @@ void Downloader::saveFile (qint64 received, qint64 total)
     }
 
     /* Save downloaded data to disk */
-    QFile file (DOWNLOAD_DIR.filePath (m_fileName + PARTIAL_DOWN));
+    QFile file (m_downloadDir.filePath (m_fileName + PARTIAL_DOWN));
     if (file.open (QIODevice::WriteOnly | QIODevice::Append)) {
         file.write (m_reply->readAll());
         file.close();
-    }
-
-    /* Open downloaded update */
-    if (received >= total && total > 0) {
-        /* Rename file */
-        QFile::rename (DOWNLOAD_DIR.filePath (m_fileName + PARTIAL_DOWN),
-                       DOWNLOAD_DIR.filePath (m_fileName));
-
-        /* Notify application */
-        emit downloadFinished (m_url, DOWNLOAD_DIR.filePath (m_fileName));
-
-        /* Install the update */
-        m_reply->close();
-        installUpdate();
     }
 }
 
@@ -333,6 +318,21 @@ void Downloader::updateProgress (qint64 received, qint64 total)
     }
 }
 
+void Downloader::finished()
+{
+    /* Rename file */
+    QFile::rename (m_downloadDir.filePath (m_fileName + PARTIAL_DOWN),
+                   m_downloadDir.filePath (m_fileName));
+
+    /* Notify application */
+    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName));
+
+    /* Install the update */
+    m_reply->close();
+    installUpdate();
+    setVisible(false);
+}
+
 /**
  * Uses two time samples (from the current time and a previous sample) to
  * calculate how many bytes have been downloaded.
@@ -390,12 +390,16 @@ qreal Downloader::round (const qreal& input)
     return roundf (input * 100) / 100;
 }
 
-/**
- * Changes the user-agent string used to communicate with the remote HTTP server
- */
-void Downloader::setUserAgentString (const QString& agent)
+QString Downloader::downloadDir() const
 {
-    m_userAgentString = agent;
+    return m_downloadDir.absolutePath();
+}
+
+void Downloader::setDownloadDir(const QString& downloadDir)
+{
+    if(m_downloadDir.absolutePath() != downloadDir) {
+        m_downloadDir = downloadDir;
+    }
 }
 
 /**
