@@ -186,7 +186,7 @@ void Downloader::openDownload()
 {
     if (!m_fileName.isEmpty())
         QDesktopServices::openUrl (QUrl::fromLocalFile (m_downloadDir.filePath (
-                                                            m_fileName)));
+                m_fileName)));
 
     else {
         QMessageBox::critical (this,
@@ -269,12 +269,12 @@ void Downloader::cancelDownload()
  */
 void Downloader::saveFile (qint64 received, qint64 total)
 {
-    Q_UNUSED(received);
-    Q_UNUSED(total);
+    Q_UNUSED (received);
+    Q_UNUSED (total);
 
     /* Check if we need to redirect */
     QUrl url = m_reply->attribute (
-                QNetworkRequest::RedirectionTargetAttribute).toUrl();
+                   QNetworkRequest::RedirectionTargetAttribute).toUrl();
     if (!url.isEmpty()) {
         startDownload (url);
         return;
@@ -411,11 +411,10 @@ QString Downloader::downloadDir() const
     return m_downloadDir.absolutePath();
 }
 
-void Downloader::setDownloadDir(const QString& downloadDir)
+void Downloader::setDownloadDir (const QString& downloadDir)
 {
-    if(m_downloadDir.absolutePath() != downloadDir) {
+    if (m_downloadDir.absolutePath() != downloadDir)
         m_downloadDir = downloadDir;
-    }
 }
 
 /**

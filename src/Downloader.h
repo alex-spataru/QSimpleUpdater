@@ -59,7 +59,7 @@ public:
     bool useCustomInstallProcedures() const;
 
     QString downloadDir() const;
-    void setDownloadDir(const QString& downloadDir);
+    void setDownloadDir (const QString& downloadDir);
 
 public slots:
     void setUrlId (const QString& url);
