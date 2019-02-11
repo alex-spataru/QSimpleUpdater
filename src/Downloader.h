@@ -67,6 +67,7 @@ public slots:
     void setFileName (const QString& file);
     void setUserAgentString (const QString& agent);
     void setUseCustomInstallProcedures (const bool custom);
+    void setMandatoryUpdate (const bool mandatory_update);
 
 private slots:
     void finished();
@@ -89,7 +90,10 @@ private:
     Ui::Downloader* m_ui;
     QNetworkReply* m_reply;
     QString m_userAgentString;
+
     bool m_useCustomProcedures;
+    bool m_mandatoryUpdate;
+
     QNetworkAccessManager* m_manager;
 };
 

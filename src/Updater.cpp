@@ -51,6 +51,7 @@ Updater::Updater()
     m_downloaderEnabled = true;
     m_moduleName = qApp->applicationName();
     m_moduleVersion = qApp->applicationVersion();
+    m_mandatoryUpdate = false;
 
     m_downloader = new Downloader();
     m_manager = new QNetworkAccessManager();
@@ -196,6 +197,15 @@ bool Updater::notifyOnUpdate() const
 bool Updater::notifyOnFinish() const
 {
     return m_notifyOnFinish;
+}
+
+/**
+ * Returns \c true if there the current update is mandatory.
+ * \warning You should call \c checkForUpdates() before using this function
+*/
+bool Updater::mandatoryUpdate() const
+{
+    return m_mandatoryUpdate;
 }
 
 /**
@@ -345,6 +355,14 @@ void Updater::setUseCustomInstallProcedures (const bool custom)
 }
 
 /**
+ * If the \a mandatory_update is set to \c true, the \c Updater has to download and install the
+ * update. If the user cancels or exits, the application will close
+ */
+void Updater::setMandatoryUpdate(const bool mandatory_update)
+{
+    m_mandatoryUpdate = mandatory_update;
+}
+/**
  * Called when the download of the update definitions file is finished.
  */
 void Updater::onReply (QNetworkReply* reply)
@@ -391,6 +409,8 @@ void Updater::onReply (QNetworkReply* reply)
     m_changelog = platform.value ("changelog").toString();
     m_downloadUrl = platform.value ("download-url").toString();
     m_latestVersion = platform.value ("latest-version").toString();
+    if (platform.contains("mandatory-update"))
+        m_mandatoryUpdate = platform.value ("mandatory-update").toBool();
 
     /* Compare latest and current version */
     setUpdateAvailable (compare (latestVersion(), moduleVersion()));
@@ -410,7 +430,14 @@ void Updater::setUpdateAvailable (const bool available)
     box.setIcon (QMessageBox::Information);
 
     if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish())) {
-        QString text = tr ("Would you like to download the update now?");
+    if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
+    {
+        QString text = tr("Would you like to download the update now?");
+        if (m_mandatoryUpdate)
+        {
+            text = tr ("Would you like to download the update now? This is a mandatory update, exiting now will close the application");
+        }
+
         QString title = "<h3>"
                         + tr ("Version %1 of %2 has been released!")
                         .arg (latestVersion()).arg (moduleName())
@@ -428,11 +455,18 @@ void Updater::setUpdateAvailable (const bool available)
             else if (downloaderEnabled()) {
                 m_downloader->setUrlId (url());
                 m_downloader->setFileName (downloadUrl().split ("/").last());
+                m_downloader->setMandatoryUpdate(m_mandatoryUpdate);
                 m_downloader->startDownload (QUrl (downloadUrl()));
             }
 
             else
                 QDesktopServices::openUrl (QUrl (downloadUrl()));
+        }else
+        {
+            if(m_mandatoryUpdate)
+            {
+                QApplication::quit();
+            }
         }
     }
 
