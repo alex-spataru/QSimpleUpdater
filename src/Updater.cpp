@@ -429,7 +429,6 @@ void Updater::setUpdateAvailable (const bool available)
     box.setTextFormat (Qt::RichText);
     box.setIcon (QMessageBox::Information);
 
-    if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish())) {
     if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
     {
         QString text = tr("Would you like to download the update now?");
