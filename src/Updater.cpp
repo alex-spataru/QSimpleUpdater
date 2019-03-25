@@ -33,6 +33,7 @@
 #include <QApplication>
 #include <QJsonDocument>
 #include <QDesktopServices>
+#include <QVersionNumber>
 
 #include "Updater.h"
 #include "Downloader.h"
@@ -456,21 +457,5 @@ void Updater::setUpdateAvailable (const bool available)
  */
 bool Updater::compare (const QString& x, const QString& y)
 {
-    QStringList versionsX = x.split (".");
-    QStringList versionsY = y.split (".");
-
-    int count = qMin (versionsX.count(), versionsY.count());
-
-    for (int i = 0; i < count; ++i) {
-        int a = QString (versionsX.at (i)).toInt();
-        int b = QString (versionsY.at (i)).toInt();
-
-        if (a > b)
-            return true;
-
-        else if (b > a)
-            return false;
-    }
-
-    return versionsY.count() < versionsX.count();
+    return QVersionNumber::fromString(x) > QVersionNumber::fromString(y);
 }
