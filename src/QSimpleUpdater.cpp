@@ -387,6 +387,13 @@ void QSimpleUpdater::setUseCustomInstallProcedures (const QString& url,
     getUpdater (url)->setUseCustomInstallProcedures (custom);
 }
 
+
+void QSimpleUpdater::setMandatoryUpdate(const QString& url,
+        const bool mandatory_update)
+{
+    getUpdater (url)->setMandatoryUpdate(mandatory_update);
+}
+
 /**
  * Returns the \c Updater instance registered with the given \a url.
  *

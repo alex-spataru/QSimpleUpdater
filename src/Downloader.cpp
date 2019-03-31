@@ -55,6 +55,7 @@ Downloader::Downloader (QWidget* parent) : QWidget (parent)
     m_fileName = "";
     m_startTime = 0;
     m_useCustomProcedures = false;
+    m_mandatoryUpdate = false;
 
     /* Set download directory */
     m_downloadDir = QDir::homePath() + "/Downloads/";
@@ -221,9 +222,16 @@ void Downloader::installUpdate()
     box.setDefaultButton   (QMessageBox::Ok);
     box.setStandardButtons (QMessageBox::Ok | QMessageBox::Cancel);
     box.setInformativeText (tr ("Click \"OK\" to begin installing the update"));
+
+    QString text = tr ("In order to install the update, you may need to "
+                      "quit the application.");
+
+    if(m_mandatoryUpdate)
+        text = tr ("In order to install the update, you may need to "
+                   "quit the application. This is a mandatory update, exiting now will close the application");
+
     box.setText ("<h3>" +
-                 tr ("In order to install the update, you may need to "
-                     "quit the application.")
+                 text
                  + "</h3>");
 
     /* User wants to install the download */
@@ -231,9 +239,11 @@ void Downloader::installUpdate()
         if (!useCustomInstallProcedures())
             openDownload();
     }
-
     /* Wait */
     else {
+        if(m_mandatoryUpdate)
+            QApplication::quit();
+
         m_ui->openButton->setEnabled (true);
         m_ui->openButton->setVisible (true);
         m_ui->timeLabel->setText (tr ("Click the \"Open\" button to "
@@ -252,16 +262,28 @@ void Downloader::cancelDownload()
         box.setWindowTitle (tr ("Updater"));
         box.setIcon (QMessageBox::Question);
         box.setStandardButtons (QMessageBox::Yes | QMessageBox::No);
-        box.setText (tr ("Are you sure you want to cancel the download?"));
+
+        QString text = tr("Are you sure you want to cancel the download?");
+        if (m_mandatoryUpdate)
+        {
+            text = tr("Are you sure you want to cancel the download? This is a mandatory update, exiting now will close the application");
+        }
+        box.setText (text);
 
         if (box.exec() == QMessageBox::Yes) {
             hide();
             m_reply->abort();
+            if(m_mandatoryUpdate)
+                QApplication::quit();
         }
     }
-
     else
+    {
+        if(m_mandatoryUpdate)
+            QApplication::quit();
+
         hide();
+    }
 }
 
 /**
@@ -415,6 +437,15 @@ void Downloader::setDownloadDir (const QString& downloadDir)
 {
     if (m_downloadDir.absolutePath() != downloadDir)
         m_downloadDir = downloadDir;
+}
+
+/**
+ * If the \a mandatory_update is set to \c true, the \c Downloader has to download and install the
+ * update. If the user cancels or exits, the application will close
+ */
+void Downloader::setMandatoryUpdate(const bool mandatory_update)
+{
+    m_mandatoryUpdate = mandatory_update;
 }
 
 /**

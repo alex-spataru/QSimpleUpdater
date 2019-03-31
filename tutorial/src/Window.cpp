@@ -9,6 +9,7 @@
 #include "Window.h"
 #include "ui_Window.h"
 
+#include <QDebug>
 #include <QSimpleUpdater.h>
 
 //==============================================================================
@@ -75,6 +76,8 @@ void Window::resetFields()
     m_ui->enableDownloader->setChecked (true);
     m_ui->showAllNotifcations->setChecked (false);
     m_ui->showUpdateNotifications->setChecked (true);
+    m_ui->mandatoryUpdate->setChecked (false);
+
 }
 
 //==============================================================================
@@ -89,6 +92,7 @@ void Window::checkForUpdates()
     bool downloaderEnabled = m_ui->enableDownloader->isChecked();
     bool notifyOnFinish = m_ui->showAllNotifcations->isChecked();
     bool notifyOnUpdate = m_ui->showUpdateNotifications->isChecked();
+    bool mandatoryUpdate = m_ui->mandatoryUpdate->isChecked();
 
     /* Apply the settings */
     m_updater->setModuleVersion (DEFS_URL, version);
@@ -96,6 +100,7 @@ void Window::checkForUpdates()
     m_updater->setNotifyOnUpdate (DEFS_URL, notifyOnUpdate);
     m_updater->setUseCustomAppcast (DEFS_URL, customAppcast);
     m_updater->setDownloaderEnabled (DEFS_URL, downloaderEnabled);
+    m_updater->setMandatoryUpdate (DEFS_URL, mandatoryUpdate);
 
     /* Check for updates */
     m_updater->checkForUpdates (DEFS_URL);

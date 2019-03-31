@@ -102,6 +102,7 @@ public slots:
     void setUserAgentString (const QString& url, const QString& agent);
     void setUseCustomAppcast (const QString& url, const bool customAppcast);
     void setUseCustomInstallProcedures (const QString& url, const bool custom);
+    void setMandatoryUpdate (const QString& url, const bool mandatory_update);
 
 protected:
     ~QSimpleUpdater();

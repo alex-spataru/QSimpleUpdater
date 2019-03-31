@@ -64,6 +64,7 @@ public:
     QString moduleVersion() const;
     QString latestVersion() const;
     QString userAgentString() const;
+    bool mandatoryUpdate() const;
 
     bool customAppcast() const;
     bool notifyOnUpdate() const;
@@ -84,6 +85,7 @@ public slots:
     void setPlatformKey (const QString& platformKey);
     void setUseCustomAppcast (const bool customAppcast);
     void setUseCustomInstallProcedures (const bool custom);
+    void setMandatoryUpdate (const bool mandatory_update);
 
 private slots:
     void onReply (QNetworkReply* reply);
@@ -101,6 +103,7 @@ private:
     bool m_notifyOnFinish;
     bool m_updateAvailable;
     bool m_downloaderEnabled;
+    bool m_mandatoryUpdate;
 
     QString m_openUrl;
     QString m_platform;
@@ -109,6 +112,7 @@ private:
     QString m_downloadUrl;
     QString m_moduleVersion;
     QString m_latestVersion;
+
 
     Downloader* m_downloader;
     QNetworkAccessManager* m_manager;
