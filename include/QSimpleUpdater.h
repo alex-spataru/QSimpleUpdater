@@ -74,6 +74,7 @@ signals:
 
 public:
     static QSimpleUpdater* getInstance();
+    void setUseGui(bool gui);
 
     bool usesCustomAppcast (const QString& url) const;
     bool getNotifyOnUpdate (const QString& url) const;
@@ -104,11 +105,12 @@ public slots:
     void setUseCustomInstallProcedures (const QString& url, const bool custom);
     void setMandatoryUpdate (const QString& url, const bool mandatory_update);
 
-protected:
+private:
+    explicit QSimpleUpdater(QObject *parent=nullptr);
     ~QSimpleUpdater();
 
-private:
     Updater* getUpdater (const QString& url) const;
+    bool gui=true;
 };
 
 #endif
