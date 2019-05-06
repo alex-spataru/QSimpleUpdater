@@ -33,6 +33,12 @@
 static QList<QString> URLS;
 static QList<Updater*> UPDATERS;
 
+QSimpleUpdater::QSimpleUpdater(QObject* parent)
+    :QObject(parent)
+{
+
+}
+
 QSimpleUpdater::~QSimpleUpdater()
 {
     URLS.clear();
@@ -50,6 +56,11 @@ QSimpleUpdater* QSimpleUpdater::getInstance()
 {
     static QSimpleUpdater updater;
     return &updater;
+}
+
+void QSimpleUpdater::setUseGui(bool _gui)
+{
+    gui = _gui;
 }
 
 /**
@@ -402,8 +413,9 @@ void QSimpleUpdater::setMandatoryUpdate(const QString& url,
  */
 Updater* QSimpleUpdater::getUpdater (const QString& url) const
 {
-    if (!URLS.contains (url)) {
-        Updater* updater = new Updater;
+    if (!URLS.contains (url))
+    {
+        Updater* updater = new Updater(gui);
         updater->setUrl (url);
 
         URLS.append (url);

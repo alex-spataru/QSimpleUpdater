@@ -27,6 +27,7 @@
  * Fix the problem yourself. A non-dick would submit the fix back.
  */
 
+#include <QDebug>
 #include <QJsonValue>
 #include <QJsonObject>
 #include <QMessageBox>
@@ -35,9 +36,10 @@
 #include <QDesktopServices>
 
 #include "Updater.h"
-#include "Downloader.h"
+#include "DownloaderGUI.h"
+#include "DownloaderLite.h"
 
-Updater::Updater()
+Updater::Updater(bool gui /*=true*/)
 {
     m_url = "";
     m_openUrl = "";
@@ -52,8 +54,17 @@ Updater::Updater()
     m_moduleName = qApp->applicationName();
     m_moduleVersion = qApp->applicationVersion();
     m_mandatoryUpdate = false;
+    m_gui = gui;
 
-    m_downloader = new Downloader();
+    if ((false))
+    {
+        m_downloader = new DownloaderGUI();
+    }
+    else
+    {
+        m_downloader = new DownloaderLite();
+    }
+
     m_manager = new QNetworkAccessManager();
 
 #if defined Q_OS_WIN
@@ -71,7 +82,7 @@ Updater::Updater()
     setUserAgentString (QString ("%1/%2 (Qt; QSimpleUpdater)").arg (qApp->applicationName(),
                         qApp->applicationVersion()));
 
-    connect (m_downloader, SIGNAL (downloadFinished (QString, QString)),
+    connect (dynamic_cast<QObject*>(m_downloader), SIGNAL (downloadFinished (QString, QString)),
              this,         SIGNAL (downloadFinished (QString, QString)));
     connect (m_manager,    SIGNAL (finished (QNetworkReply*)),
              this,           SLOT (onReply  (QNetworkReply*)));
@@ -247,7 +258,7 @@ void Updater::checkForUpdates()
     if (!userAgentString().isEmpty())
         request.setRawHeader ("User-Agent", userAgentString().toUtf8());
 
-    m_manager->get (request);
+    m_manager->get(request);
 }
 
 /**
@@ -378,6 +389,7 @@ void Updater::onReply (QNetworkReply* reply)
 
     /* There was a network error */
     if (reply->error() != QNetworkReply::NoError) {
+        qCritical()<<reply->error();
         setUpdateAvailable (false);
         emit checkingFinished (url());
         return;
@@ -425,59 +437,84 @@ void Updater::setUpdateAvailable (const bool available)
 {
     m_updateAvailable = available;
 
-    QMessageBox box;
-    box.setTextFormat (Qt::RichText);
-    box.setIcon (QMessageBox::Information);
-
-    if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
+    if (m_gui)
     {
-        QString text = tr("Would you like to download the update now?");
-        if (m_mandatoryUpdate)
+        QMessageBox box;
+        box.setTextFormat (Qt::RichText);
+        box.setIcon (QMessageBox::Information);
+
+        if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
         {
-            text = tr ("Would you like to download the update now? This is a mandatory update, exiting now will close the application");
+            QString text = tr("Would you like to download the update now?");
+            if (m_mandatoryUpdate)
+            {
+                text = tr ("Would you like to download the update now? This is a mandatory update, exiting now will close the application");
+            }
+
+            QString title = "<h3>"
+                            + tr ("Version %1 of %2 has been released!")
+                            .arg (latestVersion()).arg (moduleName())
+                            + "</h3>";
+
+            box.setText (title);
+            box.setInformativeText (text);
+            box.setStandardButtons (QMessageBox::No | QMessageBox::Yes);
+            box.setDefaultButton   (QMessageBox::Yes);
+
+            if (box.exec() == QMessageBox::Yes) {
+                if (!openUrl().isEmpty())
+                    QDesktopServices::openUrl (QUrl (openUrl()));
+
+                else if (downloaderEnabled()) {
+                    m_downloader->setUrlId (url());
+                    m_downloader->setFileName (downloadUrl().split ("/").last());
+                    m_downloader->setMandatoryUpdate(m_mandatoryUpdate);
+                    m_downloader->startDownload (QUrl (downloadUrl()));
+                }
+
+                else
+                    QDesktopServices::openUrl (QUrl (downloadUrl()));
+            }else
+            {
+                if(m_mandatoryUpdate)
+                {
+                    QApplication::quit();
+                }
+            }
         }
 
-        QString title = "<h3>"
-                        + tr ("Version %1 of %2 has been released!")
-                        .arg (latestVersion()).arg (moduleName())
-                        + "</h3>";
+        else if (notifyOnFinish())
+        {
+            box.setStandardButtons (QMessageBox::Close);
+            box.setInformativeText (tr ("No updates are available for the moment"));
+            box.setText ("<h3>"
+                         + tr ("Congratulations! You are running the "
+                               "latest version of %1").arg (moduleName())
+                         + "</h3>");
 
-        box.setText (title);
-        box.setInformativeText (text);
-        box.setStandardButtons (QMessageBox::No | QMessageBox::Yes);
-        box.setDefaultButton   (QMessageBox::Yes);
-
-        if (box.exec() == QMessageBox::Yes) {
+            box.exec();
+        }
+    }
+    else
+    {
+        if (updateAvailable())
+        {
             if (!openUrl().isEmpty())
+            {
                 QDesktopServices::openUrl (QUrl (openUrl()));
-
-            else if (downloaderEnabled()) {
+            }
+            else if (downloaderEnabled())
+            {
                 m_downloader->setUrlId (url());
                 m_downloader->setFileName (downloadUrl().split ("/").last());
                 m_downloader->setMandatoryUpdate(m_mandatoryUpdate);
                 m_downloader->startDownload (QUrl (downloadUrl()));
             }
-
             else
-                QDesktopServices::openUrl (QUrl (downloadUrl()));
-        }else
-        {
-            if(m_mandatoryUpdate)
             {
-                QApplication::quit();
+                QDesktopServices::openUrl (QUrl (downloadUrl()));
             }
         }
-    }
-
-    else if (notifyOnFinish()) {
-        box.setStandardButtons (QMessageBox::Close);
-        box.setInformativeText (tr ("No updates are available for the moment"));
-        box.setText ("<h3>"
-                     + tr ("Congratulations! You are running the "
-                           "latest version of %1").arg (moduleName())
-                     + "</h3>");
-
-        box.exec();
     }
 }
 

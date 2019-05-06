@@ -37,7 +37,7 @@
 
 #include <QSimpleUpdater.h>
 
-class Downloader;
+class IDownloader;
 
 /**
  * \brief Downloads and interprests the update definition file
@@ -52,7 +52,7 @@ signals:
     void appcastDownloaded (const QString& url, const QByteArray& data);
 
 public:
-    Updater();
+    Updater(bool gui=true);
     ~Updater();
 
     QString url() const;
@@ -104,6 +104,7 @@ private:
     bool m_updateAvailable;
     bool m_downloaderEnabled;
     bool m_mandatoryUpdate;
+    bool m_gui;
 
     QString m_openUrl;
     QString m_platform;
@@ -113,8 +114,7 @@ private:
     QString m_moduleVersion;
     QString m_latestVersion;
 
-
-    Downloader* m_downloader;
+    IDownloader* m_downloader;
     QNetworkAccessManager* m_manager;
 };
 

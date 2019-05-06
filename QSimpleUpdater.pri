@@ -34,14 +34,18 @@ QT += widgets
 INCLUDEPATH += $$PWD/include
 
 SOURCES += \
+    $$PWD/src/DownloaderLite.cpp \
+    $$PWD/src/DownloaderGUI.cpp \
+    $$PWD/src/IDownloader.cpp \
     $$PWD/src/Updater.cpp \
-    $$PWD/src/Downloader.cpp \
     $$PWD/src/QSimpleUpdater.cpp
 
 HEADERS += \
+    $$PWD/include/DownloaderGUI.h \
+    $$PWD/include/IDownloader.h \
     $$PWD/include/QSimpleUpdater.h \
-    $$PWD/src/Updater.h \
-    $$PWD/src/Downloader.h
+    $$PWD/include/Updater.h \
+    $$PWD/include/DownloaderLite.h
 
 FORMS += $$PWD/src/Downloader.ui
 RESOURCES += $$PWD/etc/resources/qsimpleupdater.qrc
