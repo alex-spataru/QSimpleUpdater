@@ -25,6 +25,9 @@ After downloading this file, the library analyzes the local version and the remo
 
 An example update definition file can be found [here](https://github.com/alex-spataru/QSimpleUpdater/blob/master/tutorial/definitions/updates.json).
 
+Is it possible to enable a no-gui version of the updater; it automatically downloads and install the update if found.  
+
+
 ### 2. Can I customize the update notifications shown to the user?
 
 Yes! You can "toggle" which notifications to show using the library's functions or re-implement by yourself the notifications by "reacting" to the signals emitted by the QSimpleUpdater.
