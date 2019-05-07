@@ -66,10 +66,14 @@ protected slots:
     virtual void cancelDownload() override;
     virtual void installUpdate() override;
     virtual void openDownload() override;
+    virtual void saveFile(qint64 received, qint64 total) override {IDownloader::saveFile(received,total);}
+    virtual void updateProgress (qint64 received, qint64 total) override;
+
+protected:
+    virtual const QObject* getThisQObj() override {return this;}
 
 private slots:
     void calculateSizes (qint64 received, qint64 total);
-    void updateProgress (qint64 received, qint64 total);
     void calculateTimeRemaining (qint64 received, qint64 total);
 
 private:

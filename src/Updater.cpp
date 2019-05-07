@@ -27,7 +27,6 @@
  * Fix the problem yourself. A non-dick would submit the fix back.
  */
 
-#include <QDebug>
 #include <QJsonValue>
 #include <QJsonObject>
 #include <QMessageBox>
@@ -56,7 +55,7 @@ Updater::Updater(bool gui /*=true*/)
     m_mandatoryUpdate = false;
     m_gui = gui;
 
-    if ((false))
+    if (m_gui)
     {
         m_downloader = new DownloaderGUI();
     }
@@ -474,7 +473,8 @@ void Updater::setUpdateAvailable (const bool available)
 
                 else
                     QDesktopServices::openUrl (QUrl (downloadUrl()));
-            }else
+            }
+            else
             {
                 if(m_mandatoryUpdate)
                 {
@@ -501,18 +501,18 @@ void Updater::setUpdateAvailable (const bool available)
         {
             if (!openUrl().isEmpty())
             {
-                QDesktopServices::openUrl (QUrl (openUrl()));
+                QDesktopServices::openUrl(QUrl (openUrl()));
             }
             else if (downloaderEnabled())
             {
                 m_downloader->setUrlId (url());
                 m_downloader->setFileName (downloadUrl().split ("/").last());
                 m_downloader->setMandatoryUpdate(m_mandatoryUpdate);
-                m_downloader->startDownload (QUrl (downloadUrl()));
+                m_downloader->startDownload(QUrl (downloadUrl()));
             }
             else
             {
-                QDesktopServices::openUrl (QUrl (downloadUrl()));
+                QDesktopServices::openUrl(QUrl (downloadUrl()));
             }
         }
     }

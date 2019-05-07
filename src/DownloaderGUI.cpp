@@ -40,7 +40,6 @@
 
 #include "DownloaderGUI.h"
 
-
 DownloaderGUI::DownloaderGUI (QWidget* parent) : QWidget (parent)
 {
     m_ui = new Ui::Downloader;
@@ -79,14 +78,6 @@ void DownloaderGUI::startDownload (const QUrl& url)
     m_ui->stopButton->setText (tr ("Stop"));
     m_ui->downloadLabel->setText (tr ("Downloading updates"));
     m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
-
-    /* Update UI when download progress changes or download finishes */
-    connect (m_reply, SIGNAL (downloadProgress (qint64, qint64)),
-             this,      SLOT (updateProgress   (qint64, qint64)));
-    connect (m_reply, SIGNAL (finished ()),
-             this,      SLOT (finished ()));
-    connect (m_reply, SIGNAL (redirected       (QUrl)),
-             this,      SLOT (startDownload    (QUrl)));
 
     showNormal();
 }
@@ -246,6 +237,7 @@ void DownloaderGUI::calculateSizes (qint64 received, qint64 total)
  */
 void DownloaderGUI::updateProgress (qint64 received, qint64 total)
 {
+    IDownloader::updateProgress(received,total);
     if (total > 0) {
         m_ui->progressBar->setMinimum (0);
         m_ui->progressBar->setMaximum (100);
@@ -253,7 +245,6 @@ void DownloaderGUI::updateProgress (qint64 received, qint64 total)
 
         calculateSizes (received, total);
         calculateTimeRemaining (received, total);
-        saveFile (received, total);
     }
 
     else {
