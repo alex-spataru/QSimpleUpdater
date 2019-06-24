@@ -34,6 +34,7 @@
 #include <QDir>
 #include <QDialog>
 #include <ui_Downloader.h>
+#include "IDownloader.h"
 
 namespace Ui {
 class Downloader;
@@ -45,56 +46,41 @@ class QNetworkAccessManager;
 /**
  * \brief Implements an integrated file downloader with a nice UI
  */
-class Downloader : public QWidget
+class DownloaderGUI : public QWidget, public IDownloader
 {
     Q_OBJECT
-
-signals:
-    void downloadFinished (const QString& url, const QString& filepath);
+    Q_INTERFACES(IDownloader)
 
 public:
-    explicit Downloader (QWidget* parent = 0);
-    ~Downloader();
+    explicit DownloaderGUI (QWidget* parent = nullptr);
+    virtual ~DownloaderGUI();
 
-    bool useCustomInstallProcedures() const;
-
-    QString downloadDir() const;
-    void setDownloadDir (const QString& downloadDir);
+signals:
+    void downloadFinished (const QString& url, const QString& filepath) override;
 
 public slots:
-    void setUrlId (const QString& url);
-    void startDownload (const QUrl& url);
-    void setFileName (const QString& file);
-    void setUserAgentString (const QString& agent);
-    void setUseCustomInstallProcedures (const bool custom);
-    void setMandatoryUpdate (const bool mandatory_update);
+    virtual void startDownload (const QUrl& url) override;
+
+protected slots:
+    virtual void finished() override;
+    virtual void cancelDownload() override;
+    virtual void installUpdate() override;
+    virtual void openDownload() override;
+    virtual void saveFile(qint64 received, qint64 total) override {IDownloader::saveFile(received,total);}
+    virtual void updateProgress (qint64 received, qint64 total) override;
+
+protected:
+    virtual const QObject* getThisQObj() override {return this;}
 
 private slots:
-    void finished();
-    void openDownload();
-    void installUpdate();
-    void cancelDownload();
-    void saveFile (qint64 received, qint64 total);
     void calculateSizes (qint64 received, qint64 total);
-    void updateProgress (qint64 received, qint64 total);
     void calculateTimeRemaining (qint64 received, qint64 total);
 
 private:
     qreal round (const qreal& input);
 
 private:
-    QString m_url;
-    uint m_startTime;
-    QDir m_downloadDir;
-    QString m_fileName;
     Ui::Downloader* m_ui;
-    QNetworkReply* m_reply;
-    QString m_userAgentString;
-
-    bool m_useCustomProcedures;
-    bool m_mandatoryUpdate;
-
-    QNetworkAccessManager* m_manager;
 };
 
 #endif

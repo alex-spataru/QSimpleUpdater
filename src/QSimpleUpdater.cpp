@@ -33,6 +33,12 @@
 static QList<QString> URLS;
 static QList<Updater*> UPDATERS;
 
+QSimpleUpdater::QSimpleUpdater(QObject* parent)
+    :QObject(parent)
+{
+
+}
+
 QSimpleUpdater::~QSimpleUpdater()
 {
     URLS.clear();
@@ -50,6 +56,11 @@ QSimpleUpdater* QSimpleUpdater::getInstance()
 {
     static QSimpleUpdater updater;
     return &updater;
+}
+
+void QSimpleUpdater::setUseGui(bool _gui)
+{
+    gui = _gui;
 }
 
 /**
@@ -241,6 +252,11 @@ QString QSimpleUpdater::getUserAgentString (const QString& url) const
     return getUpdater (url)->userAgentString();
 }
 
+QString QSimpleUpdater::getDownloadDir(const QString& url) const
+{
+    return getUpdater(url)->downloadDir();
+}
+
 /**
  * Instructs the \c Updater instance with the registered \c url to download and
  * interpret the update definitions file.
@@ -394,6 +410,11 @@ void QSimpleUpdater::setMandatoryUpdate(const QString& url,
     getUpdater (url)->setMandatoryUpdate(mandatory_update);
 }
 
+void QSimpleUpdater::setDownloadDir(const QString& url, const QString& dir)
+{
+    getUpdater (url)->setDownloadDir(dir);
+}
+
 /**
  * Returns the \c Updater instance registered with the given \a url.
  *
@@ -402,8 +423,9 @@ void QSimpleUpdater::setMandatoryUpdate(const QString& url,
  */
 Updater* QSimpleUpdater::getUpdater (const QString& url) const
 {
-    if (!URLS.contains (url)) {
-        Updater* updater = new Updater;
+    if (!URLS.contains (url))
+    {
+        Updater* updater = new Updater(gui);
         updater->setUrl (url);
 
         URLS.append (url);
