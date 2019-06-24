@@ -252,6 +252,11 @@ QString QSimpleUpdater::getUserAgentString (const QString& url) const
     return getUpdater (url)->userAgentString();
 }
 
+QString QSimpleUpdater::getDownloadDir(const QString& url) const
+{
+    return getUpdater(url)->downloadDir();
+}
+
 /**
  * Instructs the \c Updater instance with the registered \c url to download and
  * interpret the update definitions file.
@@ -403,6 +408,11 @@ void QSimpleUpdater::setMandatoryUpdate(const QString& url,
         const bool mandatory_update)
 {
     getUpdater (url)->setMandatoryUpdate(mandatory_update);
+}
+
+void QSimpleUpdater::setDownloadDir(const QString& url, const QString& dir)
+{
+    getUpdater (url)->setDownloadDir(dir);
 }
 
 /**

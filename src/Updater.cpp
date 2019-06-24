@@ -247,6 +247,11 @@ bool Updater::useCustomInstallProcedures() const
     return m_downloader->useCustomInstallProcedures();
 }
 
+QString Updater::downloadDir() const
+{
+    return m_downloader->downloadDir();
+}
+
 /**
  * Downloads and interpets the update definitions file referenced by the
  * \c url() function.
@@ -371,6 +376,11 @@ void Updater::setUseCustomInstallProcedures (const bool custom)
 void Updater::setMandatoryUpdate(const bool mandatory_update)
 {
     m_mandatoryUpdate = mandatory_update;
+}
+
+void Updater::setDownloadDir(const QString& dir)
+{
+    m_downloader->setDownloadDir(dir);
 }
 /**
  * Called when the download of the update definitions file is finished.
