@@ -73,6 +73,8 @@ public:
     bool downloaderEnabled() const;
     bool useCustomInstallProcedures() const;
 
+    QString downloadDir() const;
+
 public slots:
     void checkForUpdates();
     void setUrl (const QString& url);
@@ -86,6 +88,7 @@ public slots:
     void setUseCustomAppcast (const bool customAppcast);
     void setUseCustomInstallProcedures (const bool custom);
     void setMandatoryUpdate (const bool mandatory_update);
+    void setDownloadDir (const QString& dir);
 
 private slots:
     void onReply (QNetworkReply* reply);
