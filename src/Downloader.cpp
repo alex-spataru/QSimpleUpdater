@@ -386,7 +386,7 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total)
 
     if (difference > 0) {
         QString timeString;
-        qreal timeRemaining = total / (received / difference);
+        qreal timeRemaining = (total - received) / (received / difference);
 
         if (timeRemaining > 7200) {
             timeRemaining /= 3600;
