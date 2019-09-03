@@ -429,6 +429,10 @@ void Updater::onReply (QNetworkReply* reply)
     m_openUrl = platform.value ("open-url").toString();
     m_changelog = platform.value ("changelog").toString();
     m_downloadUrl = platform.value ("download-url").toString();
+    if (QDir(m_downloadUrl).isRelative())
+    {
+        m_downloadUrl = QUrl(m_url).resolved(QUrl(m_downloadUrl)).toString();
+    }
     m_latestVersion = platform.value ("latest-version").toString();
     if (platform.contains("mandatory-update"))
         m_mandatoryUpdate = platform.value ("mandatory-update").toBool();
