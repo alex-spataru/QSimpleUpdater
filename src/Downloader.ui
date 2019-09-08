@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>Downloader</class>
  <widget class="QWidget" name="Downloader">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>464</width>
-    <height>164</height>
+    <height>168</height>
    </rect>
   </property>
   <property name="sizePolicy">

@@ -59,7 +59,7 @@ Downloader::Downloader (QWidget* parent) : QWidget (parent)
     m_mandatoryUpdate = false;
 
     /* Set download directory */
-    m_downloadDir = QDir::homePath() + "/Downloads/";
+    m_downloadDir.setPath(QDir::homePath() + "/Downloads/");
 
     /* Make the window look like a modal dialog */
     setWindowIcon (QIcon());
@@ -426,7 +426,7 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total)
  */
 qreal Downloader::round (const qreal& input)
 {
-    return roundf (input * 100) / 100;
+    return static_cast<qreal>(roundf (static_cast<float>(input) * 100) / 100);
 }
 
 QString Downloader::downloadDir() const
@@ -437,7 +437,7 @@ QString Downloader::downloadDir() const
 void Downloader::setDownloadDir (const QString& downloadDir)
 {
     if (m_downloadDir.absolutePath() != downloadDir)
-        m_downloadDir = downloadDir;
+        m_downloadDir.setPath(downloadDir);
 }
 
 /**
