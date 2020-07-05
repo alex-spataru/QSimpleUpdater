@@ -1,7 +1,6 @@
 # QSimpleUpdater
 
 [![Build Status](https://img.shields.io/travis/alex-spataru/QSimpleUpdater.svg?style=flat-square)](https://travis-ci.org/alex-spataru/QSimpleUpdater)
-[![Donate button](https://img.shields.io/badge/bitcoin-donate-brightgreen.svg?style=flat-square)](https://blockchain.info/address/1K85yLxjuqUmhkjP839R7C23XFhSxrefMx "Donate once-off to this project using BitCoin")
 
 QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. It allows you to easily check for updates, download them and install them. Additionally, the QSimpleUpdater allows you to check for updates for different "modules" of your application. Check the [WTFs Section](#wtfs-section) for more information.
 
