@@ -6,7 +6,7 @@
 
 [![Build Status](https://github.com/alex-spataru/QSimpleUpdater/workflows/Build/badge.svg)](#)
 
-QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. It allows you to easily check for updates, download them and install them. Additionally, the QSimpleUpdater allows you to check for updates for different "modules" of your application. Check the [WTFs Section](#wtfs-section) for more information.
+QSimpleUpdater is an implementation of an auto-updating system to be used with Qt projects. It allows you to easily check for updates, download them and install them. Additionally, the QSimpleUpdater allows you to check for updates for different "modules" of your application. Check the [FAQ](#faq) for more information.
 
 Online documentation can be found [here](http://frc-utilities.github.io/documentation/qsimpleupdater/).
 
@@ -17,7 +17,7 @@ Online documentation can be found [here](http://frc-utilities.github.io/document
 2. Include the QSimpleUpdater project include (*pri*) file using the include() function.
 3. That's all! Check the [tutorial project](/tutorial) as a reference for your project.
 
-## WTFs Section
+## FAQ
 
 ### 1. How does the QSimpleUpdater check for updates?
 
