@@ -123,7 +123,7 @@ void Downloader::startDownload(const QUrl &url)
 
    /* Start download */
    m_reply = m_manager->get(request);
-   m_startTime = QDateTime::currentDateTime().toTime_t();
+   m_startTime = QDateTime::currentDateTime().toSecsSinceEpoch();
 
    /* Ensure that downloads directory exists */
    if (!m_downloadDir.exists())
@@ -375,7 +375,7 @@ void Downloader::updateProgress(qint64 received, qint64 total)
  */
 void Downloader::calculateTimeRemaining(qint64 received, qint64 total)
 {
-   uint difference = QDateTime::currentDateTime().toTime_t() - m_startTime;
+   uint difference = QDateTime::currentDateTime().toSecsSinceEpoch(); - m_startTime;
 
    if (difference > 0)
    {
