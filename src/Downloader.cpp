@@ -375,7 +375,7 @@ void Downloader::updateProgress(qint64 received, qint64 total)
  */
 void Downloader::calculateTimeRemaining(qint64 received, qint64 total)
 {
-   uint difference = QDateTime::currentDateTime().toSecsSinceEpoch(); - m_startTime;
+   uint difference = QDateTime::currentDateTime().toSecsSinceEpoch() - m_startTime;
 
    if (difference > 0)
    {
