@@ -76,4 +76,4 @@ QSimpleUpdater::getInstance()->checkForUpdates (client_url);
 
 ## License
 
-QSimpleUpdater is free and open-source software, it is released under the [DBAD](COPYING.md) license.
+QSimpleUpdater is free and open-source software, it is released under the [MIT](LICENSE.md) license.
