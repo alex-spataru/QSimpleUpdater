@@ -25,6 +25,7 @@ QT += core
 QT += network
 QT += widgets
 
+DEFINES += QSU_INCLUDE_MOC=1
 INCLUDEPATH += $$PWD/include
 
 SOURCES += \

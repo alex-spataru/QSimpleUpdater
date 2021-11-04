@@ -449,3 +449,7 @@ void Downloader::setUseCustomInstallProcedures(const bool custom)
 {
    m_useCustomProcedures = custom;
 }
+
+#if QSU_INCLUDE_MOC
+#include "moc_Downloader.cpp"
+#endif

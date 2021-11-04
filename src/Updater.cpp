@@ -505,3 +505,7 @@ bool Updater::compare(const QString &x, const QString &y)
 
    return versionsY.count() < versionsX.count();
 }
+
+#if QSU_INCLUDE_MOC
+#include "moc_Updater.cpp"
+#endif

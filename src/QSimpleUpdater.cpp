@@ -401,3 +401,7 @@ Updater *QSimpleUpdater::getUpdater(const QString &url) const
 
    return UPDATERS.at(URLS.indexOf(url));
 }
+
+#if QSU_INCLUDE_MOC
+#include "moc_QSimpleUpdater.cpp"
+#endif
