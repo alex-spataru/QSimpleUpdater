@@ -234,6 +234,9 @@ bool Updater::useCustomInstallProcedures() const
 void Updater::checkForUpdates()
 {
    QNetworkRequest request(url());
+
+   request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+
    if (!userAgentString().isEmpty())
       request.setRawHeader("User-Agent", userAgentString().toUtf8());
 

@@ -110,6 +110,9 @@ void Downloader::startDownload(const QUrl &url)
 
    /* Configure the network request */
    QNetworkRequest request(url);
+
+   request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+
    if (!m_userAgentString.isEmpty())
       request.setRawHeader("User-Agent", m_userAgentString.toUtf8());
 
@@ -128,7 +131,6 @@ void Downloader::startDownload(const QUrl &url)
    /* Update UI when download progress changes or download finishes */
    connect(m_reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateProgress(qint64, qint64)));
    connect(m_reply, SIGNAL(finished()), this, SLOT(finished()));
-   connect(m_reply, SIGNAL(redirected(QUrl)), this, SLOT(startDownload(QUrl)));
 
    showNormal();
 }
