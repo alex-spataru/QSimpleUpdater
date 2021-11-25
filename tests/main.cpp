@@ -24,18 +24,18 @@
 #include "Test_Downloader.h"
 #include "Test_QSimpleUpdater.h"
 
-int main (int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    QApplication app (argc, argv);
+   QApplication app(argc, argv);
 
-    app.setApplicationName ("QSimpleUpdater Tests");
-    app.setOrganizationName ("The QSimpleUpdater Library");
+   app.setApplicationName("QSimpleUpdater Tests");
+   app.setOrganizationName("The QSimpleUpdater Library");
 
-    QTest::qExec (new Test_Updater, argc, argv);
-    QTest::qExec (new Test_Downloader, argc, argv);
-    QTest::qExec (new Test_QSimpleUpdater, argc, argv);
+   QTest::qExec(new Test_Updater, argc, argv);
+   QTest::qExec(new Test_Downloader, argc, argv);
+   QTest::qExec(new Test_QSimpleUpdater, argc, argv);
 
-    QTimer::singleShot (1000, Qt::PreciseTimer, qApp, SLOT (quit()));
+   QTimer::singleShot(1000, Qt::PreciseTimer, qApp, SLOT(quit()));
 
-    return app.exec();
+   return app.exec();
 }

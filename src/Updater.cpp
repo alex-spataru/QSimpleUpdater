@@ -510,5 +510,5 @@ bool Updater::compare(const QString &x, const QString &y)
 }
 
 #if QSU_INCLUDE_MOC
-#include "moc_Updater.cpp"
+#   include "moc_Updater.cpp"
 #endif

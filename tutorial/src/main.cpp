@@ -8,14 +8,14 @@
 
 #include "Window.h"
 
-int main (int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app (argc, argv);
-    app.setApplicationVersion ("1.0");
-    app.setApplicationName ("Bob's Badass App");
+   QApplication app(argc, argv);
+   app.setApplicationVersion("1.0");
+   app.setApplicationName("Bob's Badass App");
 
-    Window window;
-    window.show();
+   Window window;
+   window.show();
 
-    return app.exec();
+   return app.exec();
 }

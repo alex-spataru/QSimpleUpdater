@@ -12,7 +12,8 @@
 #include <QMainWindow>
 #include <QApplication>
 
-namespace Ui {
+namespace Ui
+{
 class Window;
 }
 
@@ -20,21 +21,21 @@ class QSimpleUpdater;
 
 class Window : public QMainWindow
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    explicit Window (QWidget* parent = 0);
-    ~Window();
+   explicit Window(QWidget *parent = 0);
+   ~Window();
 
 public slots:
-    void resetFields();
-    void checkForUpdates();
-    void updateChangelog (const QString& url);
-    void displayAppcast (const QString& url, const QByteArray& reply);
+   void resetFields();
+   void checkForUpdates();
+   void updateChangelog(const QString &url);
+   void displayAppcast(const QString &url, const QByteArray &reply);
 
 private:
-    Ui::Window* m_ui;
-    QSimpleUpdater* m_updater;
+   Ui::Window *m_ui;
+   QSimpleUpdater *m_updater;
 };
 
 #endif

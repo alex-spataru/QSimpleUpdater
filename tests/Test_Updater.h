@@ -28,7 +28,7 @@
 
 class Test_Updater : public QObject
 {
-    Q_OBJECT
+   Q_OBJECT
 };
 
 #endif

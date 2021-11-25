@@ -28,7 +28,7 @@
 
 class Test_QSimpleUpdater : public QObject
 {
-    Q_OBJECT
+   Q_OBJECT
 };
 
 #endif
