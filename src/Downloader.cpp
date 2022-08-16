@@ -129,6 +129,7 @@ void Downloader::startDownload(const QUrl &url)
    QFile::remove(m_downloadDir.filePath(m_fileName + PARTIAL_DOWN));
 
    /* Update UI when download progress changes or download finishes */
+   connect(m_reply, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
    connect(m_reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateProgress(qint64, qint64)));
    connect(m_reply, SIGNAL(finished()), this, SLOT(finished()));
 
@@ -330,6 +331,23 @@ void Downloader::calculateSizes(qint64 received, qint64 total)
 
    m_ui->downloadLabel->setText(tr("Downloading updates") + " (" + receivedSize + " " + tr("of") + " " + totalSize
                                 + ")");
+}
+
+/**
+ * Get response filename.
+ */
+void Downloader::metaDataChanged() {
+   QString  filename = "";
+   QVariant variant = m_reply->header( QNetworkRequest::ContentDispositionHeader );
+   if ( variant.isValid() ) {
+      QString contentDisposition = QByteArray::fromPercentEncoding( variant.toByteArray() ).constData();
+      QRegularExpression regExp( "(.*)filename=\"(?<filename>.*)\"" );
+      QRegularExpressionMatch match = regExp.match( contentDisposition );
+      if ( match.hasMatch() ) {
+         filename = match.captured( "filename" );
+      }
+      setFileName( filename );
+   }
 }
 
 /**

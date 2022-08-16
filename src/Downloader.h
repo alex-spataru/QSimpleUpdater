@@ -64,6 +64,7 @@ public slots:
 
 private slots:
    void finished();
+   void metaDataChanged();
    void openDownload();
    void installUpdate();
    void cancelDownload();
