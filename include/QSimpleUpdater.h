@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -86,6 +86,7 @@ public:
 
 public slots:
    void checkForUpdates(const QString &url);
+   void setDownloadDir(const QString &url, const QString &dir);
    void setModuleName(const QString &url, const QString &name);
    void setNotifyOnUpdate(const QString &url, const bool notify);
    void setNotifyOnFinish(const QString &url, const bool notify);

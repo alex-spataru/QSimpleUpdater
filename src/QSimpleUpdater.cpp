@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -244,6 +244,10 @@ QString QSimpleUpdater::getUserAgentString(const QString &url) const
 void QSimpleUpdater::checkForUpdates(const QString &url)
 {
    getUpdater(url)->checkForUpdates();
+}
+
+void QSimpleUpdater::setDownloadDir(const QString &url, const QString &dir) {
+    getUpdater(url)->setDownloadDir(dir);
 }
 
 /**

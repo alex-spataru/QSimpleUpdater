@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -310,6 +310,10 @@ void Updater::setModuleVersion(const QString &version)
 void Updater::setDownloaderEnabled(const bool enabled)
 {
    m_downloaderEnabled = enabled;
+}
+
+void Updater::setDownloadDir(const QString &dir) {
+    m_downloader->setDownloadDir(dir);
 }
 
 /**
