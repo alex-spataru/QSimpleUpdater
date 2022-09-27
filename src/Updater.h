@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -75,6 +75,7 @@ public slots:
    void setUserAgentString(const QString &agent);
    void setModuleVersion(const QString &version);
    void setDownloaderEnabled(const bool enabled);
+   void setDownloadDir(const QString &dir);
    void setPlatformKey(const QString &platformKey);
    void setUseCustomAppcast(const bool customAppcast);
    void setUseCustomInstallProcedures(const bool custom);
