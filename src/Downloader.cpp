@@ -159,6 +159,12 @@ void Downloader::setUserAgentString(const QString &agent)
 
 void Downloader::finished()
 {
+   if (m_reply->error() != QNetworkReply::NoError)
+   {
+      QFile::remove(m_downloadDir.filePath(m_fileName + PARTIAL_DOWN));
+      return;
+   }
+
    /* Rename file */
    QFile::rename(m_downloadDir.filePath(m_fileName + PARTIAL_DOWN), m_downloadDir.filePath(m_fileName));
 
