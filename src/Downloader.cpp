@@ -351,11 +351,11 @@ void Downloader::metaDataChanged()
    if (variant.isValid())
    {
       QString contentDisposition = QByteArray::fromPercentEncoding(variant.toByteArray()).constData();
-      QRegularExpression regExp("(.*)filename=\"(?<filename>.*)\"");
+      QRegularExpression regExp("filename=(\S+)");
       QRegularExpressionMatch match = regExp.match(contentDisposition);
       if (match.hasMatch())
       {
-         filename = match.captured("filename");
+         filename = match.captured(1);
       }
       setFileName(filename);
    }
