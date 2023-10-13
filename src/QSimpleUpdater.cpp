@@ -246,8 +246,9 @@ void QSimpleUpdater::checkForUpdates(const QString &url)
    getUpdater(url)->checkForUpdates();
 }
 
-void QSimpleUpdater::setDownloadDir(const QString &url, const QString &dir) {
-    getUpdater(url)->setDownloadDir(dir);
+void QSimpleUpdater::setDownloadDir(const QString &url, const QString &dir)
+{
+   getUpdater(url)->setDownloadDir(dir);
 }
 
 /**

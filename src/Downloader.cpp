@@ -344,17 +344,20 @@ void Downloader::calculateSizes(qint64 received, qint64 total)
 /**
  * Get response filename.
  */
-void Downloader::metaDataChanged() {
-   QString  filename = "";
-   QVariant variant = m_reply->header( QNetworkRequest::ContentDispositionHeader );
-   if ( variant.isValid() ) {
-      QString contentDisposition = QByteArray::fromPercentEncoding( variant.toByteArray() ).constData();
-      QRegularExpression regExp( "(.*)filename=\"(?<filename>.*)\"" );
-      QRegularExpressionMatch match = regExp.match( contentDisposition );
-      if ( match.hasMatch() ) {
-         filename = match.captured( "filename" );
+void Downloader::metaDataChanged()
+{
+   QString filename = "";
+   QVariant variant = m_reply->header(QNetworkRequest::ContentDispositionHeader);
+   if (variant.isValid())
+   {
+      QString contentDisposition = QByteArray::fromPercentEncoding(variant.toByteArray()).constData();
+      QRegularExpression regExp("(.*)filename=\"(?<filename>.*)\"");
+      QRegularExpressionMatch match = regExp.match(contentDisposition);
+      if (match.hasMatch())
+      {
+         filename = match.captured("filename");
       }
-      setFileName( filename );
+      setFileName(filename);
    }
 }
 

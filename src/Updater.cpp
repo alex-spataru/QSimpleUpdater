@@ -312,8 +312,9 @@ void Updater::setDownloaderEnabled(const bool enabled)
    m_downloaderEnabled = enabled;
 }
 
-void Updater::setDownloadDir(const QString &dir) {
-    m_downloader->setDownloadDir(dir);
+void Updater::setDownloadDir(const QString &dir)
+{
+   m_downloader->setDownloadDir(dir);
 }
 
 /**
