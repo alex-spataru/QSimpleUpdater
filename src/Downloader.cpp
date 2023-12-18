@@ -114,6 +114,11 @@ void Downloader::startDownload(const QUrl &url)
    QNetworkRequest request(url);
 
    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+   
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+   /* 10s timeout */
+   request.setTransferTimeout(10000);
+#endif
 
    if (!m_userAgentString.isEmpty())
       request.setRawHeader("User-Agent", m_userAgentString.toUtf8());
