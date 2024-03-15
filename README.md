@@ -1,8 +1,8 @@
+# QSimpleUpdater
+
 <a href="#">
     <img width="112px" height="112px" src="etc/icon.png" align="right" />
 </a>
-
-# QSimpleUpdater
 
 [![Build Status](https://github.com/alex-spataru/QSimpleUpdater/workflows/Build/badge.svg)](#)
 
