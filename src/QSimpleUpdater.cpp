@@ -382,6 +382,16 @@ void QSimpleUpdater::setMandatoryUpdate(const QString &url, const bool mandatory
    getUpdater(url)->setMandatoryUpdate(mandatory_update);
 }
 
+void QSimpleUpdater::setDownloadUserName(const QString &url, const QString &userName)
+{
+   getUpdater(url)->setDownloadUserName(userName);
+}
+
+void QSimpleUpdater::setDownloadPassword(const QString &url, const QString &password)
+{
+   getUpdater(url)->setDownloadPassword(password);
+}
+
 /**
  * Returns the \c Updater instance registered with the given \a url.
  *

@@ -32,6 +32,7 @@ namespace Ui
 class Downloader;
 }
 
+class QAuthenticator;
 class QNetworkReply;
 class QNetworkAccessManager;
 
@@ -72,6 +73,7 @@ private slots:
    void calculateSizes(qint64 received, qint64 total);
    void updateProgress(qint64 received, qint64 total);
    void calculateTimeRemaining(qint64 received, qint64 total);
+   void authenticate(QNetworkReply *reply, QAuthenticator *authenticator);
 
 private:
    qreal round(const qreal &input);
