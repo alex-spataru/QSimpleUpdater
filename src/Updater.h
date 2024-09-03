@@ -80,6 +80,8 @@ public slots:
    void setUseCustomAppcast(const bool customAppcast);
    void setUseCustomInstallProcedures(const bool custom);
    void setMandatoryUpdate(const bool mandatory_update);
+   void setDownloadUserName(const QString &user_name);
+   void setDownloadPassword(const QString &password);
 
 private slots:
    void onReply(QNetworkReply *reply);
@@ -106,7 +108,8 @@ private:
    QString m_downloadUrl;
    QString m_moduleVersion;
    QString m_latestVersion;
-
+   QString m_downloadUserName;
+   QString m_downloadPassword;
    Downloader *m_downloader;
    QNetworkAccessManager *m_manager;
 };

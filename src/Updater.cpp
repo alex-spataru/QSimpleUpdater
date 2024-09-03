@@ -360,6 +360,17 @@ void Updater::setMandatoryUpdate(const bool mandatory_update)
 {
    m_mandatoryUpdate = mandatory_update;
 }
+
+void Updater::setDownloadUserName(const QString &user_name)
+{
+   m_downloadUserName = user_name;
+}
+
+void Updater::setDownloadPassword(const QString &password)
+{
+   m_downloadPassword = password;
+}
+
 /**
  * Called when the download of the update definitions file is finished.
  */
@@ -435,9 +446,12 @@ void Updater::setUpdateAvailable(const bool available)
       QString text = tr("Would you like to download the update now?");
       if (m_mandatoryUpdate)
       {
-         text = tr("Would you like to download the update now? This is a mandatory update, exiting now will close the "
-                   "application");
+         text = tr("Would you like to download the update now?<br />This is a mandatory update, exiting now will close "
+                   "the application.");
       }
+      text += "<br/><br/>";
+      if (!m_changelog.isEmpty())
+         text += tr("<strong>Change log:</strong><br/>%1").arg(m_changelog);
 
       QString title
           = "<h3>" + tr("Version %1 of %2 has been released!").arg(latestVersion()).arg(moduleName()) + "</h3>";
@@ -457,7 +471,10 @@ void Updater::setUpdateAvailable(const bool available)
             m_downloader->setUrlId(url());
             m_downloader->setFileName(downloadUrl().split("/").last());
             m_downloader->setMandatoryUpdate(m_mandatoryUpdate);
-            m_downloader->startDownload(QUrl(downloadUrl()));
+            auto url = QUrl(downloadUrl());
+            url.setUserName(m_downloadUserName);
+            url.setPassword(m_downloadPassword);
+            m_downloader->startDownload(url);
          }
 
          else

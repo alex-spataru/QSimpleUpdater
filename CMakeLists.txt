@@ -13,6 +13,9 @@ find_package(Qt${QT_VERSION_MAJOR} CONFIG REQUIRED COMPONENTS Widgets Network)
 add_library(QSimpleUpdater STATIC
     etc/resources/qsimpleupdater.qrc
     include/QSimpleUpdater.h
+    src/AuthenticateDialog.cpp
+    src/AuthenticateDialog.h
+    src/AuthenticateDialog.ui
     src/Downloader.cpp
     src/Downloader.h
     src/Downloader.ui

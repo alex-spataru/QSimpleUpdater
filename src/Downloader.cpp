@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,9 +30,11 @@
 #include <QNetworkAccessManager>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QAuthenticator>
 
 #include <math.h>
 
+#include "AuthenticateDialog.h"
 #include "Downloader.h"
 
 static const QString PARTIAL_DOWN(".part");
@@ -65,6 +67,8 @@ Downloader::Downloader(QWidget *parent)
    m_ui->openButton->setVisible(false);
    connect(m_ui->stopButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
    connect(m_ui->openButton, SIGNAL(clicked()), this, SLOT(installUpdate()));
+
+   connect(m_manager, &QNetworkAccessManager::authenticationRequired, this, &Downloader::authenticate);
 
    /* Resize to fit */
    setFixedSize(minimumSizeHint());
@@ -228,7 +232,7 @@ void Downloader::installUpdate()
 
    if (m_mandatoryUpdate)
       text = tr("In order to install the update, you may need to "
-                "quit the application. This is a mandatory update, exiting now will close the application");
+                "quit the application. This is a mandatory update, exiting now will close the application.");
 
    box.setText("<h3>" + text + "</h3>");
 
@@ -356,7 +360,7 @@ void Downloader::metaDataChanged()
    if (variant.isValid())
    {
       QString contentDisposition = QByteArray::fromPercentEncoding(variant.toByteArray()).constData();
-      QRegularExpression regExp("filename=(\S+)");
+      QRegularExpression regExp(R"(filename=(\S+))");
       QRegularExpressionMatch match = regExp.match(contentDisposition);
       if (match.hasMatch())
       {
@@ -443,6 +447,19 @@ void Downloader::calculateTimeRemaining(qint64 received, qint64 total)
       }
 
       m_ui->timeLabel->setText(tr("Time remaining") + ": " + timeString);
+   }
+}
+
+void Downloader::authenticate(QNetworkReply *reply, QAuthenticator *authenticator)
+{
+   Q_UNUSED(reply);
+   AuthenticateDialog dlg(this);
+   dlg.setUserName(authenticator->user());
+   dlg.setPassword(authenticator->password());
+   if (dlg.exec())
+   {
+      authenticator->setUser(dlg.userName());
+      authenticator->setPassword(dlg.password());
    }
 }
 
