@@ -37,10 +37,27 @@ int main(int argc, char *argv[])
 {
    int status = 0;
 
-   runTest(Test_Versioning);
-   runTest(Test_Updater);
-   runTest(Test_Downloader);
-   runTest(Test_QSimpleUpdater);
+   // runTest(Test_Versioning);
+   // runTest(Test_Updater);
+   // runTest(Test_Downloader);
+   // runTest(Test_QSimpleUpdater);
+
+   {
+      Test_Versioning tt;
+      status |= QTest::qExec(&tt, argc, argv);
+   }
+   {
+      Test_Updater tt;
+      status |= QTest::qExec(&tt, argc, argv);
+   }
+   {
+      Test_Downloader tt;
+      status |= QTest::qExec(&tt, argc, argv);
+   }
+   {
+      Test_QSimpleUpdater tt;
+      status |= QTest::qExec(&tt, argc, argv);
+   }
 
    return status;
 }
