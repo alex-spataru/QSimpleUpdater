@@ -20,22 +20,27 @@
  * THE SOFTWARE.
  */
 
+#include <QTest>
+#include <QSimpleUpdater.h>
+#include "Test_Versioning.h"
 #include "Test_Updater.h"
 #include "Test_Downloader.h"
 #include "Test_QSimpleUpdater.h"
 
+#define runTest(T)                                                                                                     \
+   {                                                                                                                   \
+      T tt;                                                                                                            \
+      status |= QTest::qExec(&tt, argc, argv);                                                                         \
+   }
+
 int main(int argc, char *argv[])
 {
-   QApplication app(argc, argv);
+   int status = 0;
 
-   app.setApplicationName("QSimpleUpdater Tests");
-   app.setOrganizationName("The QSimpleUpdater Library");
+   runTest(Test_Versioning);
+   runTest(Test_Updater);
+   runTest(Test_Downloader);
+   runTest(Test_QSimpleUpdater);
 
-   QTest::qExec(new Test_Updater, argc, argv);
-   QTest::qExec(new Test_Downloader, argc, argv);
-   QTest::qExec(new Test_QSimpleUpdater, argc, argv);
-
-   QTimer::singleShot(1000, Qt::PreciseTimer, qApp, SLOT(quit()));
-
-   return app.exec();
+   return status;
 }
