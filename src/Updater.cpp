@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -511,24 +511,7 @@ void Updater::setUpdateAvailable(const bool available)
  */
 bool Updater::compare(const QString &x, const QString &y)
 {
-   QStringList versionsX = x.split(".");
-   QStringList versionsY = y.split(".");
-
-   int count = qMin(versionsX.count(), versionsY.count());
-
-   for (int i = 0; i < count; ++i)
-   {
-      int a = QString(versionsX.at(i)).toInt();
-      int b = QString(versionsY.at(i)).toInt();
-
-      if (a > b)
-         return true;
-
-      else if (b > a)
-         return false;
-   }
-
-   return versionsY.count() < versionsX.count();
+   return QSimpleUpdater::compareVersions(x, y);
 }
 
 #if QSU_INCLUDE_MOC

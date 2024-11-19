@@ -24,7 +24,6 @@
 #define TEST_DOWNLOADER_H
 
 #include <QtTest>
-#include <Downloader.h>
 
 class Test_Downloader : public QObject
 {

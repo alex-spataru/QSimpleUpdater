@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2014-2021 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,6 +67,7 @@ signals:
 
 public:
    static QSimpleUpdater *getInstance();
+   static bool compareVersions(const QString &remote, const QString &local);
 
    bool usesCustomAppcast(const QString &url) const;
    bool getNotifyOnUpdate(const QString &url) const;
