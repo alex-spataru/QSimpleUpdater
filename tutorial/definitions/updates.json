@@ -5,7 +5,7 @@
       "latest-version": "1.0",
       "download-url": "https://raw.githubusercontent.com/alex-spataru/QSimpleUpdater/master/tutorial/download/YesItWorks.jpg",
       "changelog": "This is an example changelog for Windows. Go on...",
-      "mandatory-update": false
+      "mandatory-update": true
     },
     "osx": {
       "open-url": "",
