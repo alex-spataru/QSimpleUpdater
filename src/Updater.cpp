@@ -63,8 +63,8 @@ Updater::Updater()
 
    setUserAgentString(QString("%1/%2 (Qt; QSimpleUpdater)").arg(qApp->applicationName(), qApp->applicationVersion()));
 
-   connect(m_downloader, SIGNAL(downloadFinished(QString, QString)), this, SIGNAL(downloadFinished(QString, QString)));
-   connect(m_manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(onReply(QNetworkReply *)));
+   connect(m_downloader, SIGNAL(downloadFinished(QString,QString)), this, SIGNAL(downloadFinished(QString,QString)));
+   connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onReply(QNetworkReply*)));
 }
 
 Updater::~Updater()
@@ -454,7 +454,7 @@ void Updater::setUpdateAvailable(const bool available)
          text += tr("<strong>Change log:</strong><br/>%1").arg(m_changelog);
 
       QString title
-          = "<h3>" + tr("Version %1 of %2 has been released!").arg(latestVersion()).arg(moduleName()) + "</h3>";
+          = "<h3>" + tr("Version %1 of %2 has been released!").arg(latestVersion(), moduleName()) + "</h3>";
 
       box.setText(title);
       box.setInformativeText(text);
