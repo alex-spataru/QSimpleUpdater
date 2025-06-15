@@ -36,6 +36,7 @@
 
 #include "AuthenticateDialog.h"
 #include "Downloader.h"
+#include "ui_Downloader.h"
 
 static const QString PARTIAL_DOWN(".part");
 
@@ -49,8 +50,6 @@ Downloader::Downloader(QWidget *parent)
    m_manager = new QNetworkAccessManager();
 
    /* Initialize internal values */
-   m_url = "";
-   m_fileName = "";
    m_startTime = 0;
    m_useCustomProcedures = false;
    m_mandatoryUpdate = false;
@@ -129,7 +128,7 @@ void Downloader::startDownload(const QUrl &url)
 
    /* Start download */
    m_reply = m_manager->get(request);
-   m_startTime = QDateTime::currentDateTime().toSecsSinceEpoch();
+   m_startTime = QDateTime::currentSecsSinceEpoch();
 
    /* Ensure that downloads directory exists */
    if (!m_downloadDir.exists())
@@ -141,7 +140,7 @@ void Downloader::startDownload(const QUrl &url)
 
    /* Update UI when download progress changes or download finishes */
    connect(m_reply, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
-   connect(m_reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateProgress(qint64, qint64)));
+   connect(m_reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateProgress(qint64,qint64)));
    connect(m_reply, SIGNAL(finished()), this, SLOT(finished()));
 
    showNormal();
@@ -360,7 +359,7 @@ void Downloader::metaDataChanged()
    if (variant.isValid())
    {
       QString contentDisposition = QByteArray::fromPercentEncoding(variant.toByteArray()).constData();
-      QRegularExpression regExp(R"(filename=(\S+))");
+      static QRegularExpression regExp(R"(filename=(\S+))");
       QRegularExpressionMatch match = regExp.match(contentDisposition);
       if (match.hasMatch())
       {
@@ -393,7 +392,7 @@ void Downloader::updateProgress(qint64 received, qint64 total)
       m_ui->progressBar->setMaximum(0);
       m_ui->progressBar->setValue(-1);
       m_ui->downloadLabel->setText(tr("Downloading Updates") + "...");
-      m_ui->timeLabel->setText(QString("%1: %2").arg(tr("Time Remaining")).arg(tr("Unknown")));
+      m_ui->timeLabel->setText(QString("%1: %2").arg(tr("Time Remaining"), tr("Unknown")));
    }
 }
 
@@ -407,7 +406,7 @@ void Downloader::updateProgress(qint64 received, qint64 total)
  */
 void Downloader::calculateTimeRemaining(qint64 received, qint64 total)
 {
-   uint difference = QDateTime::currentDateTime().toSecsSinceEpoch() - m_startTime;
+   uint difference = QDateTime::currentSecsSinceEpoch() - m_startTime;
 
    if (difference > 0)
    {
@@ -466,7 +465,7 @@ void Downloader::authenticate(QNetworkReply *reply, QAuthenticator *authenticato
 /**
  * Rounds the given \a input to two decimal places
  */
-qreal Downloader::round(const qreal &input)
+qreal Downloader::round(qreal input)
 {
    return static_cast<qreal>(roundf(static_cast<float>(input) * 100) / 100);
 }
