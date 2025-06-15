@@ -24,8 +24,7 @@
 #define DOWNLOAD_DIALOG_H
 
 #include <QDir>
-#include <QDialog>
-#include <ui_Downloader.h>
+#include <QWidget>
 
 namespace Ui
 {
@@ -76,7 +75,7 @@ private slots:
    void authenticate(QNetworkReply *reply, QAuthenticator *authenticator);
 
 private:
-   qreal round(const qreal &input);
+   static qreal round(qreal input);
 
 private:
    QString m_url;

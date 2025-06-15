@@ -26,17 +26,16 @@
 #include <QApplication>
 #include <QJsonDocument>
 #include <QDesktopServices>
+#include <QUrl>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
+#include "QSimpleUpdater.h"
 
 #include "Updater.h"
 #include "Downloader.h"
 
 Updater::Updater()
 {
-   m_url = "";
-   m_openUrl = "";
-   m_changelog = "";
-   m_downloadUrl = "";
-   m_latestVersion = "";
    m_customAppcast = false;
    m_notifyOnUpdate = true;
    m_notifyOnFinish = false;

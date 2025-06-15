@@ -23,19 +23,16 @@
 #ifndef _QSIMPLEUPDATER_UPDATER_H
 #define _QSIMPLEUPDATER_UPDATER_H
 
-#include <QUrl>
 #include <QObject>
-#include <QNetworkReply>
-#include <QNetworkAccessManager>
-
-#include <QSimpleUpdater.h>
 
 class Downloader;
+class QNetworkReply;
+class QNetworkAccessManager;
 
 /**
  * \brief Downloads and interprests the update definition file
  */
-class QSU_DECL Updater : public QObject
+class Updater : public QObject
 {
    Q_OBJECT
 

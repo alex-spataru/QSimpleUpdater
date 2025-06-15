@@ -36,6 +36,7 @@
 
 #include "AuthenticateDialog.h"
 #include "Downloader.h"
+#include "ui_Downloader.h"
 
 static const QString PARTIAL_DOWN(".part");
 
@@ -49,8 +50,6 @@ Downloader::Downloader(QWidget *parent)
    m_manager = new QNetworkAccessManager();
 
    /* Initialize internal values */
-   m_url = "";
-   m_fileName = "";
    m_startTime = 0;
    m_useCustomProcedures = false;
    m_mandatoryUpdate = false;
@@ -466,7 +465,7 @@ void Downloader::authenticate(QNetworkReply *reply, QAuthenticator *authenticato
 /**
  * Rounds the given \a input to two decimal places
  */
-qreal Downloader::round(const qreal &input)
+qreal Downloader::round(qreal input)
 {
    return static_cast<qreal>(roundf(static_cast<float>(input) * 100) / 100);
 }
