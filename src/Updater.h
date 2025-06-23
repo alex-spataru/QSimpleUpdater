@@ -60,6 +60,7 @@ public:
    bool mandatoryUpdate() const;
 
    bool customAppcast() const;
+   bool usesDefaultNotifier() const;
    bool notifyOnUpdate() const;
    bool notifyOnFinish() const;
    bool updateAvailable() const;
@@ -78,10 +79,15 @@ public slots:
    void setDownloadDir(const QString &dir);
    void setPlatformKey(const QString &platformKey);
    void setUseCustomAppcast(const bool customAppcast);
+   void setUsesDefaultNotifier(const bool usesDefaultNotifier);
    void setUseCustomInstallProcedures(const bool custom);
    void setMandatoryUpdate(const bool mandatory_update);
    void setDownloadUserName(const QString &user_name);
    void setDownloadPassword(const QString &password);
+   void setOpenUrl(const QString &openUrl);
+   void setChangelog(const QString &changelog);
+   void setDownloadUrl(const QString &downloadUrl);
+   void setLatestVersion(const QString &latestVersion);
 
 private slots:
    void onReply(QNetworkReply *reply);
@@ -95,6 +101,7 @@ private:
    QString m_userAgentString;
 
    bool m_customAppcast;
+   bool m_usesDefaultNotifier;
    bool m_notifyOnUpdate;
    bool m_notifyOnFinish;
    bool m_updateAvailable;

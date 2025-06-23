@@ -102,6 +102,19 @@ bool QSimpleUpdater::usesCustomAppcast(const QString &url) const
 
 /**
  * Returns \c true if the \c Updater instance registered with the given \a url
+ * uses the default notifier dialog. This has no effect if not using a custom
+ * appcast.
+ *
+ * \note If an \c Updater instance registered with the given \a url is not
+ *       found, that \c Updater instance will be initialized automatically
+ */
+bool QSimpleUpdater::usesDefaultNotifier(const QString &url) const
+{
+    return getUpdater(url)->usesDefaultNotifier();
+}
+
+/**
+ * Returns \c true if the \c Updater instance registered with the given \a url
  * shall notify the user when an update is available.
  *
  * \note If an \c Updater instance registered with the given \a url is not
@@ -403,6 +416,11 @@ void QSimpleUpdater::setUseCustomAppcast(const QString &url, const bool customAp
    getUpdater(url)->setUseCustomAppcast(customAppcast);
 }
 
+void QSimpleUpdater::setUsesDefaultNotifier(const QString &url, const bool usesDefaultNotifier)
+{
+    getUpdater(url)->setUsesDefaultNotifier(usesDefaultNotifier);
+}
+
 /**
  * If the \a custom parameter is set to \c true, the \c Updater instance
  * registered with the given \a url will not try to open the downloaded file.
@@ -432,6 +450,26 @@ void QSimpleUpdater::setDownloadUserName(const QString &url, const QString &user
 void QSimpleUpdater::setDownloadPassword(const QString &url, const QString &password)
 {
    getUpdater(url)->setDownloadPassword(password);
+}
+
+void QSimpleUpdater::setOpenUrl(const QString &url, const QString &openUrl)
+{
+    getUpdater(url)->setOpenUrl(openUrl);
+}
+
+void QSimpleUpdater::setChangelog(const QString &url, const QString &changelog)
+{
+    getUpdater(url)->setChangelog(changelog);
+}
+
+void QSimpleUpdater::setDownloadUrl(const QString &url, const QString &downloadUrl)
+{
+    getUpdater(url)->setDownloadUrl(downloadUrl);
+}
+
+void QSimpleUpdater::setLatestVersion(const QString &url, const QString &latestVersion)
+{
+    getUpdater(url)->setLatestVersion(latestVersion);
 }
 
 /**
