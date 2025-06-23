@@ -38,6 +38,7 @@ Updater::Updater()
    m_downloadUrl = "";
    m_latestVersion = "";
    m_customAppcast = false;
+   m_usesDefaultNotifier = false;
    m_notifyOnUpdate = true;
    m_notifyOnFinish = false;
    m_updateAvailable = false;
@@ -166,6 +167,15 @@ QString Updater::moduleVersion() const
 bool Updater::customAppcast() const
 {
    return m_customAppcast;
+}
+
+/**
+ * Returns \c true if the default updater dialog should be shown when using a
+ * custom appcast.
+ */
+bool Updater::usesDefaultNotifier() const
+{
+    return m_usesDefaultNotifier;
 }
 
 /**
@@ -343,6 +353,16 @@ void Updater::setUseCustomAppcast(const bool customAppcast)
 }
 
 /**
+ * If the \a usesDefaultNotifier parameter is set to \c true, then the \c Updater
+ * will show the default notifier dialog with a custom appcast. The client is
+ * responsible for setting up the various arguments, such as the changelog.
+ */
+void Updater::setUsesDefaultNotifier(const bool usesDefaultNotifier)
+{
+    m_usesDefaultNotifier = usesDefaultNotifier;
+}
+
+/**
  * If the \a custom parameter is set to \c true, the \c Updater will not try
  * to open the downloaded file. Use the signals fired by the \c QSimpleUpdater
  * to install the update from the downloaded file by yourself.
@@ -371,6 +391,26 @@ void Updater::setDownloadPassword(const QString &password)
    m_downloadPassword = password;
 }
 
+void Updater::setOpenUrl(const QString &openUrl)
+{
+    m_openUrl = openUrl;
+}
+
+void Updater::setChangelog(const QString &changelog)
+{
+    m_changelog = changelog;
+}
+
+void Updater::setDownloadUrl(const QString &downloadUrl)
+{
+    m_downloadUrl = downloadUrl;
+}
+
+void Updater::setLatestVersion(const QString &latestVersion)
+{
+    m_latestVersion = latestVersion;
+}
+
 /**
  * Called when the download of the update definitions file is finished.
  */
@@ -397,6 +437,8 @@ void Updater::onReply(QNetworkReply *reply)
    if (customAppcast())
    {
       emit appcastDownloaded(url(), reply->readAll());
+      if (usesDefaultNotifier())
+        setUpdateAvailable(compare(latestVersion(), moduleVersion()));
       emit checkingFinished(url());
       return;
    }

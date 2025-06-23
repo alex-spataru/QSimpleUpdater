@@ -70,6 +70,7 @@ public:
    static bool compareVersions(const QString &remote, const QString &local);
 
    bool usesCustomAppcast(const QString &url) const;
+   bool usesDefaultNotifier(const QString &url) const;
    bool getNotifyOnUpdate(const QString &url) const;
    bool getNotifyOnFinish(const QString &url) const;
    bool getUpdateAvailable(const QString &url) const;
@@ -96,10 +97,15 @@ public slots:
    void setDownloaderEnabled(const QString &url, const bool enabled);
    void setUserAgentString(const QString &url, const QString &agent);
    void setUseCustomAppcast(const QString &url, const bool customAppcast);
+   void setUsesDefaultNotifier(const QString &url, const bool usesDefaultNotifier);
    void setUseCustomInstallProcedures(const QString &url, const bool custom);
    void setMandatoryUpdate(const QString &url, const bool mandatory_update);
    void setDownloadUserName(const QString &url, const QString &userName);
    void setDownloadPassword(const QString &url, const QString &password);
+   void setOpenUrl(const QString &url, const QString &openUrl);
+   void setChangelog(const QString &url, const QString &changelog);
+   void setDownloadUrl(const QString &url, const QString &downloadUrl);
+   void setLatestVersion(const QString &url, const QString &latestVersion);
 
 protected:
    ~QSimpleUpdater();
