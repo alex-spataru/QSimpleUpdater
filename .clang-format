@@ -1,94 +1,179 @@
-# Copyright (C) 2016 Olivier Goffart <ogoffart@woboq.com>
+# ============================================================================
+# Serial Studio clang-format configuration
 #
-# You may use this file under the terms of the 3-clause BSD license.
-# See the file LICENSE from this package for details.
+# Philosophy: Simple, readable code over clever code
+# - Max 3 levels of nesting (if/for/while) - enforced by code review
+# - No inline end-of-line comments - use block comments above
+# - Single-statement bodies omit braces - makes nesting visible
+# - Early returns preferred over deep nesting
+#
+# This configuration makes "AI slop code" (deeply nested if/else chains)
+# visually painful, naturally encouraging better code structure.
+# ============================================================================
 
-# This is the clang-format configuration style to be used by Qt,
-# based on the rules from https://wiki.qt.io/Qt_Coding_Style and
-# https://wiki.qt.io/Coding_Conventions
+# Base Style & Language
+BasedOnStyle:                          LLVM
+Language:                              Cpp
+Standard:                              c++20
 
----
-# Webkit style was loosely based on the Qt style
-BasedOnStyle: WebKit
+# Column & Indentation
+# 100 column limit: With 2-space indent and max 3 nesting levels,
+# this leaves ~94 chars at level 3. Hitting the limit at level 4+
+# is a natural signal that code is too deeply nested.
+ColumnLimit:                           100
+IndentWidth:                           2
+TabWidth:                              2
+UseTab:                                Never
+ContinuationIndentWidth:               2
+IndentCaseLabels:                      true
+IndentCaseBlocks:                      false
+IndentPPDirectives:                    AfterHash
+NamespaceIndentation:                  None
+AccessModifierOffset:                  -2
+IndentAccessModifiers:                 false
+IndentWrappedFunctionNames:            false
+LambdaBodyIndentation:                 Signature
 
-Standard: Cpp11
-
-# Leave the line breaks up to the user.
-# Note that this may be changed at some point in the future.
-ColumnLimit: 0
-# How much weight do extra characters after the line length limit have.
-# PenaltyExcessCharacter: 4
-
-# Disable reflow of qdoc comments: indentation rules are different.
-# Translation comments are also excluded.
-CommentPragmas: "^!|^:"
-
-# We want a space between the type and the star for pointer types.
-PointerBindsToType: false
-
-# We use template< without space.
-SpaceAfterTemplateKeyword: false
-
-# We want to break before the operators, but not before a '='.
-BreakBeforeBinaryOperators: All
-
-# Braces are usually attached, but not after functions or class declarations.
-BreakBeforeBraces: Custom
+# Braces (K&R with function braces on new line)
+RemoveBracesLLVM:                      true
+BreakBeforeBraces:                     Custom
 BraceWrapping:
-    AfterClass: true
-    AfterControlStatement: true
-    AfterEnum: true
-    AfterFunction: true
-    AfterNamespace: true
-    AfterObjCDeclaration: true
-    AfterStruct: true
-    AfterUnion: true
-    BeforeCatch: true
-    BeforeElse: true
-    IndentBraces: false
+  AfterCaseLabel:                      false
+  AfterClass:                          false
+  AfterControlStatement:               Never
+  AfterEnum:                           false
+  AfterFunction:                       true
+  AfterNamespace:                      false
+  AfterObjCDeclaration:                false
+  AfterStruct:                         false
+  AfterUnion:                          false
+  AfterExternBlock:                    false
+  BeforeCatch:                         false
+  BeforeElse:                          false
+  BeforeLambdaBody:                    false
+  BeforeWhile:                         false
+  IndentBraces:                        false
+  SplitEmptyFunction:                  false
+  SplitEmptyRecord:                    false
+  SplitEmptyNamespace:                 false
 
-BreakBeforeTernaryOperators: true
+# Alignment
+AlignAfterOpenBracket:                 Align
+AlignArrayOfStructures:                Right
+AlignConsecutiveAssignments:           Consecutive
+AlignConsecutiveBitFields:             Consecutive
+AlignConsecutiveDeclarations:          None
+AlignConsecutiveMacros:                Consecutive
+AlignEscapedNewlines:                  Left
+AlignOperands:                         AlignAfterOperator
+AlignTrailingComments:                 true
 
-BreakConstructorInitializers: BeforeComma
+# Pointer & Reference
+PointerAlignment:                      Left
+ReferenceAlignment:                    Left
+DerivePointerAlignment:                false
 
-# Indent initializers by 3 spaces
-ConstructorInitializerIndentWidth: 3
+# Short Forms
+# These settings prevent AI-generated "slop code" patterns:
+# - Never allows "if (x) return y;" on one line → forces visibility
+# - Never allows short loops on one line → forces clarity
+# - RemoveBracesLLVM (above) removes braces from single statements
+# This combination makes deeply nested code painful to read/write,
+# naturally encouraging early returns and reduced complexity
+AllowShortCaseLabelsOnASingleLine:     false
+AllowShortEnumsOnASingleLine:          false
+AllowShortFunctionsOnASingleLine:      Inline
+AllowShortIfStatementsOnASingleLine:   Never
+AllowShortLambdasOnASingleLine:        Inline
+AllowShortLoopsOnASingleLine:          false
+AllowAllArgumentsOnNextLine:           true
+AllowAllParametersOfDeclarationOnNextLine: true
 
-# No indentation for namespaces.
-NamespaceIndentation: None
+# Breaking
+AlwaysBreakAfterReturnType:            None
+AlwaysBreakTemplateDeclarations:       Yes
+BreakBeforeBinaryOperators:            NonAssignment
+BreakBeforeTernaryOperators:           true
+BreakConstructorInitializers:          BeforeComma
+BreakInheritanceList:                  BeforeComma
+BreakStringLiterals:                   false
 
-# Horizontally align arguments after an open bracket.
-# The coding style does not specify the following, but this is what gives
-# results closest to the existing code.
-AlignAfterOpenBracket: true
-AlwaysBreakTemplateDeclarations: true
+# Constructor Initializers
+ConstructorInitializerIndentWidth:     2
+PackConstructorInitializers:           NextLine
 
-# Ideally we should also allow less short function in a single line, but
-# clang-format does not handle that.
-AllowShortFunctionsOnASingleLine: Inline
+# Spaces
+SpaceAfterCStyleCast:                  false
+SpaceAfterLogicalNot:                  false
+SpaceAfterTemplateKeyword:             false
+SpaceBeforeAssignmentOperators:        true
+SpaceBeforeCaseColon:                  false
+SpaceBeforeCpp11BracedList:            false
+SpaceBeforeCtorInitializerColon:       true
+SpaceBeforeInheritanceColon:           true
+SpaceBeforeParens:                     ControlStatements
+SpaceBeforeRangeBasedForLoopColon:     true
+SpaceBeforeSquareBrackets:             false
+SpaceInEmptyBlock:                     false
+SpaceInEmptyParentheses:               false
+SpacesBeforeTrailingComments:          2
+SpacesInAngles:                        Never
+SpacesInCStyleCastParentheses:         false
+SpacesInConditionalStatement:          false
+SpacesInContainerLiterals:             false
+SpacesInLineCommentPrefix:
+  Minimum:                             1
+  Maximum:                             -1
+SpacesInParentheses:                   false
+SpacesInSquareBrackets:                false
 
-# The coding style specifies some include order categories, but also tells to
-# separate categories with an empty line. It does not specify the order within
-# the categories. Since the SortInclude feature of clang-format does not
-# re-order includes separated by empty lines, the feature is not used.
-SortIncludes: false
+# Includes & Sorting
+SortIncludes:                          CaseInsensitive
+SortUsingDeclarations:                 true
+IncludeBlocks:                         Regroup
+IncludeCategories:
+  - Regex:                             '^<[^/]*\.h>'
+    Priority:                          1
+  - Regex:                             '^<.*>'
+    Priority:                          2
+  - Regex:                             '.*'
+    Priority:                          3
 
-# macros for which the opening brace stays attached.
-ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH, forever, Q_FOREVER, QBENCHMARK, QBENCHMARK_ONCE ]
+# Penalties (fine-tune line-break decisions)
+PenaltyBreakAssignment:                2
+PenaltyBreakBeforeFirstCallParameter:  19
+PenaltyBreakComment:                   300
+PenaltyBreakFirstLessLess:             120
+PenaltyBreakString:                    10
+PenaltyBreakTemplateDeclaration:       10
+PenaltyExcessCharacter:                1000000
+PenaltyReturnTypeOnItsOwnLine:         1000
+PenaltyIndentedWhitespace:             0
 
-IndentCaseLabels: true
+# Misc
+BinPackArguments:                      false
+BinPackParameters:                     false
+CompactNamespaces:                     false
+Cpp11BracedListStyle:                  true
+EmptyLineAfterAccessModifier:          Never
+EmptyLineBeforeAccessModifier:         Always
+FixNamespaceComments:                  true
+InsertTrailingCommas:                  None
+KeepEmptyLinesAtTheStartOfBlocks:      false
+MaxEmptyLinesToKeep:                   1
+ReflowComments:                        true
+SeparateDefinitionBlocks:              Always
 
-IndentPPDirectives: AfterHash
-
-AlignAfterOpenBracket: Align
-
-AccessModifierOffset: -3
-
-IndentWidth: 3
-
-#StatementMacros ['Q_OBJECT', 'Q_UNUSED']
-
-ColumnLimit: 120
-
-
-
+# Pragmas & Macros
+CommentPragmas:                        "^!|^:"
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+  - forever
+  - Q_FOREVER
+  - QBENCHMARK
+  - QBENCHMARK_ONCE
+StatementMacros:
+  - Q_OBJECT
+  - Q_UNUSED

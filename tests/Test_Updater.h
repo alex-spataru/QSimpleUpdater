@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016 Alex Spataru <alex_spataru@outlook.com>
+ * Copyright (c) 2015-2025 Alex Spataru <https://github.com/alex-spataru>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <QtTest>
 #include <QSimpleUpdater.h>
 
-class Test_Updater : public QObject
-{
-   Q_OBJECT
+#include <QtTest>
+
+class Test_Updater : public QObject {
+  Q_OBJECT
 };
