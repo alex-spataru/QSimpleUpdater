@@ -26,6 +26,8 @@
 
 cmake_minimum_required(VERSION 3.20)
 project(QSimpleUpdater
+    VERSION 1.0.0
+    DESCRIPTION "Automatic update library for Qt applications"
     LANGUAGES CXX
 )
 
@@ -98,6 +100,19 @@ set(FORMS
 )
 
 #-------------------------------------------------------------------------------
+# Windows version information resource
+#-------------------------------------------------------------------------------
+
+if(WIN32)
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/etc/resources/version.rc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/version.rc
+        @ONLY
+    )
+    set(WINDOWS_RC ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
+endif()
+
+#-------------------------------------------------------------------------------
 # Compile & link the library
 #-------------------------------------------------------------------------------
 
@@ -109,6 +124,7 @@ if(QSIMPLE_UPDATER_BUILD_SHARED)
         ${HEADERS}
         ${FORMS}
         ${QSU_RCC}
+        ${WINDOWS_RC}
     )
     target_compile_definitions(QSimpleUpdater PRIVATE QSU_SHARED)
 else()
@@ -121,8 +137,9 @@ else()
 endif()
 
 target_include_directories(QSimpleUpdater PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 target_link_libraries(QSimpleUpdater PUBLIC
@@ -130,6 +147,71 @@ target_link_libraries(QSimpleUpdater PUBLIC
     Qt${QSU_QT_VERSION_MAJOR}::Gui
     Qt${QSU_QT_VERSION_MAJOR}::Network
     Qt${QSU_QT_VERSION_MAJOR}::Widgets
+)
+
+#-------------------------------------------------------------------------------
+# Library properties
+#-------------------------------------------------------------------------------
+
+set_target_properties(QSimpleUpdater PROPERTIES
+    VERSION ${PROJECT_VERSION}
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+# Add debug postfix on Windows to distinguish debug/release builds
+if(WIN32)
+    set_target_properties(QSimpleUpdater PROPERTIES
+        DEBUG_POSTFIX d
+    )
+endif()
+
+#-------------------------------------------------------------------------------
+# Installation rules
+#-------------------------------------------------------------------------------
+
+include(GNUInstallDirs)
+
+# Install library
+install(TARGETS QSimpleUpdater
+    EXPORT QSimpleUpdaterTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+# Install public headers
+install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QSimpleUpdater.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/QSimpleUpdater
+)
+
+# Install CMake config files
+install(EXPORT QSimpleUpdaterTargets
+    FILE QSimpleUpdaterTargets.cmake
+    NAMESPACE QSimpleUpdater::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QSimpleUpdater
+)
+
+# Generate and install package config file
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/QSimpleUpdaterConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/QSimpleUpdaterConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QSimpleUpdater
+)
+
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/QSimpleUpdaterConfigVersion.cmake
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/QSimpleUpdaterConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/QSimpleUpdaterConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QSimpleUpdater
 )
 
 #-------------------------------------------------------------------------------
