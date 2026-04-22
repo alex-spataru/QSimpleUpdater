@@ -171,6 +171,11 @@ endif()
 
 include(GNUInstallDirs)
 
+# Set default install directory to project's build/install if not specified
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install" CACHE PATH "Install path prefix" FORCE)
+endif()
+
 # Install library
 install(TARGETS QSimpleUpdater
     EXPORT QSimpleUpdaterTargets
