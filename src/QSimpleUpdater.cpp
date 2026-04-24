@@ -295,6 +295,20 @@ QString QSimpleUpdater::getUserAgentString(const QString& url) const
 }
 
 /**
+ * @brief Returns @c true if the update is mandatory for the Updater registered
+ *        with the given @a url.
+ *
+ * When mandatory, the application will quit if the user declines the update.
+ *
+ * @note If no Updater is registered with the given @a url, one will be created
+ *       automatically.
+ */
+bool QSimpleUpdater::getMandatoryUpdate(const QString& url) const
+{
+  return getUpdater(url)->mandatoryUpdate();
+}
+
+/**
  * @brief Instructs the Updater registered with the given @a url to download
  *        and interpret the update definitions file.
  *

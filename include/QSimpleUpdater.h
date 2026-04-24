@@ -82,6 +82,7 @@ public:
   QString getLatestVersion(const QString& url) const;
   QString getModuleVersion(const QString& url) const;
   QString getUserAgentString(const QString& url) const;
+  bool getMandatoryUpdate(const QString& url) const;
 
 public slots:
   void checkForUpdates(const QString& url);
