@@ -7,7 +7,7 @@
 [![Build Status](https://github.com/alex-spataru/QSimpleUpdater/actions/workflows/main.yml/badge.svg)](https://github.com/alex-spataru/QSimpleUpdater/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
-QSimpleUpdater is an auto-updating library for Qt applications. It checks for updates by downloading a JSON definitions file, compares versions, and can download and launch the installer for you — or hand everything over to your own code through signals. It also supports checking updates for different "modules" of your application independently. Check the [FAQ](#faq) for more information.
+QSimpleUpdater is an auto-updating library for Qt applications. It checks for updates by downloading a JSON definitions file, compares versions, and can download and launch the installer for you, or hand everything over to your own code through signals. It also supports checking updates for different "modules" of your application independently. Check the [FAQ](#faq) for more information.
 
 [![Downloading](etc/screenshots/downloading.png)](etc/screenshots/)
 
@@ -25,7 +25,7 @@ updater->setModuleVersion(url, "1.2.0");  // Optional: defaults to qApp version
 updater->checkForUpdates(url);
 ```
 
-If the remote version is newer, the user is prompted to download and install the update. Everything else (notifications, downloader, install behavior) is configurable per URL — see the [FAQ](#faq).
+If the remote version is newer, the user is prompted to download and install the update. Everything else (notifications, downloader, install behavior) is configurable per URL; see the [FAQ](#faq).
 
 ## Integrating QSimpleUpdater with your projects
 
@@ -123,10 +123,10 @@ You can also set custom platform keys with `setPlatformKey()`.
 
 QSimpleUpdater supports semantic versioning with optional pre-release suffixes:
 
-- `1.2.3` vs `1.2.4` — patch upgrade detected
-- `v1.0.0-alpha1` vs `v1.0.0` — stable is newer than pre-release
-- `v1.0.0-alpha1` vs `v1.0.0-beta1` — beta is newer than alpha
-- `v1.0.0-rc9` vs `v1.0.0-rc10` — suffix numbers compare numerically
+- `1.2.3` vs `1.2.4`: patch upgrade detected
+- `v1.0.0-alpha1` vs `v1.0.0`: stable is newer than pre-release
+- `v1.0.0-alpha1` vs `v1.0.0-beta1`: beta is newer than alpha
+- `v1.0.0-rc9` vs `v1.0.0-rc10`: suffix numbers compare numerically
 
 The `v` prefix is optional and ignored during comparison. You can also use the comparison logic directly via `QSimpleUpdater::compareVersions(remote, local)`.
 
@@ -205,7 +205,7 @@ connect(QSimpleUpdater::getInstance(), &QSimpleUpdater::downloadFinished,
 
 ### 7. Does the server need HTTP basic authentication?
 
-That's supported too — set the credentials before checking for updates:
+That's supported too. Set the credentials before checking for updates:
 
 ```cpp
 QString url = "https://example.com/updates.json";
