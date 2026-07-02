@@ -3,7 +3,9 @@ on: [push, pull_request]
 env:
   QT_VERSION_LINUX: 6.11.1
   QT_VERSION_MACOS: 6.11.1
-  QT_VERSION_WINDOWS: 6.11.1
+  # Qt 6.11+ changed the Windows repo layout and released aqtinstall (3.3.0)
+  # cannot parse it yet (miurahr/aqtinstall#959). Bump when a fix ships.
+  QT_VERSION_WINDOWS: 6.10.3
   
 jobs:
   build-linux:
