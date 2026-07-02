@@ -52,6 +52,15 @@ option(QSIMPLE_UPDATER_BUILD_TUTORIAL "Build the tutorial application" OFF)
 option(QSIMPLE_UPDATER_BUILD_TESTS "Build the unit tests" ON)
 option(QSIMPLE_UPDATER_BUILD_SHARED "Build as a shared library instead of static" OFF)
 
+# Install rules only apply when QSimpleUpdater is the top-level project;
+# embedded consumers (add_subdirectory) must not inherit them or the
+# install-prefix override below
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    option(QSIMPLE_UPDATER_INSTALL "Generate install rules" ON)
+else()
+    option(QSIMPLE_UPDATER_INSTALL "Generate install rules" OFF)
+endif()
+
 #-------------------------------------------------------------------------------
 # Find Qt dependencies
 #
@@ -169,6 +178,8 @@ endif()
 # Installation rules
 #-------------------------------------------------------------------------------
 
+if(QSIMPLE_UPDATER_INSTALL)
+
 include(GNUInstallDirs)
 
 # Set default install directory to project's build/install if not specified
@@ -218,6 +229,8 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/QSimpleUpdaterConfigVersion.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QSimpleUpdater
 )
+
+endif()
 
 #-------------------------------------------------------------------------------
 # Tutorial
