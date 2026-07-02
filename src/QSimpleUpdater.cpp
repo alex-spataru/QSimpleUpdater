@@ -66,9 +66,12 @@ QSimpleUpdater* QSimpleUpdater::getInstance()
  */
 bool QSimpleUpdater::compareVersions(const QString& remote, const QString& local)
 {
+  // Suffix letters and digits are captured separately so that e.g. alpha10 is
+  // compared numerically against alpha2 (a \w+ suffix would swallow the digits
+  // and force a lexicographic comparison)
   // clang-format off
   static QRegularExpression re(
-    "v?(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?(?:-(\\w+)(?:(\\d+))?)?"
+    "v?(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?(?:-([A-Za-z]+)(\\d+)?)?"
   );
   // clang-format on
 
