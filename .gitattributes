@@ -1,1 +1,7 @@
+# Normalize line endings to LF in the repository
+* text=auto eol=lf
+*.png binary
+*.icns binary
+*.ico binary
+
 doc/* linguist-documentation

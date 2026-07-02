@@ -20,8 +20,8 @@
  * THE SOFTWARE.
  */
 
-#ifndef _QSIMPLEUPDATER_MAIN_H
-#define _QSIMPLEUPDATER_MAIN_H
+#ifndef QSIMPLEUPDATER_MAIN_H
+#define QSIMPLEUPDATER_MAIN_H
 
 #include <QList>
 #include <QObject>
