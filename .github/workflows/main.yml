@@ -1,5 +1,5 @@
 name: Build
-on: [push]
+on: [push, pull_request]
 env:
   QT_VERSION_LINUX: 6.8.0
   QT_VERSION_MACOS: 6.8.0
@@ -57,7 +57,12 @@ jobs:
       run: |
         cd build
         cmake --build . --config Release -j 16
-             
+
+    - name: '🧪 Run tests'
+      run: ctest --test-dir build --output-on-failure -C Release
+      env:
+        QT_QPA_PLATFORM: offscreen
+
   build-mac-aarch64:
     runs-on: macos-latest
     name: '🍎 macOS (aarch64)'
@@ -77,11 +82,6 @@ jobs:
       with:
         useLocalCache: true
 
-    - name: '⚙️ Install Node'
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-
     - name: '🚧 Configure with CMake'
       run: |
         mkdir build
@@ -92,7 +92,12 @@ jobs:
       run: |
         cd build
         cmake --build . --config Release -j 16
-               
+
+    - name: '🧪 Run tests'
+      run: ctest --test-dir build --output-on-failure -C Release
+      env:
+        QT_QPA_PLATFORM: offscreen
+
   build-windows:
     runs-on: windows-latest
     name: '🧊 Windows'
@@ -118,8 +123,13 @@ jobs:
         mkdir build
         cd build
         cmake ../ -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl -DCMAKE_BUILD_TYPE=Release
-        
+
     - name: '🚧 Build library'
       run: |
         cd build
         cmake --build . --config Release -j 16
+
+    - name: '🧪 Run tests'
+      run: ctest --test-dir build --output-on-failure -C Release
+      env:
+        QT_QPA_PLATFORM: offscreen
