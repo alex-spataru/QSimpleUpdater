@@ -30,6 +30,9 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
+#include <QHBoxLayout>
+#include <QLayout>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -58,7 +61,18 @@ Downloader::Downloader(QWidget* parent)
   , m_mandatoryUpdate(false)
   , m_manager(new QNetworkAccessManager())
 {
+  // Register the static-library resource so :/icons/update.png resolves
+  Q_INIT_RESOURCE(qsimpleupdater);
+
   m_ui->setupUi(this);
+
+  // Render the icon at 48x48 logical px (sharp from the 96px source at 2x)
+  m_ui->updater_icon->setFixedSize(48, 48);
+  m_ui->updater_icon->setScaledContents(true);
+
+  // Add breathing room between the icon and the progress column
+  if (auto* row = qobject_cast<QHBoxLayout*>(m_ui->widget->layout()))
+    row->setSpacing(16);
 
   // Set download directory
   m_downloadDir.setPath(QDir::homePath() + "/Downloads/");
@@ -75,7 +89,9 @@ Downloader::Downloader(QWidget* parent)
   connect(
     m_manager, &QNetworkAccessManager::authenticationRequired, this, &Downloader::authenticate);
 
-  // Resize to fit
+  // Resize to fit (activate the layout first so the hint is valid)
+  if (layout())
+    layout()->activate();
   setFixedSize(minimumSizeHint());
 }
 
@@ -197,8 +213,15 @@ void Downloader::finished()
 {
   if (!m_reply || m_reply->error() != QNetworkReply::NoError) {
     QFile::remove(m_downloadDir.filePath(m_fileName + PARTIAL_DOWN));
+    if (m_reply) {
+      m_reply->deleteLater();
+      m_reply = nullptr;
+    }
     return;
   }
+
+  // Flush any data not yet delivered through downloadProgress
+  saveFile(0, 0);
 
   // Rename file
   QFile::rename(m_downloadDir.filePath(m_fileName + PARTIAL_DOWN),
@@ -208,7 +231,7 @@ void Downloader::finished()
   emit downloadFinished(m_url, m_downloadDir.filePath(m_fileName));
 
   // Install the update
-  m_reply->close();
+  m_reply->deleteLater();
   m_reply = nullptr;
   installUpdate();
   setVisible(false);
@@ -243,7 +266,7 @@ void Downloader::installUpdate()
   // Update labels
   m_ui->stopButton->setText(tr("Close"));
   m_ui->downloadLabel->setText(tr("Download complete!"));
-  m_ui->timeLabel->setText(tr("The installer will open separately") + "...");
+  m_ui->timeLabel->setText(tr("The installer opens separately") + "...");
 
   // Ask the user to install the download
   QMessageBox box;
@@ -371,16 +394,18 @@ void Downloader::metaDataChanged()
   if (!m_reply)
     return;
 
-  QString filename = "";
   QVariant variant = m_reply->header(QNetworkRequest::ContentDispositionHeader);
   if (variant.isValid()) {
     QString contentDisposition = QByteArray::fromPercentEncoding(variant.toByteArray()).constData();
-    QRegularExpression regExp(R"(filename=(\S+))");
+    QRegularExpression regExp(R"rx(filename\s*=\s*"?([^";]+)"?)rx");
     QRegularExpressionMatch match = regExp.match(contentDisposition);
-    if (match.hasMatch())
-      filename = match.captured(1);
-
-    setFileName(filename);
+    if (match.hasMatch()) {
+      // Keep only the base name so a malicious header cannot escape the
+      // download directory (e.g. "filename=../../evil")
+      QString filename = QFileInfo(match.captured(1).trimmed()).fileName();
+      if (!filename.isEmpty())
+        setFileName(filename);
+    }
   }
 }
 
@@ -396,7 +421,6 @@ void Downloader::updateProgress(qint64 received, qint64 total)
 
     calculateSizes(received, total);
     calculateTimeRemaining(received, total);
-    saveFile(received, total);
   }
 
   else {
@@ -404,8 +428,11 @@ void Downloader::updateProgress(qint64 received, qint64 total)
     m_ui->progressBar->setMaximum(0);
     m_ui->progressBar->setValue(-1);
     m_ui->downloadLabel->setText(tr("Downloading Updates") + "...");
-    m_ui->timeLabel->setText(QString("%1: %2").arg(tr("Time Remaining")).arg(tr("Unknown")));
+    m_ui->timeLabel->setText(QString("%1: %2").arg(tr("Time Remaining"), tr("Unknown")));
   }
+
+  // Write received data even when the server does not report a total size
+  saveFile(received, total);
 }
 
 /**
@@ -419,9 +446,10 @@ void Downloader::calculateTimeRemaining(qint64 received, qint64 total)
 {
   uint difference = QDateTime::currentDateTime().toSecsSinceEpoch() - m_startTime;
 
-  if (difference > 0) {
+  if (difference > 0 && received > 0) {
     QString timeString;
-    qreal timeRemaining = (total - received) / (received / difference);
+    qreal speed         = static_cast<qreal>(received) / static_cast<qreal>(difference);
+    qreal timeRemaining = static_cast<qreal>(total - received) / speed;
 
     if (timeRemaining > 7200) {
       timeRemaining /= 3600;
