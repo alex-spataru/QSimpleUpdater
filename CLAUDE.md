@@ -43,7 +43,8 @@ include(path/to/QSimpleUpdater.pri)
 ```
 
 Key CMake options: `QSIMPLE_UPDATER_BUILD_TUTORIAL`, `QSIMPLE_UPDATER_BUILD_TESTS`,
-`QSIMPLE_UPDATER_BUILD_SHARED`, `QSU_QT_VERSION_MAJOR`.
+`QSIMPLE_UPDATER_BUILD_SHARED`, `QSU_QT_VERSION_MAJOR`, `QSIMPLE_UPDATER_INSTALL`
+(install rules; defaults `ON` top-level, `OFF` when embedded via `add_subdirectory()`).
 
 ### CI
 

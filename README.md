@@ -49,6 +49,7 @@ Available CMake options:
 | `QSIMPLE_UPDATER_BUILD_TUTORIAL` | `OFF`   | Build the example/tutorial application.          |
 | `QSIMPLE_UPDATER_BUILD_TESTS`    | `ON`    | Build the unit tests.                            |
 | `QSIMPLE_UPDATER_BUILD_SHARED`   | `OFF`   | Build as a shared library instead of static.     |
+| `QSIMPLE_UPDATER_INSTALL`        | (auto)  | Generate install rules. `ON` when built top-level, `OFF` when embedded via `add_subdirectory()`. |
 | `QSU_QT_VERSION_MAJOR`           | (auto)  | Set to `5` or `6` to skip Qt auto-detection.     |
 
 ### Using qmake
