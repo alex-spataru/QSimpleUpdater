@@ -56,7 +56,7 @@ Updater::Updater()
 {
 #if defined Q_OS_WIN
   m_platform = "windows";
-#elif defined Q_OS_MAC
+#elif defined Q_OS_MACOS
   m_platform = "osx";
 #elif defined Q_OS_LINUX
   m_platform = "linux";
